@@ -1,10 +1,12 @@
 package projeto.fag.com.ocorrenciasmunicipais.model;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.MultiUnique;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@MultiUnique("cd_imagem, cd_usuario")
 public class ImagemUsuario extends SugarRecord implements Serializable {
     private int cd_imagem;
     private int cd_usuario;

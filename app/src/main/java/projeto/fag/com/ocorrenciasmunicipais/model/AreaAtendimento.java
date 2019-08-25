@@ -1,11 +1,13 @@
 package projeto.fag.com.ocorrenciasmunicipais.model;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Unique;
 
 import java.io.Serializable;
 import java.util.Date;
 
 public class AreaAtendimento extends SugarRecord implements Serializable {
+    @Unique
     private int cd_areaatendimento;
     private AreaAtuacao areaAtuacao;
     private String ds_areaatendimento;
