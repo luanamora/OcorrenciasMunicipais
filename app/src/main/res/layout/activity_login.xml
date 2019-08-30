@@ -14,6 +14,7 @@
         android:layout_marginLeft="@dimen/marginEditText"
         android:layout_marginRight="@dimen/marginEditText"
         android:id="@+id/etEmail"
+        android:text="@string/app_name"
         />
 
 
