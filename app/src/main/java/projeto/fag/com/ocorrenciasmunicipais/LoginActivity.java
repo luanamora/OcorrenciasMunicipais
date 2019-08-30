@@ -1,4 +1,4 @@
-package projeto.fag.com.ocorrenciasmunicipais.model;
+package projeto.fag.com.ocorrenciasmunicipais;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
