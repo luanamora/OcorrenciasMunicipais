@@ -41,4 +41,28 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/sizeButton"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btCriarNovaConta"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="120dp"
+        android:hint="@string/btCriarNovaConta"
+        android:textSize="@dimen/sizeButton"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:layout_marginLeft="@dimen/marginButton"
+        android:layout_marginRight="@dimen/marginButton"/>
+
+    <Button
+        android:id="@+id/btEsqueceuSenha"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="@dimen/marginButtonTop"
+        android:hint="@string/btEsqueceuSenha"
+        android:textSize="@dimen/sizeButton"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        android:layout_marginLeft="@dimen/marginButton"
+        android:layout_marginRight="@dimen/marginButton"/>
 </LinearLayout>

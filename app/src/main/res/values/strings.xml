@@ -12,4 +12,6 @@
     <string name="lbEmail">"Email"</string>
     <string name="lbSenha">"Senha"</string>
     <string name="btEntrar">"Entrar"</string>
+    <string name="btCriarNovaConta">"Criar Nova Conta"</string>
+    <string name="btEsqueceuSenha">"Esqueceu Sua Senha?"</string>
 </resources>
