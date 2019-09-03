@@ -11,4 +11,5 @@
     <string name="login_failed">"Login failed"</string>
     <string name="lbEmail">"Email"</string>
     <string name="lbSenha">"Senha"</string>
+    <string name="btEntrar">"Entrar"</string>
 </resources>
