@@ -52,7 +52,8 @@
         android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite"
         android:layout_marginLeft="@dimen/marginButton"
-        android:layout_marginRight="@dimen/marginButton"/>
+        android:layout_marginRight="@dimen/marginButton"
+        />
 
     <Button
         android:id="@+id/btEsqueceuSenha"
