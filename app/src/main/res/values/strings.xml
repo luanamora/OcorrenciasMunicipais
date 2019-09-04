@@ -14,4 +14,14 @@
     <string name="btEntrar">"Entrar"</string>
     <string name="btCriarNovaConta">"Criar Nova Conta"</string>
     <string name="btEsqueceuSenha">"Esqueceu Sua Senha?"</string>
+
+    <string name="lbNomeUser">"Nome"</string>
+    <string name="lbEmailUser">"Email"</string>
+    <string name="lbTelefoneUser">"Telefone"</string>
+    <string name="lbDtNascimento">"Data de Nascimento"</string>
+    <string name="lbSenhaUser">"Senha"</string>
+    <string name="lbConfirmarSenhaUser">"Confirmar Senha"</string>
+    <string name="btCriarConta">"Criar Conta"</string>
+
+
 </resources>

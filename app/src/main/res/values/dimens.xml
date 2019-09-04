@@ -3,7 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="marginEditText">20dp</dimen>
-    <dimen name="marginButton">45</dimen>
+    <dimen name="marginButton">30dp</dimen>
     <dimen name="marginButtonTop">8dp</dimen>
     <dimen name="sizeButton">15dp</dimen>
+    <dimen name="marginTopLabel">18dp</dimen>
 </resources>
