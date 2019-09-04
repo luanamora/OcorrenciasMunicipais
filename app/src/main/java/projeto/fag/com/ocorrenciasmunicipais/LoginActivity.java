@@ -1,5 +1,6 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,19 +36,29 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loadEvents(){
-        btEntrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        createUser();
+        recoverPassword();
 
-            }
-        });
+    }
 
+    private void createUser(){
         btCriarNovaConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Usuario usuario = new Usuario();
-
+                Intent intent = new Intent(LoginActivity.this, CreateUserActivity.class);
+                startActivity(intent);
             }
         });
     }
+
+    private void recoverPassword(){
+        btEsqueceuSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RecoverPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 }
