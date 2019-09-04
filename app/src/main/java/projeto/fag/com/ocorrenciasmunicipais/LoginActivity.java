@@ -2,8 +2,11 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.orm.SugarContext;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -16,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         loadComponents();
+        loadEvents();
 
 
     }
@@ -26,5 +30,14 @@ public class LoginActivity extends AppCompatActivity {
         btEntrar = findViewById(R.id.btEntrar);
         btCriarNovaConta = findViewById(R.id.btCriarNovaConta);
         btEsqueceuSenha = findViewById(R.id.btEsqueceuSenha);
+    }
+
+    private void loadEvents(){
+        btEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 }
