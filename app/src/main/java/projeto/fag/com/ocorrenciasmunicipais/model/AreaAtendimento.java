@@ -8,32 +8,31 @@ import java.util.Date;
 
 public class AreaAtendimento extends SugarRecord implements Serializable {
     @Unique
-    private int cd_areaatendimento;
+    private int cdAreaAtendimento;
     private AreaAtuacao areaAtuacao;
-    private String ds_areaatendimento;
-    private String ds_email;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private String dsAreaAtendimento;
+    private String dsEmail;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public AreaAtendimento() {
     }
 
-    public AreaAtendimento(int cd_areaatendimento, AreaAtuacao areaAtuacao,
-                           String ds_areaatendimento, String ds_email, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_areaatendimento = cd_areaatendimento;
+    public AreaAtendimento(int cdAreaAtendimento, AreaAtuacao areaAtuacao, String dsAreaAtendimento, String dsEmail, Date dtCadastro, Date dtAtualizacao) {
+        this.cdAreaAtendimento = cdAreaAtendimento;
         this.areaAtuacao = areaAtuacao;
-        this.ds_areaatendimento = ds_areaatendimento;
-        this.ds_email = ds_email;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dsAreaAtendimento = dsAreaAtendimento;
+        this.dsEmail = dsEmail;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_areaatendimento() {
-        return cd_areaatendimento;
+    public int getCdAreaAtendimento() {
+        return cdAreaAtendimento;
     }
 
-    public void setCd_areaatendimento(int cd_areaatendimento) {
-        this.cd_areaatendimento = cd_areaatendimento;
+    public void setCdAreaAtendimento(int cdAreaAtendimento) {
+        this.cdAreaAtendimento = cdAreaAtendimento;
     }
 
     public AreaAtuacao getAreaAtuacao() {
@@ -44,47 +43,47 @@ public class AreaAtendimento extends SugarRecord implements Serializable {
         this.areaAtuacao = areaAtuacao;
     }
 
-    public String getDs_areaatendimento() {
-        return ds_areaatendimento;
+    public String getDsAreaAtendimento() {
+        return dsAreaAtendimento;
     }
 
-    public void setDs_areaatendimento(String ds_areaatendimento) {
-        this.ds_areaatendimento = ds_areaatendimento;
+    public void setDsAreaAtendimento(String dsAreaAtendimento) {
+        this.dsAreaAtendimento = dsAreaAtendimento;
     }
 
-    public String getDs_email() {
-        return ds_email;
+    public String getDsEmail() {
+        return dsEmail;
     }
 
-    public void setDs_email(String ds_email) {
-        this.ds_email = ds_email;
+    public void setDsEmail(String dsEmail) {
+        this.dsEmail = dsEmail;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "AreaAtendimento{" +
-                "cd_areaatendimento=" + cd_areaatendimento +
+                "cdAreaAtendimento=" + cdAreaAtendimento +
                 ", areaAtuacao=" + areaAtuacao +
-                ", ds_areaatendimento='" + ds_areaatendimento + '\'' +
-                ", ds_email='" + ds_email + '\'' +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                ", dsAreaAtendimento='" + dsAreaAtendimento + '\'' +
+                ", dsEmail='" + dsEmail + '\'' +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

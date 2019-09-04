@@ -8,60 +8,60 @@ import java.util.Date;
 
 public class AreaAtuacao extends SugarRecord implements Serializable {
     @Unique
-    private int cd_areaatuacao;
-    private String ds_areaatuacao;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private int cdAreaAtuacao;
+    private String dsAreaAtuacao;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public AreaAtuacao() {
     }
 
-    public AreaAtuacao(int cd_areaatuacao, String ds_areaatuacao, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_areaatuacao = cd_areaatuacao;
-        this.ds_areaatuacao = ds_areaatuacao;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+    public AreaAtuacao(int cdAreaAtuacao, String dsAreaAtuacao, Date dtCadastro, Date dtAtualizacao) {
+        this.cdAreaAtuacao = cdAreaAtuacao;
+        this.dsAreaAtuacao = dsAreaAtuacao;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_areaatuacao() {
-        return cd_areaatuacao;
+    public int getCdAreaAtuacao() {
+        return cdAreaAtuacao;
     }
 
-    public void setCd_areaatuacao(int cd_areaatuacao) {
-        this.cd_areaatuacao = cd_areaatuacao;
+    public void setCdAreaAtuacao(int cdAreaAtuacao) {
+        this.cdAreaAtuacao = cdAreaAtuacao;
     }
 
-    public String getDs_areaatuacao() {
-        return ds_areaatuacao;
+    public String getDsAreaAtuacao() {
+        return dsAreaAtuacao;
     }
 
-    public void setDs_areaatuacao(String ds_areaatuacao) {
-        this.ds_areaatuacao = ds_areaatuacao;
+    public void setDsAreaAtuacao(String dsAreaAtuacao) {
+        this.dsAreaAtuacao = dsAreaAtuacao;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "AreaAtuacao{" +
-                "cd_areaatuacao=" + cd_areaatuacao +
-                ", ds_areaatuacao='" + ds_areaatuacao + '\'' +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                "cdAreaAtuacao=" + cdAreaAtuacao +
+                ", dsAreaAtuacao='" + dsAreaAtuacao + '\'' +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

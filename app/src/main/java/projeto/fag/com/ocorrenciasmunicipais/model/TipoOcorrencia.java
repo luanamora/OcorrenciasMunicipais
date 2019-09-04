@@ -8,60 +8,60 @@ import java.util.Date;
 
 public class TipoOcorrencia extends SugarRecord implements Serializable {
     @Unique
-    private int cd_tipoocorrencia;
-    private String ds_tipoocorrencia;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private int cdTipoOcorrencia;
+    private String dsTipoOcorrencia;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public TipoOcorrencia() {
     }
 
-    public TipoOcorrencia(int cd_tipoocorrencia, String ds_tipoocorrencia, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_tipoocorrencia = cd_tipoocorrencia;
-        this.ds_tipoocorrencia = ds_tipoocorrencia;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+    public TipoOcorrencia(int cdTipoOcorrencia, String dsTipoOcorrencia, Date dtCadastro, Date dtAtualizacao) {
+        this.cdTipoOcorrencia = cdTipoOcorrencia;
+        this.dsTipoOcorrencia = dsTipoOcorrencia;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_tipoocorrencia() {
-        return cd_tipoocorrencia;
+    public int getCdTipoOcorrencia() {
+        return cdTipoOcorrencia;
     }
 
-    public void setCd_tipoocorrencia(int cd_tipoocorrencia) {
-        this.cd_tipoocorrencia = cd_tipoocorrencia;
+    public void setCdTipoOcorrencia(int cdTipoOcorrencia) {
+        this.cdTipoOcorrencia = cdTipoOcorrencia;
     }
 
-    public String getDs_tipoocorrencia() {
-        return ds_tipoocorrencia;
+    public String getDsTipoOcorrencia() {
+        return dsTipoOcorrencia;
     }
 
-    public void setDs_tipoocorrencia(String ds_tipoocorrencia) {
-        this.ds_tipoocorrencia = ds_tipoocorrencia;
+    public void setDsTipoOcorrencia(String dsTipoOcorrencia) {
+        this.dsTipoOcorrencia = dsTipoOcorrencia;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "TipoOcorrencia{" +
-                "cd_tipoocorrencia=" + cd_tipoocorrencia +
-                ", ds_tipoocorrencia='" + ds_tipoocorrencia + '\'' +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                "cdTipoOcorrencia=" + cdTipoOcorrencia +
+                ", dsTipoOcorrencia='" + dsTipoOcorrencia + '\'' +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

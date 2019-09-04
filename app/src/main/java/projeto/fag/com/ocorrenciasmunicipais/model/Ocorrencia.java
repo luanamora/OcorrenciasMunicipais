@@ -8,53 +8,51 @@ import java.util.Date;
 
 public class Ocorrencia extends SugarRecord implements Serializable {
     @Unique
-    private int cd_ocorrencia;
+    private int cdOcorrencia;
     private Usuario usuario;
     private PrioridadeOcorrencia prioridade;
     private TipoOcorrencia tipoOcorrencia;
     private EstadoOcorrencia estadoOcorrencia;
     private AreaAtendimento areaAtendimento;
     private Endereco endereco;
-    private int nr_ocorrencia;
-    private String ds_mensagem;
-    private String ds_observacao;
-    private int nr_status;
-    private boolean ds_finalizado;
-    private int nr_curtir;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private int nrOcorrencia;
+    private String dsMensagem;
+    private String dsObservacao;
+    private int nrStatus;
+    private boolean dsFinalizado;
+    private int nrCurtir;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public Ocorrencia() {
     }
 
-    public Ocorrencia(int cd_ocorrencia, Usuario usuario, PrioridadeOcorrencia prioridade,
-                        TipoOcorrencia tipoOcorrencia, EstadoOcorrencia estadoOcorrencia,
-                             AreaAtendimento areaAtendimento, Endereco endereco, int nr_ocorrencia,
-                                    String ds_mensagem, String ds_observacao, int nr_status,
-                                        boolean ds_finalizado, int nr_curtir, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_ocorrencia = cd_ocorrencia;
+    public Ocorrencia(int cdOcorrencia, Usuario usuario, PrioridadeOcorrencia prioridade, TipoOcorrencia tipoOcorrencia, EstadoOcorrencia estadoOcorrencia,
+                      AreaAtendimento areaAtendimento, Endereco endereco, int nrOcorrencia, String dsMensagem, String dsObservacao, int nrStatus, boolean dsFinalizado, int nrCurtir,
+                      Date dtCadastro, Date dtAtualizacao) {
+        this.cdOcorrencia = cdOcorrencia;
         this.usuario = usuario;
         this.prioridade = prioridade;
         this.tipoOcorrencia = tipoOcorrencia;
         this.estadoOcorrencia = estadoOcorrencia;
         this.areaAtendimento = areaAtendimento;
         this.endereco = endereco;
-        this.nr_ocorrencia = nr_ocorrencia;
-        this.ds_mensagem = ds_mensagem;
-        this.ds_observacao = ds_observacao;
-        this.nr_status = nr_status;
-        this.ds_finalizado = ds_finalizado;
-        this.nr_curtir = nr_curtir;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.nrOcorrencia = nrOcorrencia;
+        this.dsMensagem = dsMensagem;
+        this.dsObservacao = dsObservacao;
+        this.nrStatus = nrStatus;
+        this.dsFinalizado = dsFinalizado;
+        this.nrCurtir = nrCurtir;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_ocorrencia() {
-        return cd_ocorrencia;
+    public int getCdOcorrencia() {
+        return cdOcorrencia;
     }
 
-    public void setCd_ocorrencia(int cd_ocorrencia) {
-        this.cd_ocorrencia = cd_ocorrencia;
+    public void setCdOcorrencia(int cdOcorrencia) {
+        this.cdOcorrencia = cdOcorrencia;
     }
 
     public Usuario getUsuario() {
@@ -105,88 +103,88 @@ public class Ocorrencia extends SugarRecord implements Serializable {
         this.endereco = endereco;
     }
 
-    public int getNr_ocorrencia() {
-        return nr_ocorrencia;
+    public int getNrOcorrencia() {
+        return nrOcorrencia;
     }
 
-    public void setNr_ocorrencia(int nr_ocorrencia) {
-        this.nr_ocorrencia = nr_ocorrencia;
+    public void setNrOcorrencia(int nrOcorrencia) {
+        this.nrOcorrencia = nrOcorrencia;
     }
 
-    public String getDs_mensagem() {
-        return ds_mensagem;
+    public String getDsMensagem() {
+        return dsMensagem;
     }
 
-    public void setDs_mensagem(String ds_mensagem) {
-        this.ds_mensagem = ds_mensagem;
+    public void setDsMensagem(String dsMensagem) {
+        this.dsMensagem = dsMensagem;
     }
 
-    public String getDs_observacao() {
-        return ds_observacao;
+    public String getDsObservacao() {
+        return dsObservacao;
     }
 
-    public void setDs_observacao(String ds_observacao) {
-        this.ds_observacao = ds_observacao;
+    public void setDsObservacao(String dsObservacao) {
+        this.dsObservacao = dsObservacao;
     }
 
-    public int getNr_status() {
-        return nr_status;
+    public int getNrStatus() {
+        return nrStatus;
     }
 
-    public void setNr_status(int nr_status) {
-        this.nr_status = nr_status;
+    public void setNrStatus(int nrStatus) {
+        this.nrStatus = nrStatus;
     }
 
-    public boolean isDs_finalizado() {
-        return ds_finalizado;
+    public boolean isDsFinalizado() {
+        return dsFinalizado;
     }
 
-    public void setDs_finalizado(boolean ds_finalizado) {
-        this.ds_finalizado = ds_finalizado;
+    public void setDsFinalizado(boolean dsFinalizado) {
+        this.dsFinalizado = dsFinalizado;
     }
 
-    public int getNr_curtir() {
-        return nr_curtir;
+    public int getNrCurtir() {
+        return nrCurtir;
     }
 
-    public void setNr_curtir(int nr_curtir) {
-        this.nr_curtir = nr_curtir;
+    public void setNrCurtir(int nrCurtir) {
+        this.nrCurtir = nrCurtir;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "Ocorrencia{" +
-                "cd_ocorrencia=" + cd_ocorrencia +
+                "cdOcorrencia=" + cdOcorrencia +
                 ", usuario=" + usuario +
                 ", prioridade=" + prioridade +
                 ", tipoOcorrencia=" + tipoOcorrencia +
                 ", estadoOcorrencia=" + estadoOcorrencia +
                 ", areaAtendimento=" + areaAtendimento +
                 ", endereco=" + endereco +
-                ", nr_ocorrencia=" + nr_ocorrencia +
-                ", ds_mensagem='" + ds_mensagem + '\'' +
-                ", ds_observacao='" + ds_observacao + '\'' +
-                ", nr_status=" + nr_status +
-                ", ds_finalizado=" + ds_finalizado +
-                ", nr_curtir=" + nr_curtir +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                ", nrOcorrencia=" + nrOcorrencia +
+                ", dsMensagem='" + dsMensagem + '\'' +
+                ", dsObservacao='" + dsObservacao + '\'' +
+                ", nrStatus=" + nrStatus +
+                ", dsFinalizado=" + dsFinalizado +
+                ", nrCurtir=" + nrCurtir +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

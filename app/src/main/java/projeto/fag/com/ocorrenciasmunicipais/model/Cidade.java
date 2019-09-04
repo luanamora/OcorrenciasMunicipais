@@ -8,37 +8,37 @@ import java.util.Date;
 
 public class Cidade extends SugarRecord implements Serializable {
     @Unique
-    private int cd_cidade;
-    private String nm_cidade;
+    private int cdCidade;
+    private String nmCidade;
     private Estado estado;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public Cidade() {
     }
 
-    public Cidade(int cd_cidade, String nm_cidade, Estado estado, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_cidade = cd_cidade;
-        this.nm_cidade = nm_cidade;
+    public Cidade(int cdCidade, String nmCidade, Estado estado, Date dtCadastro, Date dtAtualizacao) {
+        this.cdCidade = cdCidade;
+        this.nmCidade = nmCidade;
         this.estado = estado;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_cidade() {
-        return cd_cidade;
+    public int getCdCidade() {
+        return cdCidade;
     }
 
-    public void setCd_cidade(int cd_cidade) {
-        this.cd_cidade = cd_cidade;
+    public void setCdCidade(int cdCidade) {
+        this.cdCidade = cdCidade;
     }
 
-    public String getNm_cidade() {
-        return nm_cidade;
+    public String getNmCidade() {
+        return nmCidade;
     }
 
-    public void setNm_cidade(String nm_cidade) {
-        this.nm_cidade = nm_cidade;
+    public void setNmCidade(String nmCidade) {
+        this.nmCidade = nmCidade;
     }
 
     public Estado getEstado() {
@@ -49,30 +49,30 @@ public class Cidade extends SugarRecord implements Serializable {
         this.estado = estado;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "Cidade{" +
-                "cd_cidade=" + cd_cidade +
-                ", nm_cidade='" + nm_cidade + '\'' +
+                "cdCidade=" + cdCidade +
+                ", nmCidade='" + nmCidade + '\'' +
                 ", estado=" + estado +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

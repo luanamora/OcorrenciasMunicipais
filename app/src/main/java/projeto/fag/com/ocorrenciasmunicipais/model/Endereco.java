@@ -6,79 +6,77 @@ import java.util.Date;
 
 public class Endereco {
     @Unique
-    private int cd_endereco;
-    private String nr_cep;
-    private String ds_bairro;
-    private String ds_logradouro;
-    private String ds_numero;
-    private String ds_complemento;
+    private int cdEndereco;
+    private String nrCep;
+    private String dsBairro;
+    private String dsLogradouro;
+    private String dsNumero;
+    private String dsComplemento;
     private Cidade cidade;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public Endereco() {
     }
 
-    public Endereco(int cd_endereco, String nr_cep, String ds_bairro, String ds_logradouro,
-                    String ds_numero, String ds_complemento, Cidade cidade, Date dt_cadastro,
-                    Date dt_atualizacao) {
-        this.cd_endereco = cd_endereco;
-        this.nr_cep = nr_cep;
-        this.ds_bairro = ds_bairro;
-        this.ds_logradouro = ds_logradouro;
-        this.ds_numero = ds_numero;
-        this.ds_complemento = ds_complemento;
+    public Endereco(int cdEndereco, String nrCep, String dsBairro, String dsLogradouro, String dsNumero, String dsComplemento, Cidade cidade, Date dtCadastro, Date dtAtualizacao) {
+        this.cdEndereco = cdEndereco;
+        this.nrCep = nrCep;
+        this.dsBairro = dsBairro;
+        this.dsLogradouro = dsLogradouro;
+        this.dsNumero = dsNumero;
+        this.dsComplemento = dsComplemento;
         this.cidade = cidade;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_endereco() {
-        return cd_endereco;
+    public int getCdEndereco() {
+        return cdEndereco;
     }
 
-    public void setCd_endereco(int cd_endereco) {
-        this.cd_endereco = cd_endereco;
+    public void setCdEndereco(int cdEndereco) {
+        this.cdEndereco = cdEndereco;
     }
 
-    public String getNr_cep() {
-        return nr_cep;
+    public String getNrCep() {
+        return nrCep;
     }
 
-    public void setNr_cep(String nr_cep) {
-        this.nr_cep = nr_cep;
+    public void setNrCep(String nrCep) {
+        this.nrCep = nrCep;
     }
 
-    public String getDs_bairro() {
-        return ds_bairro;
+    public String getDsBairro() {
+        return dsBairro;
     }
 
-    public void setDs_bairro(String ds_bairro) {
-        this.ds_bairro = ds_bairro;
+    public void setDsBairro(String dsBairro) {
+        this.dsBairro = dsBairro;
     }
 
-    public String getDs_logradouro() {
-        return ds_logradouro;
+    public String getDsLogradouro() {
+        return dsLogradouro;
     }
 
-    public void setDs_logradouro(String ds_logradouro) {
-        this.ds_logradouro = ds_logradouro;
+    public void setDsLogradouro(String dsLogradouro) {
+        this.dsLogradouro = dsLogradouro;
     }
 
-    public String getDs_numero() {
-        return ds_numero;
+    public String getDsNumero() {
+        return dsNumero;
     }
 
-    public void setDs_numero(String ds_numero) {
-        this.ds_numero = ds_numero;
+    public void setDsNumero(String dsNumero) {
+        this.dsNumero = dsNumero;
     }
 
-    public String getDs_complemento() {
-        return ds_complemento;
+    public String getDsComplemento() {
+        return dsComplemento;
     }
 
-    public void setDs_complemento(String ds_complemento) {
-        this.ds_complemento = ds_complemento;
+    public void setDsComplemento(String dsComplemento) {
+        this.dsComplemento = dsComplemento;
     }
 
     public Cidade getCidade() {
@@ -89,34 +87,34 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "Endereco{" +
-                "cd_endereco=" + cd_endereco +
-                ", nr_cep='" + nr_cep + '\'' +
-                ", ds_bairro='" + ds_bairro + '\'' +
-                ", ds_logradouro='" + ds_logradouro + '\'' +
-                ", ds_numero='" + ds_numero + '\'' +
-                ", ds_complemento='" + ds_complemento + '\'' +
+                "cdEndereco=" + cdEndereco +
+                ", nrCep='" + nrCep + '\'' +
+                ", dsBairro='" + dsBairro + '\'' +
+                ", dsLogradouro='" + dsLogradouro + '\'' +
+                ", dsNumero='" + dsNumero + '\'' +
+                ", dsComplemento='" + dsComplemento + '\'' +
                 ", cidade=" + cidade +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

@@ -8,30 +8,29 @@ import java.util.Date;
 
 public class HistoricoSenha extends SugarRecord implements Serializable {
     @Unique
-    private int cd_historicosenha;
+    private int cdHistoricoSenha;
     private Usuario usuario;
-    private String ds_historicosenha;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private String dsHistoricoSenha;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public HistoricoSenha() {
     }
 
-    public HistoricoSenha(int cd_historicosenha, Usuario usuario, String ds_historicosenha,
-                          Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_historicosenha = cd_historicosenha;
+    public HistoricoSenha(int cdHistoricoSenha, Usuario usuario, String dsHistoricoSenha, Date dtCadastro, Date dtAtualizacao) {
+        this.cdHistoricoSenha = cdHistoricoSenha;
         this.usuario = usuario;
-        this.ds_historicosenha = ds_historicosenha;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dsHistoricoSenha = dsHistoricoSenha;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_historicosenha() {
-        return cd_historicosenha;
+    public int getCdHistoricoSenha() {
+        return cdHistoricoSenha;
     }
 
-    public void setCd_historicosenha(int cd_historicosenha) {
-        this.cd_historicosenha = cd_historicosenha;
+    public void setCdHistoricoSenha(int cdHistoricoSenha) {
+        this.cdHistoricoSenha = cdHistoricoSenha;
     }
 
     public Usuario getUsuario() {
@@ -42,38 +41,38 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
         this.usuario = usuario;
     }
 
-    public String getDs_historicosenha() {
-        return ds_historicosenha;
+    public String getDsHistoricoSenha() {
+        return dsHistoricoSenha;
     }
 
-    public void setDs_historicosenha(String ds_historicosenha) {
-        this.ds_historicosenha = ds_historicosenha;
+    public void setDsHistoricoSenha(String dsHistoricoSenha) {
+        this.dsHistoricoSenha = dsHistoricoSenha;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "HistoricoSenha{" +
-                "cd_historicosenha=" + cd_historicosenha +
+                "cdHistoricoSenha=" + cdHistoricoSenha +
                 ", usuario=" + usuario +
-                ", ds_historicosenha='" + ds_historicosenha + '\'' +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                ", dsHistoricoSenha='" + dsHistoricoSenha + '\'' +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

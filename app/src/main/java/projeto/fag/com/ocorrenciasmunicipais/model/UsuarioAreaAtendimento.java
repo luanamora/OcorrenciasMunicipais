@@ -6,40 +6,39 @@ import com.orm.dsl.MultiUnique;
 import java.io.Serializable;
 import java.util.Date;
 
-@MultiUnique("cd_usuarioatendimento, cd_areaatendimento")
+@MultiUnique("cdUsuarioAtendimento, cdAreaAtendimento")
 public class UsuarioAreaAtendimento extends SugarRecord implements Serializable {
-    private int cd_usuarioatendimento;
-    private int cd_areaatendimento;
+    private int cdUsuarioAtendimento;
+    private int cdAreaAtendimento;
     private Usuario usuario;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public UsuarioAreaAtendimento() {
     }
 
-    public UsuarioAreaAtendimento(int cd_usuarioatendimento, int cd_areaatendimento,
-                                    Usuario usuario, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_usuarioatendimento = cd_usuarioatendimento;
-        this.cd_areaatendimento = cd_areaatendimento;
+    public UsuarioAreaAtendimento(int cdUsuarioAtendimento, int cdAreaAtendimento, Usuario usuario, Date dtCadastro, Date dtAtualizacao) {
+        this.cdUsuarioAtendimento = cdUsuarioAtendimento;
+        this.cdAreaAtendimento = cdAreaAtendimento;
         this.usuario = usuario;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_usuarioatendimento() {
-        return cd_usuarioatendimento;
+    public int getCdUsuarioAtendimento() {
+        return cdUsuarioAtendimento;
     }
 
-    public void setCd_usuarioatendimento(int cd_usuarioatendimento) {
-        this.cd_usuarioatendimento = cd_usuarioatendimento;
+    public void setCdUsuarioAtendimento(int cdUsuarioAtendimento) {
+        this.cdUsuarioAtendimento = cdUsuarioAtendimento;
     }
 
-    public int getCd_areaatendimento() {
-        return cd_areaatendimento;
+    public int getCdAreaAtendimento() {
+        return cdAreaAtendimento;
     }
 
-    public void setCd_areaatendimento(int cd_areaatendimento) {
-        this.cd_areaatendimento = cd_areaatendimento;
+    public void setCdAreaAtendimento(int cdAreaAtendimento) {
+        this.cdAreaAtendimento = cdAreaAtendimento;
     }
 
     public Usuario getUsuario() {
@@ -50,30 +49,30 @@ public class UsuarioAreaAtendimento extends SugarRecord implements Serializable 
         this.usuario = usuario;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "UsuarioAreaAtendimento{" +
-                "cd_usuarioatendimento=" + cd_usuarioatendimento +
-                ", cd_areaatendimento=" + cd_areaatendimento +
+                "cdUsuarioAtendimento=" + cdUsuarioAtendimento +
+                ", cdAreaAtendimento=" + cdAreaAtendimento +
                 ", usuario=" + usuario +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 import com.orm.SugarContext;
 
+import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etSenha;
@@ -36,6 +38,14 @@ public class LoginActivity extends AppCompatActivity {
         btEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+            }
+        });
+
+        btCriarNovaConta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Usuario usuario = new Usuario();
 
             }
         });

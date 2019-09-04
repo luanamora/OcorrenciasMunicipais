@@ -10,64 +10,47 @@ import java.util.List;
 
 public class Estado extends SugarRecord implements Serializable {
     @Unique
-    private int cd_estado;
-    private String nm_estado;
-    private String sg_estado;
+    private int cdEstado;
+    private String nmEstado;
+    private String sgEstado;
     private List<Cidade> cidadeList = new ArrayList<Cidade>();
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public Estado() {
     }
 
-    public Estado(int cd_estado, String nm_estado, String sg_estado, List<Cidade> cidadeList,
-                  Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_estado = cd_estado;
-        this.nm_estado = nm_estado;
-        this.sg_estado = sg_estado;
+    public Estado(int cdEstado, String nmEstado, String sgEstado, List<Cidade> cidadeList, Date dtCadastro, Date dtAtualizacao) {
+        this.cdEstado = cdEstado;
+        this.nmEstado = nmEstado;
+        this.sgEstado = sgEstado;
         this.cidadeList = cidadeList;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_estado() {
-        return cd_estado;
+    public int getCdEstado() {
+        return cdEstado;
     }
 
-    public void setCd_estado(int cd_estado) {
-        this.cd_estado = cd_estado;
+    public void setCdEstado(int cdEstado) {
+        this.cdEstado = cdEstado;
     }
 
-    public String getNm_estado() {
-        return nm_estado;
+    public String getNmEstado() {
+        return nmEstado;
     }
 
-    public void setNm_estado(String nm_estado) {
-        this.nm_estado = nm_estado;
+    public void setNmEstado(String nmEstado) {
+        this.nmEstado = nmEstado;
     }
 
-    public String getSg_estado() {
-        return sg_estado;
+    public String getSgEstado() {
+        return sgEstado;
     }
 
-    public void setSg_estado(String sg_estado) {
-        this.sg_estado = sg_estado;
-    }
-
-    public Date getDt_cadastro() {
-        return dt_cadastro;
-    }
-
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
-    }
-
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
-    }
-
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setSgEstado(String sgEstado) {
+        this.sgEstado = sgEstado;
     }
 
     public List<Cidade> getCidadeList() {
@@ -78,15 +61,31 @@ public class Estado extends SugarRecord implements Serializable {
         this.cidadeList = cidadeList;
     }
 
+    public Date getDtCadastro() {
+        return dtCadastro;
+    }
+
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
+    }
+
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
+    }
+
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
+    }
+
     @Override
     public String toString() {
         return "Estado{" +
-                "cd_estado=" + cd_estado +
-                ", nm_estado='" + nm_estado + '\'' +
-                ", sg_estado='" + sg_estado + '\'' +
+                "cdEstado=" + cdEstado +
+                ", nmEstado='" + nmEstado + '\'' +
+                ", sgEstado='" + sgEstado + '\'' +
                 ", cidadeList=" + cidadeList +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

@@ -6,85 +6,95 @@ import com.orm.dsl.MultiUnique;
 import java.io.Serializable;
 import java.util.Date;
 
-@MultiUnique("cd_imagem, cd_usuario")
+@MultiUnique("cdImagem, cdUsuario")
 public class ImagemUsuario extends SugarRecord implements Serializable {
-    private int cd_imagem;
-    private int cd_usuario;
-    private String nm_imagem;
-    private String ds_tipo;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private int cdImagem;
+    private int cdUsuario;
+    private String nmImagem;
+    private String dsCaminho;
+    private String dsTipo;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public ImagemUsuario() {
     }
 
-    public ImagemUsuario(int cd_imagem, int cd_usuario, String nm_imagem,
-                         String ds_tipo, Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_imagem = cd_imagem;
-        this.cd_usuario = cd_usuario;
-        this.nm_imagem = nm_imagem;
-        this.ds_tipo = ds_tipo;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+    public ImagemUsuario(int cdImagem, int cdUsuario, String nmImagem, String dsCaminho, String dsTipo, Date dtCadastro, Date dtAtualizacao) {
+        this.cdImagem = cdImagem;
+        this.cdUsuario = cdUsuario;
+        this.nmImagem = nmImagem;
+        this.dsCaminho = dsCaminho;
+        this.dsTipo = dsTipo;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_imagem() {
-        return cd_imagem;
+    public int getCdImagem() {
+        return cdImagem;
     }
 
-    public void setCd_imagem(int cd_imagem) {
-        this.cd_imagem = cd_imagem;
+    public void setCdImagem(int cdImagem) {
+        this.cdImagem = cdImagem;
     }
 
-    public int getCd_usuario() {
-        return cd_usuario;
+    public int getCdUsuario() {
+        return cdUsuario;
     }
 
-    public void setCd_usuario(int cd_usuario) {
-        this.cd_usuario = cd_usuario;
+    public void setCdUsuario(int cdUsuario) {
+        this.cdUsuario = cdUsuario;
     }
 
-    public String getNm_imagem() {
-        return nm_imagem;
+    public String getNmImagem() {
+        return nmImagem;
     }
 
-    public void setNm_imagem(String nm_imagem) {
-        this.nm_imagem = nm_imagem;
+    public void setNmImagem(String nmImagem) {
+        this.nmImagem = nmImagem;
     }
 
-    public String getDs_tipo() {
-        return ds_tipo;
+    public String getDsCaminho() {
+        return dsCaminho;
     }
 
-    public void setDs_tipo(String ds_tipo) {
-        this.ds_tipo = ds_tipo;
+    public void setDsCaminho(String dsCaminho) {
+        this.dsCaminho = dsCaminho;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public String getDsTipo() {
+        return dsTipo;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDsTipo(String dsTipo) {
+        this.dsTipo = dsTipo;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
+    }
+
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
+    }
+
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "ImagemUsuario{" +
-                "cd_imagem=" + cd_imagem +
-                ", cd_usuario=" + cd_usuario +
-                ", nm_imagem='" + nm_imagem + '\'' +
-                ", ds_tipo='" + ds_tipo + '\'' +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                "cdImagem=" + cdImagem +
+                ", cdUsuario=" + cdUsuario +
+                ", nmImagem='" + nmImagem + '\'' +
+                ", dsCaminho='" + dsCaminho + '\'' +
+                ", dsTipo='" + dsTipo + '\'' +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

@@ -6,98 +6,96 @@ import com.orm.dsl.MultiUnique;
 import java.io.Serializable;
 import java.util.Date;
 
-@MultiUnique("cd_telefoneareaatendimento, cd_areaatendimento")
+@MultiUnique("cdTelefoneAreaAtendimento, cdAreaAtendimento")
 public class TelefoneAreaAtendimento extends SugarRecord implements Serializable {
-    private int cd_telefoneareaatendimento;
-    private int cd_areaatendimento;
-    private String nr_telefone;
-    private String nr_ddd;
-    private String ds_telefone;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private int cdTelefoneAreaAtendimento;
+    private int cdAreaAtendimento;
+    private String nrTelefone;
+    private String nrDdd;
+    private String dsTelefone;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public TelefoneAreaAtendimento() {
 
     }
 
-    public TelefoneAreaAtendimento(int cd_telefoneareaatendimento, int cd_areaatendimento,
-                                    String nr_telefone, String nr_ddd, String ds_telefone,
-                                        Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_telefoneareaatendimento = cd_telefoneareaatendimento;
-        this.cd_areaatendimento = cd_areaatendimento;
-        this.nr_telefone = nr_telefone;
-        this.nr_ddd = nr_ddd;
-        this.ds_telefone = ds_telefone;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+    public TelefoneAreaAtendimento(int cdTelefoneAreaAtendimento, int cdAreaAtendimento, String nrTelefone, String nrDdd, String dsTelefone, Date dtCadastro, Date dtAtualizacao) {
+        this.cdTelefoneAreaAtendimento = cdTelefoneAreaAtendimento;
+        this.cdAreaAtendimento = cdAreaAtendimento;
+        this.nrTelefone = nrTelefone;
+        this.nrDdd = nrDdd;
+        this.dsTelefone = dsTelefone;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_telefoneareaatendimento() {
-        return cd_telefoneareaatendimento;
+    public int getCdTelefoneAreaAtendimento() {
+        return cdTelefoneAreaAtendimento;
     }
 
-    public void setCd_telefoneareaatendimento(int cd_telefoneareaatendimento) {
-        this.cd_telefoneareaatendimento = cd_telefoneareaatendimento;
+    public void setCdTelefoneAreaAtendimento(int cdTelefoneAreaAtendimento) {
+        this.cdTelefoneAreaAtendimento = cdTelefoneAreaAtendimento;
     }
 
-    public int getCd_areaatendimento() {
-        return cd_areaatendimento;
+    public int getCdAreaAtendimento() {
+        return cdAreaAtendimento;
     }
 
-    public void setCd_areaatendimento(int cd_areaatendimento) {
-        this.cd_areaatendimento = cd_areaatendimento;
+    public void setCdAreaAtendimento(int cdAreaAtendimento) {
+        this.cdAreaAtendimento = cdAreaAtendimento;
     }
 
-    public String getNr_telefone() {
-        return nr_telefone;
+    public String getNrTelefone() {
+        return nrTelefone;
     }
 
-    public void setNr_telefone(String nr_telefone) {
-        this.nr_telefone = nr_telefone;
+    public void setNrTelefone(String nrTelefone) {
+        this.nrTelefone = nrTelefone;
     }
 
-    public String getNr_ddd() {
-        return nr_ddd;
+    public String getNrDdd() {
+        return nrDdd;
     }
 
-    public void setNr_ddd(String nr_ddd) {
-        this.nr_ddd = nr_ddd;
+    public void setNrDdd(String nrDdd) {
+        this.nrDdd = nrDdd;
     }
 
-    public String getDs_telefone() {
-        return ds_telefone;
+    public String getDsTelefone() {
+        return dsTelefone;
     }
 
-    public void setDs_telefone(String ds_telefone) {
-        this.ds_telefone = ds_telefone;
+    public void setDsTelefone(String dsTelefone) {
+        this.dsTelefone = dsTelefone;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "TelefoneAreaAtendimento{" +
-                "cd_telefoneareaatendimento=" + cd_telefoneareaatendimento +
-                ", cd_areaatendimento=" + cd_areaatendimento +
-                ", nr_telefone='" + nr_telefone + '\'' +
-                ", nr_ddd='" + nr_ddd + '\'' +
-                ", ds_telefone='" + ds_telefone + '\'' +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                "cdTelefoneAreaAtendimento=" + cdTelefoneAreaAtendimento +
+                ", cdAreaAtendimento=" + cdAreaAtendimento +
+                ", nrTelefone='" + nrTelefone + '\'' +
+                ", nrDdd='" + nrDdd + '\'' +
+                ", dsTelefone='" + dsTelefone + '\'' +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

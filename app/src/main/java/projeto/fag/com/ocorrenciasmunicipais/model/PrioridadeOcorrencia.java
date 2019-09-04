@@ -8,72 +8,71 @@ import java.util.Date;
 
 public class PrioridadeOcorrencia extends SugarRecord implements Serializable {
     @Unique
-    private int cd_prioridade;
-    private String ds_prioridade;
-    private int nr_prioridade;
-    private Date dt_cadastro;
-    private Date dt_atualizacao;
+    private int cdPrioridade;
+    private String dsPrioridade;
+    private int nrPrioridade;
+    private Date dtCadastro;
+    private Date dtAtualizacao;
 
     public PrioridadeOcorrencia() {
     }
 
-    public PrioridadeOcorrencia(int cd_prioridade, String ds_prioridade, int nr_prioridade,
-                                Date dt_cadastro, Date dt_atualizacao) {
-        this.cd_prioridade = cd_prioridade;
-        this.ds_prioridade = ds_prioridade;
-        this.nr_prioridade = nr_prioridade;
-        this.dt_cadastro = dt_cadastro;
-        this.dt_atualizacao = dt_atualizacao;
+    public PrioridadeOcorrencia(int cdPrioridade, String dsPrioridade, int nrPrioridade, Date dtCadastro, Date dtAtualizacao) {
+        this.cdPrioridade = cdPrioridade;
+        this.dsPrioridade = dsPrioridade;
+        this.nrPrioridade = nrPrioridade;
+        this.dtCadastro = dtCadastro;
+        this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCd_prioridade() {
-        return cd_prioridade;
+    public int getCdPrioridade() {
+        return cdPrioridade;
     }
 
-    public void setCd_prioridade(int cd_prioridade) {
-        this.cd_prioridade = cd_prioridade;
+    public void setCdPrioridade(int cdPrioridade) {
+        this.cdPrioridade = cdPrioridade;
     }
 
-    public String getDs_prioridade() {
-        return ds_prioridade;
+    public String getDsPrioridade() {
+        return dsPrioridade;
     }
 
-    public void setDs_prioridade(String ds_prioridade) {
-        this.ds_prioridade = ds_prioridade;
+    public void setDsPrioridade(String dsPrioridade) {
+        this.dsPrioridade = dsPrioridade;
     }
 
-    public int getNr_prioridade() {
-        return nr_prioridade;
+    public int getNrPrioridade() {
+        return nrPrioridade;
     }
 
-    public void setNr_prioridade(int nr_prioridade) {
-        this.nr_prioridade = nr_prioridade;
+    public void setNrPrioridade(int nrPrioridade) {
+        this.nrPrioridade = nrPrioridade;
     }
 
-    public Date getDt_cadastro() {
-        return dt_cadastro;
+    public Date getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(Date dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public Date getDt_atualizacao() {
-        return dt_atualizacao;
+    public Date getDtAtualizacao() {
+        return dtAtualizacao;
     }
 
-    public void setDt_atualizacao(Date dt_atualizacao) {
-        this.dt_atualizacao = dt_atualizacao;
+    public void setDtAtualizacao(Date dtAtualizacao) {
+        this.dtAtualizacao = dtAtualizacao;
     }
 
     @Override
     public String toString() {
         return "PrioridadeOcorrencia{" +
-                "cd_prioridade=" + cd_prioridade +
-                ", ds_prioridade='" + ds_prioridade + '\'' +
-                ", nr_prioridade=" + nr_prioridade +
-                ", dt_cadastro=" + dt_cadastro +
-                ", dt_atualizacao=" + dt_atualizacao +
+                "cdPrioridade=" + cdPrioridade +
+                ", dsPrioridade='" + dsPrioridade + '\'' +
+                ", nrPrioridade=" + nrPrioridade +
+                ", dtCadastro=" + dtCadastro +
+                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }
