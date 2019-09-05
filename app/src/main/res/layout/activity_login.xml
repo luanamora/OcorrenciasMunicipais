@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="180dp"
         android:orientation="vertical">
 
         <EditText
@@ -48,9 +48,9 @@
         android:layout_marginLeft="45dp"
         android:layout_marginTop="200dp"
         android:layout_marginRight="45dp"
-        android:background="@color/colorPrimary"
-        android:hint="@string/btCriarNovaConta"
-        android:textColor="@color/colorWhite"
+        android:background="@color/colorWhite"
+        android:text="@string/btCriarNovaConta"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/sizeButton" />
 
     <Button
@@ -61,8 +61,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="45dp"
         android:background="@color/colorPrimary"
-        android:hint="@string/btEsqueceuSenha"
-        android:textColor="#FFFFFF"
+        android:text="@string/btEsqueceuSenha"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/sizeButton" />
 
 </LinearLayout>

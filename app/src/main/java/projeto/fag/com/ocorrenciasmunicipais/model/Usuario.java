@@ -19,7 +19,7 @@ public class Usuario extends SugarRecord implements Serializable {
     private Date dtAtualizacao;
 
 
-    public Usuario() { //Contrutor Vazio
+    public Usuario() {
     }
 
     public Usuario(int cdUsuario, String nmUsuario, String dsSenha, String dsEmail, Date dtNascimento, boolean stStatus, boolean stAdministrador, Date dtCadastro, Date dtAtualizacao) {
