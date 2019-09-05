@@ -1,15 +1,11 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.orm.SugarContext;
-
-import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void loadComponents(){
+    private void loadComponents() {
         etEmail = findViewById(R.id.etEmail);
         etSenha = findViewById(R.id.etSenha);
         btEntrar = findViewById(R.id.btEntrar);
@@ -35,13 +31,13 @@ public class LoginActivity extends AppCompatActivity {
         btEsqueceuSenha = findViewById(R.id.btEsqueceuSenha);
     }
 
-    private void loadEvents(){
+    private void loadEvents() {
         createUser();
         recoverPassword();
 
     }
 
-    private void createUser(){
+    private void createUser() {
         btCriarNovaConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void recoverPassword(){
+    private void recoverPassword() {
         btEsqueceuSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
