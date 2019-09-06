@@ -7,22 +7,12 @@
     tools:context=".LoginActivity">
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/colorPrimary"/>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="200dp"
+        >
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -35,7 +25,6 @@
 
             <EditText
                 android:id="@+id/etEmail"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/marginEditText"
@@ -75,8 +64,8 @@
 
     <Button
         android:id="@+id/btCriarNovaConta"
-        android:layout_width="match_parent"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="200dp"
