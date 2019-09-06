@@ -12,6 +12,8 @@ public class CreateUserActivity extends AppCompatActivity {
 
     private EditText etNome, etEmail, etTelefone, etDtNascimento, etSenha, etConfirmarSenha;
     private Button btCriarConta;
+    private Usuario usuario;
+    private TelefoneUsuario telefone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,8 @@ public class CreateUserActivity extends AppCompatActivity {
     }
 
     private void loadEvents(){
-        Usuario usuario = new Usuario();
-        TelefoneUsuario telefone = new TelefoneUsuario();
+        usuario = new Usuario();
+        telefone = new TelefoneUsuario();
         usuario.setNmUsuario(etNome.getText().toString());
         usuario.setDsEmail(etEmail.getText().toString());
         telefone.setNrTelefone(etTelefone.getText().toString());

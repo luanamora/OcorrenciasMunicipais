@@ -83,4 +83,5 @@
         android:text="@string/btEsqueceuSenha"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/sizeButton" />
+
 </LinearLayout>
