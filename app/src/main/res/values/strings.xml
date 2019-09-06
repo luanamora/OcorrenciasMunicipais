@@ -23,6 +23,7 @@
     <string name="lbConfirmarSenhaUser">"Confirmar Senha"</string>
     <string name="btCriarConta">"Criar Conta"</string>
     <string name="hint_text">"Criar Conta"</string>
+    <string name="title_activity_teste">teste</string>
 
 
 </resources>

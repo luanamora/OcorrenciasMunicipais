@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".RecoverPasswordActivity"></activity>
+        <activity android:name=".RecoverPasswordActivity" />
         <activity android:name=".CreateUserActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
