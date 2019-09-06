@@ -12,6 +12,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etSenha;
     private Button btEntrar, btCriarNovaConta, btEsqueceuSenha;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

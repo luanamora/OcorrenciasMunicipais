@@ -22,6 +22,7 @@
     <string name="lbSenhaUser">"Senha"</string>
     <string name="lbConfirmarSenhaUser">"Confirmar Senha"</string>
     <string name="btCriarConta">"Criar Conta"</string>
+    <string name="hint_text">"Criar Conta"</string>
 
 
 </resources>
