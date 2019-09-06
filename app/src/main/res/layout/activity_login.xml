@@ -6,6 +6,18 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorPrimary"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,5 +94,4 @@
         android:text="@string/btEsqueceuSenha"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/sizeButton" />
-
 </LinearLayout>
