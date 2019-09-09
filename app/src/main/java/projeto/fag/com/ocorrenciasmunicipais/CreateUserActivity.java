@@ -8,14 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.QuickContactBadge;
-
 import java.util.Calendar;
-
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
-import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
-import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 
 public class CreateUserActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -71,7 +66,16 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     }
 
     @Override
-    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        etDtNascimento.setText(day + "/ " + (month + 1) + "/ " + year);
+    public void onDateSet(DatePicker datePicker, int year, int monthDate, int dayOfMonth) {
+        if (dayOfMonth > 9 && monthDate > 9){
+            etDtNascimento.setText(dayOfMonth + "/" + (monthDate + 1) + "/" + year);
+        } else if (dayOfMonth > 9 && monthDate < 9){
+            etDtNascimento.setText(dayOfMonth + "/" + "0"+(monthDate + 1) + "/" + year);
+        } else if (dayOfMonth < 9 && monthDate > 9 ){
+            etDtNascimento.setText("0"+dayOfMonth + "/" + (monthDate + 1) + "/" + year);
+        } else {
+            etDtNascimento.setText("0"+dayOfMonth + "/" + "0"+(monthDate + 1) + "/" + year);
+        }
+
     }
 }

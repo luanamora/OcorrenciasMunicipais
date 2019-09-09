@@ -38,7 +38,18 @@
         android:layout_marginRight="@dimen/marginButton"
         android:layout_marginBottom="@dimen/marginButtonTop"
         android:hint="@string/lbTelefoneUser"
-        android:inputType="number" />
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/etDtNascimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginButton"
+        android:layout_marginRight="@dimen/marginButton"
+        android:layout_marginBottom="@dimen/marginButtonTop"
+        android:hint="@string/lbDtNascimento"
+        android:inputType="date" />
+
 
 
     <EditText
@@ -49,7 +60,7 @@
         android:layout_marginRight="@dimen/marginButton"
         android:layout_marginBottom="@dimen/marginButtonTop"
         android:hint="@string/lbSenhaUser"
-        android:inputType="text" />
+        android:inputType="textPassword" />
 
 
     <EditText
@@ -60,19 +71,9 @@
         android:layout_marginRight="@dimen/marginButton"
         android:layout_marginBottom="@dimen/marginButtonTop"
         android:hint="@string/lbConfirmarSenhaUser"
-        android:inputType="text" />
+        android:inputType="textPassword" />
 
 
-    <EditText
-        android:id="@+id/etDtNascimento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/marginButton"
-        android:layout_marginRight="@dimen/marginButton"
-        android:layout_marginBottom="@dimen/marginButtonTop"
-        android:hint="@string/lbDtNascimento"
-        android:drawableRight="@mipmap/ic_launcher_calendar"
-        android:inputType="date" />
 
     <Button
         android:id="@+id/btEntrar"
