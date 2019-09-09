@@ -17,7 +17,7 @@ import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 
-public class CreateUserActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class CreateUserActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private EditText etNome, etEmail, etTelefone, etDtNascimento, etSenha, etConfirmarSenha;
     private Button btCriarConta;
@@ -39,7 +39,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         datePicker();
     }
 
-    private void datePicker(){
+    private void datePicker() {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -53,16 +53,16 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
-    private void loadComponents(){
+    private void loadComponents() {
         etNome = findViewById(R.id.etNome);
-        etEmail= findViewById(R.id.etEmail);
-        etTelefone= findViewById(R.id.etTelefone);
+        etEmail = findViewById(R.id.etEmail);
+        etTelefone = findViewById(R.id.etTelefone);
         etDtNascimento = findViewById(R.id.etDtNascimento);
         etSenha = findViewById(R.id.etSenha);
         etConfirmarSenha = findViewById(R.id.etConfirmarSenha);
     }
 
-    private void loadEvents(){
+    private void loadEvents() {
         usuario = new Usuario();
         telefone = new TelefoneUsuario();
         usuario.setNmUsuario(etNome.getText().toString());
@@ -72,7 +72,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        Mensagem.ExibirMensagem(CreateUserActivity.this, "Data Selecionada (" + day + "/ " + month + "/ " + year + ")", TipoMensagem.ALERTA);
         etDtNascimento.setText(day + "/ " + (month + 1) + "/ " + year);
     }
 }
