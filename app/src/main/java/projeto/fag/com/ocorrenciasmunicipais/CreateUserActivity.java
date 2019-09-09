@@ -58,11 +58,17 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     }
 
     private void loadEvents() {
-        usuario = new Usuario();
-        telefone = new TelefoneUsuario();
-        usuario.setNmUsuario(etNome.getText().toString());
-        usuario.setDsEmail(etEmail.getText().toString());
-        telefone.setNrTelefone(etTelefone.getText().toString());
+        btCriarConta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                usuario = new Usuario();
+                telefone = new TelefoneUsuario();
+                usuario.setNmUsuario(etNome.getText().toString());
+                usuario.setDsEmail(etEmail.getText().toString());
+                telefone.setNrTelefone(etTelefone.getText().toString());
+            }
+        });
+
     }
 
     @Override
