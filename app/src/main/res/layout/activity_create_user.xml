@@ -2,24 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CreateUserActivity">
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+
+        >
 
         <EditText
             android:id="@+id/etNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/lbNomeUser"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginBottom="@dimen/marginButtonTop"
+            android:background="@color/colorWhite"
+            android:hint="@string/lbNomeUser" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -32,10 +36,12 @@
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/lbEmailUser"
-            android:inputType="text"
+            android:layout_marginLeft="@dimen/marginButton"
             android:layout_marginRight="@dimen/marginButton"
-            android:layout_marginLeft="@dimen/marginButton"/>
+            android:layout_marginBottom="@dimen/marginButtonTop"
+            android:background="@color/colorWhite"
+            android:hint="@string/lbEmailUser"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,27 +54,13 @@
             android:id="@+id/etTelefone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginButton"
+            android:layout_marginRight="@dimen/marginButton"
+            android:layout_marginBottom="@dimen/marginButtonTop"
+            android:background="@color/colorWhite"
             android:hint="@string/lbTelefoneUser"
-            android:inputType="number"
-            android:layout_marginRight="@dimen/marginButton"
-            android:layout_marginLeft="@dimen/marginButton"/>
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/etDtNascimento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/lbDtNascimento"
-            android:inputType="date"
-            android:layout_marginRight="@dimen/marginButton"
-            android:layout_marginLeft="@dimen/marginButton"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -78,10 +70,12 @@
             android:id="@+id/etSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/lbSenhaUser"
-            android:inputType="text"
+            android:layout_marginLeft="@dimen/marginButton"
             android:layout_marginRight="@dimen/marginButton"
-            android:layout_marginLeft="@dimen/marginButton"/>
+            android:background="@color/colorWhite"
+            android:layout_marginBottom="@dimen/marginButtonTop"
+            android:hint="@string/lbSenhaUser"
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -93,24 +87,42 @@
             android:id="@+id/etConfirmarSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/lbConfirmarSenhaUser"
-            android:inputType="text"
+            android:layout_marginLeft="@dimen/marginButton"
             android:layout_marginRight="@dimen/marginButton"
-            android:layout_marginLeft="@dimen/marginButton"/>
+            android:background="@color/colorWhite"
+            android:layout_marginBottom="@dimen/marginButtonTop"
+            android:hint="@string/lbConfirmarSenhaUser"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etDtNascimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginButton"
+            android:layout_marginRight="@dimen/marginButton"
+            android:layout_marginBottom="@dimen/marginButtonTop"
+            android:background="@color/colorWhite"
+            android:hint="@string/lbDtNascimento"
+            android:inputType="date" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
-        <Button
-            android:id="@+id/btEntrar"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="120dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="120dp"
-            android:background="@color/colorPrimary"
-            android:text="@string/btCriarConta"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/sizeButton" />
+    <Button
+        android:id="@+id/btEntrar"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="120dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/btCriarConta"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/sizeButton" />
 
 
 </LinearLayout>
