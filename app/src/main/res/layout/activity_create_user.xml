@@ -71,7 +71,7 @@
         android:layout_marginRight="@dimen/marginButton"
         android:layout_marginBottom="@dimen/marginButtonTop"
         android:hint="@string/lbDtNascimento"
-        android:drawableRight="@drawable/ic_launcher_foreground"
+        android:drawableRight="@mipmap/ic_launcher_calendar"
         android:inputType="date" />
 
     <Button
