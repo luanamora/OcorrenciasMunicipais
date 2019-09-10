@@ -27,8 +27,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
 
-        setTitle("Criar uma nova conta");
-
         loadComponents();
         loadEvents();
         datePicker();

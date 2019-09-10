@@ -4,138 +4,161 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_vertical"
     tools:context=".CreateUserActivity">
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/marginEditText"
-        android:layout_marginRight="@dimen/marginEditText"
-        android:outlineSpotShadowColor="@color/colorPrimary">
-
-        <EditText
-            android:id="@+id/etNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/lbNomeUser" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/marginEditText"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="@dimen/marginEditText"
-        android:outlineSpotShadowColor="@color/colorPrimary">
-
-
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/lbEmailUser"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textAlignment="center"
+            android:text="CRIAR NOVA CONTA DE USUÁRIO"
+            android:background="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/colorWhite"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginEditText"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="6dp"
+            android:layout_marginRight="@dimen/marginEditText"
             android:outlineSpotShadowColor="@color/colorPrimary">
 
             <EditText
-                android:id="@+id/etDdd"
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:hint="@string/lbDddUser"
-                android:inputType="phone" />
+                android:id="@+id/etNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbNomeUser" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginEditText"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/marginEditText"
+            android:outlineSpotShadowColor="@color/colorPrimary">
+
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbEmailUser"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/marginEditText"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="6dp"
+                android:outlineSpotShadowColor="@color/colorPrimary">
+
+                <EditText
+                    android:id="@+id/etDdd"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:hint="@string/lbDddUser"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="@dimen/marginEditText"
+                android:outlineSpotShadowColor="@color/colorPrimary">
+
+                <EditText
+                    android:id="@+id/etTelefone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lbTelefoneUser"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginEditText"
             android:layout_marginTop="10dp"
             android:layout_marginRight="@dimen/marginEditText"
             android:outlineSpotShadowColor="@color/colorPrimary">
 
             <EditText
-                android:id="@+id/etTelefone"
+                android:id="@+id/etDtNascimento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/lbTelefoneUser"
-                android:inputType="phone" />
+                android:hint="@string/lbDtNascimento"
+                android:inputType="date" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginEditText"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/marginEditText"
+            android:outlineSpotShadowColor="@color/colorPrimary">
+
+            <EditText
+                android:id="@+id/etSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbSenhaUser"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginEditText"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/marginEditText"
+            android:outlineSpotShadowColor="@color/colorPrimary">
+
+            <EditText
+                android:id="@+id/etConfirmarSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbConfirmarSenhaUser"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btCriarConta"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="120dp"
+            android:text="@string/btCriarConta"
+            android:textSize="@dimen/sizeButton" />
     </LinearLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/marginEditText"
-        android:layout_marginRight="@dimen/marginEditText"
-        android:layout_marginTop="10dp"
-        android:outlineSpotShadowColor="@color/colorPrimary">
-
-        <EditText
-            android:id="@+id/etDtNascimento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/lbDtNascimento"
-            android:inputType="date" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/marginEditText"
-        android:layout_marginRight="@dimen/marginEditText"
-        android:layout_marginTop="10dp"
-        android:outlineSpotShadowColor="@color/colorPrimary">
-
-        <EditText
-            android:id="@+id/etSenha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/lbSenhaUser"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/marginEditText"
-        android:layout_marginRight="@dimen/marginEditText"
-        android:layout_marginTop="10dp"
-        android:outlineSpotShadowColor="@color/colorPrimary">
-
-        <EditText
-            android:id="@+id/etConfirmarSenha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/lbConfirmarSenhaUser"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btCriarConta"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="120dp"
-        android:text="@string/btCriarConta"
-        android:textSize="@dimen/sizeButton" />
-
 </LinearLayout>

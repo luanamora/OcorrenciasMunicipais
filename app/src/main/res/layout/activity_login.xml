@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_vertical"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
 
@@ -44,7 +44,6 @@
                 android:hint="@string/lbSenha" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <Button
             android:id="@+id/btEntrar"
             android:layout_width="match_parent"
@@ -54,7 +53,6 @@
             android:layout_marginRight="135dp"
             android:outlineSpotShadowColor="@color/colorPrimary"
             android:text="@string/btEntrar" />
-
 
     </LinearLayout>
 
