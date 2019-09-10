@@ -55,6 +55,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         etDtNascimento = findViewById(R.id.etDtNascimento);
         etSenha = findViewById(R.id.etSenha);
         etConfirmarSenha = findViewById(R.id.etConfirmarSenha);
+        btCriarConta = findViewById(R.id.btCriarConta);
     }
 
     private void loadEvents() {
