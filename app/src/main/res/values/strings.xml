@@ -18,6 +18,7 @@
     <string name="lbNomeUser">"Nome"</string>
     <string name="lbEmailUser">"Email"</string>
     <string name="lbTelefoneUser">"Telefone"</string>
+    <string name="lbDddUser">"DDD"</string>
     <string name="lbDtNascimento">"Data de Nascimento"</string>
     <string name="lbSenhaUser">"Senha"</string>
     <string name="lbConfirmarSenhaUser">"Confirmar Senha"</string>
