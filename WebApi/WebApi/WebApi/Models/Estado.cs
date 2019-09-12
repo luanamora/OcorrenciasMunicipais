@@ -10,6 +10,7 @@ namespace WebApi.Models
             Cidade = new HashSet<Cidade>();
         }
 
+       
         public int CdEstado { get; set; }
         public string NmEstado { get; set; }
         public string SgEstado { get; set; }
