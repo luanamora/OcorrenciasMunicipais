@@ -78,7 +78,7 @@ namespace WebApi.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetAreaAtuacao", new { id = areaAtuacao.CdAreaatuacao}, areaAtuacao);
         }
 
         // POST: api/AreaAtuacaos

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace WebApi.Models
@@ -10,9 +11,13 @@ namespace WebApi.Models
             Ocorrencia = new HashSet<Ocorrencia>();
         }
 
+        [JsonProperty("cd_estadoocorrencia")]
         public int CdEstadoocorrencia { get; set; }
+        [JsonProperty("ds_estadoocorrencia")]
         public string DsEstadoocorrencia { get; set; }
+        [JsonProperty("dt_cadastro")]
         public DateTime DtCadastro { get; set; }
+        [JsonProperty("dt_atualizacao")]
         public DateTime? DtAtualizacao { get; set; }
 
         public ICollection<Ocorrencia> Ocorrencia { get; set; }

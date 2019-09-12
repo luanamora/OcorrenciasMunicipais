@@ -11,9 +11,13 @@ namespace WebApi.Models
             AreaAtendimento = new HashSet<AreaAtendimento>();
         }
 
+        [JsonProperty("cd_areaatuacao")]
         public int CdAreaatuacao { get; set; }
+        [JsonProperty("ds_areaatuacao")]
         public string DsAreaatuacao { get; set; }
+        [JsonProperty("dt_cadastro")]
         public DateTime DtCadastro { get; set; }
+        [JsonProperty("dt_atualizacao")]
         public DateTime? DtAtualizacao { get; set; }
 
         [JsonIgnore]
