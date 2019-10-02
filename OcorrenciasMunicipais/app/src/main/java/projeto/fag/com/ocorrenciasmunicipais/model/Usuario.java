@@ -2,7 +2,6 @@ package projeto.fag.com.ocorrenciasmunicipais.model;
 
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
-
 import java.io.Serializable;
 import java.util.Date;
 

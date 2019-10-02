@@ -36,7 +36,8 @@ public class UserPhoneDialog extends AppCompatDialogFragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String ddd = etDdd.getText().toString();
                 String telefone = etTelefone.getText().toString();
-                listener.applyPhone(ddd, telefone);
+                String descricao = etDescricao.getText().toString();
+                listener.applyPhone(ddd, telefone, descricao);
             }
         });
 
@@ -58,6 +59,6 @@ public class UserPhoneDialog extends AppCompatDialogFragment {
     }
 
     public interface UserPhoneDialogListener {
-        void applyPhone(String ddd, String telefone);
+        void applyPhone(String ddd, String telefone, String descricao);
     }
 }

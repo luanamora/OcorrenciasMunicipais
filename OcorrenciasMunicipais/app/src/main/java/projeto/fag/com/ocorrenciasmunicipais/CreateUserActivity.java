@@ -2,26 +2,38 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
 import java.util.Calendar;
 import java.util.Date;
 
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
+import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
+import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.UserPhoneDialog;
 
 public class CreateUserActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, UserPhoneDialog.UserPhoneDialogListener {
 
     private EditText etNome, etEmail, etTelefone, etDtNascimento, etSenha, etConfirmarSenha, etDdd;
     private Button btCriarConta;
+
+    private int codigoUsuario;
+    private int codigoTelefone;
+    private String dsTelefone;
+
     private Usuario usuario;
     private TelefoneUsuario telefone;
+
     private int day, month, year;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;
@@ -62,22 +74,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     }
 
     private void loadEvents() {
-        //Criar conta do usuário
-        btCriarConta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                usuario = new Usuario();
-                telefone = new TelefoneUsuario();
-                usuario.setNmUsuario(etNome.getText().toString());
-                usuario.setDsEmail(etEmail.getText().toString());
-                usuario.setDtNascimento(DateUtil.stringToDate(etDtNascimento.getText().toString()));
-                usuario.setStStatus(true);
-                usuario.setStAdministrador(false);
-                usuario.setDtCadastro(new Date());
-                telefone.setCdUsuario(usuario.getCdUsuario());
-                telefone.setNrTelefone(etTelefone.getText().toString());
-            }
-        });
+        saveUser();
 
         etTelefone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,29 +85,103 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
     }
 
-    public void openDialogPhone(){
+    public void saveUser() {
+        btCriarConta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!checkFields()) {
+                    try {
+                        usuario = new Usuario();
+                        usuario.setCdUsuario(lastUserCode());
+                        usuario.setNmUsuario(etNome.getText().toString());
+                        usuario.setDsEmail(etEmail.getText().toString());
+                        usuario.setDtNascimento(DateUtil.stringToDate(etDtNascimento.getText().toString()));
+                        usuario.setStStatus(true);
+                        usuario.setStAdministrador(false);
+                        usuario.setDsSenha(etSenha.getText().toString());
+                        usuario.setDtCadastro(new Date());
+
+                        telefone = new TelefoneUsuario();
+                        telefone.setCdUsuario(usuario.getCdUsuario());
+                        telefone.setCdTelefoneUsuario(lastPhoneCode());
+                        telefone.setNrTelefone(etTelefone.getText().toString());
+                        telefone.setNrDdd(etDdd.getText().toString());
+                        telefone.setDsTelefone(dsTelefone);
+                        telefone.setDtCadastro(new Date());
+
+                        usuario.save();
+                        telefone.save();
+
+                        System.out.println("Código do usuario ---> " + usuario);
+                        System.out.println("Telefone ------>" + telefone);
+
+                    } catch (NullPointerException npe) {
+                        Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ERRO);
+                    }
+                }
+            }
+        });
+    }
+
+    public void openDialogPhone() {
         UserPhoneDialog userPhoneDialog = new UserPhoneDialog();
         userPhoneDialog.show(getSupportFragmentManager(), "Telefone");
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int monthDate, int dayOfMonth) {
-        if (dayOfMonth > 9 && monthDate > 9){
+        if (dayOfMonth > 9 && monthDate > 9) {
             etDtNascimento.setText(dayOfMonth + "/" + (monthDate + 1) + "/" + year);
-        } else if (dayOfMonth > 9 && monthDate < 9){
-            etDtNascimento.setText(dayOfMonth + "/" + "0"+(monthDate + 1) + "/" + year);
-        } else if (dayOfMonth < 9 && monthDate > 9 ){
-            etDtNascimento.setText("0"+dayOfMonth + "/" + (monthDate + 1) + "/" + year);
+        } else if (dayOfMonth > 9 && monthDate < 9) {
+            etDtNascimento.setText(dayOfMonth + "/" + "0" + (monthDate + 1) + "/" + year);
+        } else if (dayOfMonth < 9 && monthDate > 9) {
+            etDtNascimento.setText("0" + dayOfMonth + "/" + (monthDate + 1) + "/" + year);
         } else {
-            etDtNascimento.setText("0"+dayOfMonth + "/" + "0"+(monthDate + 1) + "/" + year);
+            etDtNascimento.setText("0" + dayOfMonth + "/" + "0" + (monthDate + 1) + "/" + year);
         }
 
     }
 
+    public boolean checkFields() {
+        int nome = etNome.getText().toString().length();
+        int email = etEmail.getText().toString().length();
+        int ddd = etDdd.getText().toString().length();
+        int telefone = etTelefone.getText().toString().length();
+        int dataNascimento = etDtNascimento.getText().toString().length();
+        int senha = etSenha.getText().toString().length();
+        int confirmarSenha = etConfirmarSenha.getText().toString().length();
+
+        if ((nome <= 0) || (email <= 0) || (ddd <= 0) || (telefone <= 0) || (dataNascimento <= 0) ||
+                (senha <= 0) || (confirmarSenha <= 0)) {
+            Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ALERTA);
+            return true;
+        }
+        return false;
+    }
+
+    public int lastUserCode() {
+        Usuario last = Usuario.last(Usuario.class);
+        if (last == null)
+            codigoUsuario = 1;
+        else
+            codigoUsuario = last.getCdUsuario() + 1;
+        return codigoUsuario;
+    }
+
+    public int lastPhoneCode() {
+        TelefoneUsuario last = TelefoneUsuario.last(TelefoneUsuario.class);
+        if (last == null)
+            codigoTelefone = 1;
+        else
+            codigoUsuario = last.getCdTelefoneUsuario() + 1;
+        return codigoTelefone;
+    }
 
     @Override
-    public void applyPhone(String ddd, String telefone) {
+    public void applyPhone(String ddd, String telefone, String descricao) {
         etDdd.setText(ddd);
         etTelefone.setText(telefone);
+        dsTelefone = descricao;
     }
 }
