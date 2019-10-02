@@ -7,21 +7,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.material.textview.MaterialTextView;
+import com.orm.SugarContext;
+
+import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etSenha;
     private Button btEntrar, btCriarNovaConta, btEsqueceuSenha;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        SugarContext.init(this);
         loadComponents();
         loadEvents();
-
-
     }
 
     private void loadComponents() {
@@ -35,7 +37,16 @@ public class LoginActivity extends AppCompatActivity {
     private void loadEvents() {
         createUser();
         recoverPassword();
+        checkAdministrator();
+        logon();
+    }
 
+    private void checkAdministrator(){
+        String etEmailText = etEmail.getText().toString();
+        if (etEmailText.equalsIgnoreCase("admin@admin.com")){
+            Intent intent = new Intent(LoginActivity.this, RecoverPasswordActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void createUser() {
@@ -59,4 +70,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void logon(){
+        btEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
 }

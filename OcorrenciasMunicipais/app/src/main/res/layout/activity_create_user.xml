@@ -13,14 +13,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:textAlignment="center"
-            android:text="CRIAR NOVA CONTA DE USUÁRIO"
             android:background="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:textSize="17dp"
             android:paddingTop="8dp"
+            android:text="CRIAR NOVA CONTA DE USUÁRIO"
+            android:textAlignment="center"
             android:textColor="@color/colorWhite"
-            />
+            android:textSize="17dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -50,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginEditText"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="@dimen/marginEditText"
             android:outlineSpotShadowColor="@color/colorPrimary">
 
@@ -63,33 +62,33 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="30dp"
-            >
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/marginEditText"
-                android:layout_marginRight="6dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
                 android:outlineSpotShadowColor="@color/colorPrimary">
 
                 <EditText
                     android:id="@+id/etDdd"
                     android:layout_width="80dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="@string/lbDddUser"
-                    android:inputType="phone"
-                    />
+                    android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="@dimen/marginEditText"
                 android:outlineSpotShadowColor="@color/colorPrimary">
 
@@ -100,14 +99,13 @@
                     android:hint="@string/lbTelefoneUser"
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginEditText"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="@dimen/marginEditText"
             android:outlineSpotShadowColor="@color/colorPrimary">
 
@@ -123,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginEditText"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="@dimen/marginEditText"
             android:outlineSpotShadowColor="@color/colorPrimary">
 
@@ -139,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginEditText"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="@dimen/marginEditText"
             android:outlineSpotShadowColor="@color/colorPrimary">
 
