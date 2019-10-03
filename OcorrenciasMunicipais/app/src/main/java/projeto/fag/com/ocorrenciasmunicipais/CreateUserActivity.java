@@ -127,8 +127,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         userPhoneDialog.show(getSupportFragmentManager(), "Telefone");
     }
 
-    public int checkFields() {
-        int controleInterno = 0;
+    public boolean checkFields() {
         int nome = etNome.getText().toString().trim().length();
         int email = etEmail.getText().toString().trim().length();
         int ddd = etDdd.getText().toString().trim().length();
@@ -142,33 +141,29 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         if ((nome <= 0) && (email <= 0) && (ddd <= 0) && (telefone <= 0) && (dataNascimento <= 0) &&
                 (senha <= 0) && (confirmarSenha <= 0)) {
             Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ALERTA);
-            controleInterno = 1;
-           return controleInterno;
+            return true;
         }
 
-        if (controleInterno == 0){
-
-
-
-
-        }
         if (nome <= 0)
             camposMensagem.add("Nome");
-        else if (email <= 0)
-                camposMensagem.add("Email");
-            else if (ddd <= 0)
-                camposMensagem.add("DDD");
-            else if (telefone <= 0)
-                camposMensagem.add("Telefone");
-            else if (dataNascimento <= 0)
-                camposMensagem.add("Data de Nascimento");
-            else if (senha <= 0)
-                camposMensagem.add("Senha");
-            else if (confirmarSenha <= 0)
-                camposMensagem.add("Confirmar senha");
-            return controleInterno;
+        if (email <= 0)
+            camposMensagem.add("Email");
+        if (ddd <= 0)
+            camposMensagem.add("DDD");
+        if (telefone <= 0)
+            camposMensagem.add("Telefone");
+        if (dataNascimento <= 0)
+            camposMensagem.add("Data de Nascimento");
+        if (senha <= 0)
+            camposMensagem.add("Senha");
+        if (confirmarSenha <= 0)
+            camposMensagem.add("Confirmar senha");
+
+        if (!camposMensagem.isEmpty()) {
+            Mensagem.ExibirMensagem(CreateUserActivity.this, "Você esqueceu de preencher os seguintes campos: " + camposMensagem.toString(), TipoMensagem.ALERTA);
+            return true;
         }
-        return controleInterno;
+        return false;
     }
 
     public int lastUserCode() {
