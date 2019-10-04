@@ -23,7 +23,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -46,7 +45,6 @@
                 android:hint="@string/lbNomeUser" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +53,6 @@
             android:layout_marginRight="@dimen/marginEditText"
             android:outlineSpotShadowColor="@color/colorPrimary"
             app:errorEnabled="true">
-
 
             <EditText
                 android:id="@+id/etEmail"
@@ -79,20 +76,19 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:outlineSpotShadowColor="@color/colorPrimary"
-
                 app:errorEnabled="true">
 
                 <EditText
                     android:id="@+id/etDdd"
                     android:layout_width="80dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:hint="@string/lbDddUser"
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="@dimen/marginEditText"
                 android:outlineSpotShadowColor="@color/colorPrimary"
@@ -102,10 +98,12 @@
                     android:id="@+id/etTelefone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableRight=""
+                    android:drawableRight="@drawable/ic_add_circle_outline_black_24dp"
+                    android:drawableTint="@color/colorPrimary"
                     android:hint="@string/lbTelefoneUser"
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -121,6 +119,8 @@
                 android:id="@+id/etDtNascimento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_date_range_black_24dp"
+                android:drawableTint="@color/colorPrimary"
                 android:hint="@string/lbDtNascimento"
                 android:inputType="date" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -132,12 +132,11 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/marginEditText"
             android:outlineSpotShadowColor="@color/colorPrimary"
-            app:errorEnabled="true"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorPrimary"
             app:counterEnabled="true"
             app:counterMaxLength="30"
-            >
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorPrimary">
 
             <EditText
                 android:id="@+id/etSenha"
@@ -154,11 +153,11 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/marginEditText"
             android:outlineSpotShadowColor="@color/colorPrimary"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorPrimary"
-            app:counterEnabled="true"
-            app:counterMaxLength="30">
+            app:passwordToggleTint="@color/colorPrimary">
 
             <EditText
                 android:id="@+id/etConfirmarSenha"

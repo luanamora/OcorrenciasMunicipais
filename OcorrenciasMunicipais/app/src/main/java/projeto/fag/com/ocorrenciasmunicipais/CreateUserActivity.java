@@ -112,6 +112,8 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
                         usuario.save();
                         telefone.save();
+                        Mensagem.ExibirMensagem(CreateUserActivity.this, "Usuário salvo com sucesso!", TipoMensagem.SUCESSO);
+                        finish();
 
                         System.out.println("Código do usuario ---> " + usuario);
                         System.out.println("Telefone ------>" + telefone);
