@@ -139,7 +139,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
         if ((nome <= 0) && (email <= 0) && (ddd <= 0) && (telefone <= 0) && (dataNascimento <= 0) &&
                 (senha <= 0) && (confirmarSenha <= 0)) {
-            Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ALERTA);
+           // Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ALERTA);
             etNome.setError("Campo vazio!");
             etEmail.setError("Campo vazio!");
             etDdd.setError("Campo vazio!");

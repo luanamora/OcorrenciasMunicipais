@@ -102,6 +102,7 @@
                     android:id="@+id/etTelefone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableRight=""
                     android:hint="@string/lbTelefoneUser"
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
