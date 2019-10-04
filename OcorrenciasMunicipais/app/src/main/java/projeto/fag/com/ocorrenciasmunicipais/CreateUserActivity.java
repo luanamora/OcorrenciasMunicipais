@@ -29,6 +29,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     private EditText etNome, etEmail, etTelefone, etDtNascimento, etSenha, etConfirmarSenha, etDdd;
     private Button btCriarConta;
 
+
     private int codigoUsuario;
     private int codigoTelefone;
     private String dsTelefone;
