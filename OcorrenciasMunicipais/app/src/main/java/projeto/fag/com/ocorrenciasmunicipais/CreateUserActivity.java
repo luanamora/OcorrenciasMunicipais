@@ -137,7 +137,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         int confirmarSenha = etConfirmarSenha.getText().toString().trim().length();
         List<String> camposMensagem = new ArrayList<String>();
 
-
         if ((nome <= 0) && (email <= 0) && (ddd <= 0) && (telefone <= 0) && (dataNascimento <= 0) &&
                 (senha <= 0) && (confirmarSenha <= 0)) {
             Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ALERTA);
@@ -190,18 +189,16 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         etTelefone.setText(telefone);
         dsTelefone = descricao;
     }
-
     @Override
     public void onDateSet(DatePicker datePicker, int year, int monthDate, int dayOfMonth) {
-        if (dayOfMonth > 9 && monthDate > 9) {
+        if (((dayOfMonth >= 10) && ((monthDate + 1) >= 10))) {
             etDtNascimento.setText(dayOfMonth + "/" + (monthDate + 1) + "/" + year);
-        } else if (dayOfMonth > 9 && monthDate < 9) {
+        } else if ((dayOfMonth >= 10) && ((monthDate + 1) < 10)) {
             etDtNascimento.setText(dayOfMonth + "/" + "0" + (monthDate + 1) + "/" + year);
-        } else if (dayOfMonth < 9 && monthDate > 9) {
+        } else if ((dayOfMonth < 10) && ((monthDate + 1) >= 10)) {
             etDtNascimento.setText("0" + dayOfMonth + "/" + (monthDate + 1) + "/" + year);
-        } else {
-            etDtNascimento.setText("0" + dayOfMonth + "/" + "0" + (monthDate + 1) + "/" + year);
+        } else if ((dayOfMonth < 10) && ((monthDate + 1) < 10)) {
+            etDtNascimento.setText("0" + dayOfMonth + "/" + "0"+(monthDate + 1) + "/" + year);
         }
-
     }
 }
