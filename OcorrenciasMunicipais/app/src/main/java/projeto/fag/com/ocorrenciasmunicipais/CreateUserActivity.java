@@ -140,28 +140,51 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         if ((nome <= 0) && (email <= 0) && (ddd <= 0) && (telefone <= 0) && (dataNascimento <= 0) &&
                 (senha <= 0) && (confirmarSenha <= 0)) {
             Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ALERTA);
+            etNome.setError("Campo vazio!");
+            etEmail.setError("Campo vazio!");
+            etDdd.setError("Campo vazio!");
+            etTelefone.setError("Campo vazio");
+            etDtNascimento.setError("Campo vazio!");
+            etSenha.setError("Campo vazio!");
+            etConfirmarSenha.setError("Campo vazio!");
+
             return true;
         }
 
-        if (nome <= 0)
+        if (nome <= 0) {
             camposMensagem.add("Nome");
-        if (email <= 0)
-            camposMensagem.add("Email");
-        if (ddd <= 0)
-            camposMensagem.add("DDD");
-        if (telefone <= 0)
-            camposMensagem.add("Telefone");
-        if (dataNascimento <= 0)
-            camposMensagem.add("Data de Nascimento");
-        if (senha <= 0)
-            camposMensagem.add("Senha");
-        if (confirmarSenha <= 0)
-            camposMensagem.add("Confirmar senha");
+            etNome.setError("Campo vazio!");
+        }
 
-        if (!camposMensagem.isEmpty()) {
+        if (email <= 0) {
+            camposMensagem.add("Email");
+            etEmail.setError("Campo vazio!");
+        }
+        if (ddd <= 0) {
+            camposMensagem.add("DDD");
+            etDdd.setError("Campo vazio!");
+        }
+        if (telefone <= 0) {
+            camposMensagem.add("Telefone");
+            etTelefone.setError("Campo vazio!");
+        }
+        if (dataNascimento <= 0) {
+            camposMensagem.add("Data de Nascimento");
+            etDtNascimento.setError("Campo vazio!");
+        }
+        if (senha <= 0) {
+            camposMensagem.add("Senha");
+            etSenha.setError("Campo vazio!");
+        }
+        if (confirmarSenha <= 0) {
+            camposMensagem.add("Confirmar senha");
+            etConfirmarSenha.setError("Campo vazio!");
+        }
+
+       /* if (!camposMensagem.isEmpty()) {
             Mensagem.ExibirMensagem(CreateUserActivity.this, "Você esqueceu de preencher os seguintes campos: " + camposMensagem.toString(), TipoMensagem.ALERTA);
             return true;
-        }
+        }*/
         return false;
     }
 
@@ -189,6 +212,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         etTelefone.setText(telefone);
         dsTelefone = descricao;
     }
+
     @Override
     public void onDateSet(DatePicker datePicker, int year, int monthDate, int dayOfMonth) {
         if (((dayOfMonth >= 10) && ((monthDate + 1) >= 10))) {
@@ -198,7 +222,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         } else if ((dayOfMonth < 10) && ((monthDate + 1) >= 10)) {
             etDtNascimento.setText("0" + dayOfMonth + "/" + (monthDate + 1) + "/" + year);
         } else if ((dayOfMonth < 10) && ((monthDate + 1) < 10)) {
-            etDtNascimento.setText("0" + dayOfMonth + "/" + "0"+(monthDate + 1) + "/" + year);
+            etDtNascimento.setText("0" + dayOfMonth + "/" + "0" + (monthDate + 1) + "/" + year);
         }
     }
 }

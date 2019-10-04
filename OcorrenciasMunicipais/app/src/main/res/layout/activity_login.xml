@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +21,8 @@
             android:layout_marginLeft="@dimen/marginEditText"
             android:layout_marginRight="@dimen/marginEditText"
             android:layout_marginBottom="4dp"
-            android:outlineSpotShadowColor="@color/colorPrimary">
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            app:errorEnabled="true">
 
             <EditText
                 android:id="@+id/etEmail"
@@ -35,7 +37,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginEditText"
             android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary">
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorPrimary"
+            app:counterEnabled="true"
+            app:counterMaxLength="30">
 
             <EditText
                 android:id="@+id/etSenha"

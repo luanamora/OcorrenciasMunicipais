@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -33,9 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginEditText"
-            android:layout_marginRight="@dimen/marginEditText"
             android:layout_marginTop="15dp"
-            android:outlineSpotShadowColor="@color/colorPrimary">
+            android:layout_marginRight="@dimen/marginEditText"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            app:errorEnabled="true">
 
             <EditText
                 android:id="@+id/etNome"
@@ -51,7 +53,8 @@
             android:layout_marginLeft="@dimen/marginEditText"
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary">
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            app:errorEnabled="true">
 
 
             <EditText
@@ -75,7 +78,9 @@
                 android:layout_marginLeft="@dimen/marginEditText"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:outlineSpotShadowColor="@color/colorPrimary">
+                android:outlineSpotShadowColor="@color/colorPrimary"
+
+                app:errorEnabled="true">
 
                 <EditText
                     android:id="@+id/etDdd"
@@ -90,7 +95,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="@dimen/marginEditText"
-                android:outlineSpotShadowColor="@color/colorPrimary">
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                app:errorEnabled="true">
 
                 <EditText
                     android:id="@+id/etTelefone"
@@ -107,7 +113,8 @@
             android:layout_marginLeft="@dimen/marginEditText"
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary">
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            app:errorEnabled="true">
 
             <EditText
                 android:id="@+id/etDtNascimento"
@@ -123,7 +130,13 @@
             android:layout_marginLeft="@dimen/marginEditText"
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary">
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorPrimary"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            >
 
             <EditText
                 android:id="@+id/etSenha"
@@ -139,7 +152,12 @@
             android:layout_marginLeft="@dimen/marginEditText"
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary">
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorPrimary"
+            app:counterEnabled="true"
+            app:counterMaxLength="30">
 
             <EditText
                 android:id="@+id/etConfirmarSenha"
