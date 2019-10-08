@@ -17,9 +17,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
-import projeto.fag.com.ocorrenciasmunicipais.task.usuarioTask.Post;
+import projeto.fag.com.ocorrenciasmunicipais.task.historicoSenha.HistSenhaTaskPost;
+import projeto.fag.com.ocorrenciasmunicipais.task.telefone.TelefoneTaskPost;
+import projeto.fag.com.ocorrenciasmunicipais.task.usuario.UsuarioTaskPost;
 import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
@@ -33,10 +36,12 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
     private int codigoUsuario;
     private int codigoTelefone;
+    private int codigoHistoricoSenha;
     private String dsTelefone;
 
     private Usuario usuario;
     private TelefoneUsuario telefone;
+    private HistoricoSenha historicoSenha;
 
     private int day, month, year;
     private Calendar calendar = Calendar.getInstance();
@@ -111,10 +116,26 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         telefone.setDsTelefone(dsTelefone);
                         telefone.setDtCadastro(new Date());
 
+                        historicoSenha = new HistoricoSenha();
+                        historicoSenha.setCdHistoricoSenha(lastPasswordCode());
+                        historicoSenha.setDsHistoricoSenha("Arrumar depois");
+                        historicoSenha.setDtCadastro(new Date());
+                        historicoSenha.setCdUsuario(usuario.getCdUsuario());
+
                         usuario.save();
                         telefone.save();
-                        Post usuarioTaskPost = new Post(CreateUserActivity.this);
+                        historicoSenha.save();
+
+                        UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
                         usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
+
+                        TelefoneTaskPost telefoneTaskPost = new TelefoneTaskPost(CreateUserActivity.this);
+                        telefoneTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(telefone));
+
+                        HistSenhaTaskPost histSenhaTaskPost = new HistSenhaTaskPost(CreateUserActivity.this);
+                        histSenhaTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(historicoSenha));
+
+
                         //Mensagem.ExibirMensagem(CreateUserActivity.this, "Usuário salvo com sucesso!", TipoMensagem.SUCESSO);
 
 
@@ -186,12 +207,13 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             camposMensagem.add("Confirmar senha");
             etConfirmarSenha.setError("Campo vazio!");
         }
+        
 
        /* if (!camposMensagem.isEmpty()) {
             Mensagem.ExibirMensagem(CreateUserActivity.this, "Você esqueceu de preencher os seguintes campos: " + camposMensagem.toString(), TipoMensagem.ALERTA);
             return true;
         }*/
-        return false;
+            return false;
     }
 
     public int lastUserCode() {
@@ -203,6 +225,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         return codigoUsuario;
     }
 
+
     public int lastPhoneCode() {
         TelefoneUsuario last = TelefoneUsuario.last(TelefoneUsuario.class);
         if (last == null)
@@ -210,6 +233,15 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         else
             codigoUsuario = last.getCdTelefoneUsuario() + 1;
         return codigoTelefone;
+    }
+
+    public int lastPasswordCode() {
+        HistoricoSenha last = HistoricoSenha.last(HistoricoSenha.class);
+        if (last == null)
+            codigoHistoricoSenha = 1;
+        else
+            codigoHistoricoSenha = last.getCdHistoricoSenha() + 1;
+        return codigoHistoricoSenha;
     }
 
     @Override

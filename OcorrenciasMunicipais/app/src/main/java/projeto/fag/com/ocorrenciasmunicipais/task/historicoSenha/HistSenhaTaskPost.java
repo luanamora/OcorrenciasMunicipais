@@ -1,62 +1,62 @@
-package projeto.fag.com.ocorrenciasmunicipais.task.usuarioTask;
+package projeto.fag.com.ocorrenciasmunicipais.task.historicoSenha;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import javax.net.ssl.HttpsURLConnection;
-
 import projeto.fag.com.ocorrenciasmunicipais.R;
-import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
+import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
 
-public class Get extends AsyncTask<String, Integer, Usuario> {
+public class HistSenhaTaskPost extends AsyncTask<String, Integer, HistoricoSenha> {
 
     private ProgressDialog progress;
     private Context context;
 
-    public Get(Context context) {
+    public HistSenhaTaskPost(Context context) {
         this.context = context;
     }
+
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         progress = new ProgressDialog(context);
-        progress.setTitle("Consulta de Usuário");
-        progress.setMessage("Aguarde, consultando Usuário");
+        progress.setTitle("Telefone");
+        progress.setMessage("Aguarde,  salvando telefone");
         progress.setIcon(R.drawable.ic_cached_black_24dp);
         progress.setCancelable(false);
         progress.show();
     }
 
+
     @Override
-    protected Usuario doInBackground(String... params) {
+    protected HistoricoSenha doInBackground(String... params) {
 
         if (params != null && params.length > 0) {
-
             try {
                 StringBuffer response = new StringBuffer();
-
-                URL urlUsuario = new URL("http://192.168.100.116:5000/api/Usuarios");
-                HttpURLConnection connection = (HttpURLConnection) urlUsuario.openConnection();
-                connection.setRequestMethod("GET");
+                URL urlSenha = new URL("http://192.168.100.116:5000/api/HistoricoSenhas");
+                HttpURLConnection connection = (HttpURLConnection) urlSenha.openConnection();
+                connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setConnectTimeout(20000);
-                connection.setReadTimeout(30000);
+                connection.setDoInput(true);
+                connection.setReadTimeout(70000);
                 connection.connect();
 
-                if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                OutputStream os = new BufferedOutputStream(connection.getOutputStream()); //Escrevo na conexão que montamos
+                os.write(params[0].getBytes()); //Escrevo na requisição do nosso Json
+                os.flush();
+                System.out.println("RETORNO DA REQUISIÇÃO " + connection.getResponseCode());
+
+                if (connection.getResponseCode() == HttpURLConnection.HTTP_CREATED) {
                     Scanner scanner = new Scanner(connection.getInputStream());
                     while (scanner.hasNext()) {
                         response.append(scanner.next());
@@ -64,15 +64,10 @@ public class Get extends AsyncTask<String, Integer, Usuario> {
                 } else
                     System.out.println("-------------------- ERRO DE CONEXÃO  --------------------");
 
-                System.out.println("-------------------- Resultado --------------------");
-                System.out.println(response.toString());
-
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-
-
         return null;
     }
 }

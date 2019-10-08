@@ -1,44 +1,47 @@
-package projeto.fag.com.ocorrenciasmunicipais.task.usuarioTask;
+package projeto.fag.com.ocorrenciasmunicipais.task.telefone;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+
 import java.io.BufferedOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+
 import projeto.fag.com.ocorrenciasmunicipais.R;
+import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 
-public class Post extends AsyncTask<String, Integer, Usuario> {
+public class TelefoneTaskPost extends AsyncTask<String, Integer, TelefoneUsuario> {
 
     private ProgressDialog progress;
     private Context context;
 
-    public Post(Context context){
+    public TelefoneTaskPost(Context context) {
         this.context = context;
     }
 
 
     @Override
-    protected void onPreExecute()   {
+    protected void onPreExecute() {
         super.onPreExecute();
         progress = new ProgressDialog(context);
-        progress.setTitle("Usuário");
-        progress.setMessage("Aguarde,  salvando Usuário");
+        progress.setTitle("Telefone");
+        progress.setMessage("Aguarde,  salvando telefone");
         progress.setIcon(R.drawable.ic_cached_black_24dp);
         progress.setCancelable(false);
         progress.show();
     }
 
     @Override
-    protected Usuario doInBackground(String... params) {
-        if (params != null && params.length > 0){
+    protected TelefoneUsuario doInBackground(String... params) {
+        if (params != null && params.length > 0) {
             try {
                 StringBuffer response = new StringBuffer();
-                URL urlUsuario = new URL("http://192.168.100.116:5000/api/Usuarios"); //Ip do meu pc
-                HttpURLConnection connection = (HttpURLConnection) urlUsuario.openConnection();
+                URL urlTelefone = new URL("http://192.168.100.116:5000/api/TelefoneUsuarios");
+                HttpURLConnection connection = (HttpURLConnection) urlTelefone.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setRequestProperty("Accept", "application/json");
@@ -60,7 +63,7 @@ public class Post extends AsyncTask<String, Integer, Usuario> {
                 } else
                     System.out.println("-------------------- ERRO DE CONEXÃO  --------------------");
 
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
@@ -68,8 +71,8 @@ public class Post extends AsyncTask<String, Integer, Usuario> {
     }
 
     @Override
-    protected void onPostExecute(Usuario usuario) {
-        super.onPostExecute(usuario);
+    protected void onPostExecute(TelefoneUsuario telefoneUsuario) {
+        super.onPostExecute(telefoneUsuario);
         progress.cancel();
     }
 }

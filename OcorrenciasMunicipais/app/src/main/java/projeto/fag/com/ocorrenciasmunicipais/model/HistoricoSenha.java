@@ -9,7 +9,7 @@ import java.util.Date;
 public class HistoricoSenha extends SugarRecord implements Serializable {
     @Unique
     private int cdHistoricoSenha;
-    private Usuario usuario;
+    private int cdUsuario;
     private String dsHistoricoSenha;
     private Date dtCadastro;
     private Date dtAtualizacao;
@@ -17,9 +17,9 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
     public HistoricoSenha() {
     }
 
-    public HistoricoSenha(int cdHistoricoSenha, Usuario usuario, String dsHistoricoSenha, Date dtCadastro, Date dtAtualizacao) {
+    public HistoricoSenha(int cdHistoricoSenha, int cdUsuario, String dsHistoricoSenha, Date dtCadastro, Date dtAtualizacao) {
         this.cdHistoricoSenha = cdHistoricoSenha;
-        this.usuario = usuario;
+        this.cdUsuario = cdUsuario;
         this.dsHistoricoSenha = dsHistoricoSenha;
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
@@ -33,12 +33,12 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
         this.cdHistoricoSenha = cdHistoricoSenha;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getcdUsuario() {
+        return cdUsuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCdUsuario(int cdUsuario) {
+        this.cdUsuario = cdUsuario;
     }
 
     public String getDsHistoricoSenha() {
@@ -69,7 +69,7 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
     public String toString() {
         return "HistoricoSenha{" +
                 "cdHistoricoSenha=" + cdHistoricoSenha +
-                ", usuario=" + usuario +
+                ", usuario=" + cdUsuario +
                 ", dsHistoricoSenha='" + dsHistoricoSenha + '\'' +
                 ", dtCadastro=" + dtCadastro +
                 ", dtAtualizacao=" + dtAtualizacao +
