@@ -11,12 +11,12 @@ import java.util.Scanner;
 import projeto.fag.com.ocorrenciasmunicipais.R;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 
-public class UsuarioTask extends AsyncTask<String, Integer, Usuario> {
+public class UsuarioTaskPost extends AsyncTask<String, Integer, Usuario> {
 
     private ProgressDialog progress;
     private Context context;
 
-    public UsuarioTask(Context context){
+    public UsuarioTaskPost(Context context){
         this.context = context;
     }
 

@@ -21,7 +21,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",
-      "applicationUrl": "http://*:5000", // //* aceita qualquer ip 
+      "applicationUrl": "http://*:5000", // //* aceita qualquer ip //executar com o dotnet run
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

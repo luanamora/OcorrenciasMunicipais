@@ -2,13 +2,9 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -23,7 +19,7 @@ import java.util.List;
 
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
-import projeto.fag.com.ocorrenciasmunicipais.task.UsuarioTask;
+import projeto.fag.com.ocorrenciasmunicipais.task.UsuarioTaskPost;
 import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
@@ -117,8 +113,8 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
                         usuario.save();
                         telefone.save();
-                        UsuarioTask usuarioTask = new UsuarioTask(CreateUserActivity.this);
-                        usuarioTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
+                        UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
+                        usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
                         //Mensagem.ExibirMensagem(CreateUserActivity.this, "Usuário salvo com sucesso!", TipoMensagem.SUCESSO);
 
 
