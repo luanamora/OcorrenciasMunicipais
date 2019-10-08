@@ -1,4 +1,4 @@
-package projeto.fag.com.ocorrenciasmunicipais.task;
+package projeto.fag.com.ocorrenciasmunicipais.task.usuarioTask;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -11,12 +11,12 @@ import java.util.Scanner;
 import projeto.fag.com.ocorrenciasmunicipais.R;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 
-public class UsuarioTaskPost extends AsyncTask<String, Integer, Usuario> {
+public class Post extends AsyncTask<String, Integer, Usuario> {
 
     private ProgressDialog progress;
     private Context context;
 
-    public UsuarioTaskPost(Context context){
+    public Post(Context context){
         this.context = context;
     }
 

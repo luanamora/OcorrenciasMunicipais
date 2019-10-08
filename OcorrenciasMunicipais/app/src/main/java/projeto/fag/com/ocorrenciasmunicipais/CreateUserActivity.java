@@ -19,7 +19,7 @@ import java.util.List;
 
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
-import projeto.fag.com.ocorrenciasmunicipais.task.UsuarioTaskPost;
+import projeto.fag.com.ocorrenciasmunicipais.task.usuarioTask.Post;
 import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
@@ -113,7 +113,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
                         usuario.save();
                         telefone.save();
-                        UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
+                        Post usuarioTaskPost = new Post(CreateUserActivity.this);
                         usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
                         //Mensagem.ExibirMensagem(CreateUserActivity.this, "Usuário salvo com sucesso!", TipoMensagem.SUCESSO);
 
