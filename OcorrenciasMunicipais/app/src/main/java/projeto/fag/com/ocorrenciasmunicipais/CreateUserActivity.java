@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +23,7 @@ import java.util.List;
 
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
+import projeto.fag.com.ocorrenciasmunicipais.task.UsuarioTask;
 import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
@@ -112,8 +117,10 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
                         usuario.save();
                         telefone.save();
-                        Mensagem.ExibirMensagem(CreateUserActivity.this, "Usuário salvo com sucesso!", TipoMensagem.SUCESSO);
-                        finish();
+                        UsuarioTask usuarioTask = new UsuarioTask(CreateUserActivity.this);
+                        usuarioTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
+                        //Mensagem.ExibirMensagem(CreateUserActivity.this, "Usuário salvo com sucesso!", TipoMensagem.SUCESSO);
+
 
                         System.out.println("Código do usuario ---> " + usuario);
                         System.out.println("Telefone ------>" + telefone);
@@ -142,7 +149,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
         if ((nome <= 0) && (email <= 0) && (ddd <= 0) && (telefone <= 0) && (dataNascimento <= 0) &&
                 (senha <= 0) && (confirmarSenha <= 0)) {
-           // Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ALERTA);
+            // Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ALERTA);
             etNome.setError("Campo vazio!");
             etEmail.setError("Campo vazio!");
             etDdd.setError("Campo vazio!");

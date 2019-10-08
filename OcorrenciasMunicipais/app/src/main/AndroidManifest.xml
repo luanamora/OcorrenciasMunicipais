@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="projeto.fag.com.ocorrenciasmunicipais">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".FeedActivity"></activity>
         <activity android:name=".RecoverPasswordActivity" />

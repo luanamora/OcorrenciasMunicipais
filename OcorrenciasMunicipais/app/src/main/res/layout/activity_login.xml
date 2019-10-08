@@ -40,9 +40,7 @@
             android:outlineSpotShadowColor="@color/colorPrimary"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorPrimary"
-            app:counterEnabled="true"
-            app:counterMaxLength="30">
+            app:passwordToggleTint="@color/colorPrimary">
 
             <EditText
                 android:id="@+id/etSenha"
