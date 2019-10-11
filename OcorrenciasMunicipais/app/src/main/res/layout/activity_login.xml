@@ -27,6 +27,8 @@
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawablePadding="5dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/lbEmail" />
         </com.google.android.material.textfield.TextInputLayout>
