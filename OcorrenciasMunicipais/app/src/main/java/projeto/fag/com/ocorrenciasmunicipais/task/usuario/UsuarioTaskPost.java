@@ -37,7 +37,7 @@ public class UsuarioTaskPost extends AsyncTask<String, Integer, Usuario> {
         if (params != null && params.length > 0){
             try {
                 StringBuffer response = new StringBuffer();
-                URL urlUsuario = new URL("http://192.168.100.116:5000/api/Usuarios"); //Ip do meu pc
+                URL urlUsuario = new URL("http://192.168.1.61:5000/api/Usuarios"); //Ip do meu pc
                 HttpURLConnection connection = (HttpURLConnection) urlUsuario.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json");

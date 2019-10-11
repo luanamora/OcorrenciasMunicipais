@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace WebApi.Models
@@ -13,6 +14,7 @@ namespace WebApi.Models
         public DateTime DtCadastro { get; set; }
         public DateTime? DtAtualizacao { get; set; }
 
+        [JsonIgnore]
         public Usuario CdUsuarioNavigation { get; set; }
     }
 }

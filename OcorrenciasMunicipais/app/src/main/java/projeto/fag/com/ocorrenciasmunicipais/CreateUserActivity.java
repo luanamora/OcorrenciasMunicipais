@@ -252,15 +252,19 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     }
 
     @Override
-    public void onDateSet(DatePicker datePicker, int year, int monthDate, int dayOfMonth) {
-        if (((dayOfMonth >= 10) && ((monthDate + 1) >= 10))) {
-            etDtNascimento.setText(dayOfMonth + "/" + (monthDate + 1) + "/" + year);
-        } else if ((dayOfMonth >= 10) && ((monthDate + 1) < 10)) {
-            etDtNascimento.setText(dayOfMonth + "/" + "0" + (monthDate + 1) + "/" + year);
-        } else if ((dayOfMonth < 10) && ((monthDate + 1) >= 10)) {
-            etDtNascimento.setText("0" + dayOfMonth + "/" + (monthDate + 1) + "/" + year);
-        } else if ((dayOfMonth < 10) && ((monthDate + 1) < 10)) {
-            etDtNascimento.setText("0" + dayOfMonth + "/" + "0" + (monthDate + 1) + "/" + year);
+    public void onDateSet(DatePicker datePicker, int yearDate, int monthDate, int dayOfMonth) {
+        if (year - yearDate >= 16) {
+            if (((dayOfMonth >= 10) && ((monthDate + 1) >= 10))) {
+                etDtNascimento.setText(dayOfMonth + "/" + (monthDate + 1) + "/" + yearDate);
+            } else if ((dayOfMonth >= 10) && ((monthDate + 1) < 10)) {
+                etDtNascimento.setText(dayOfMonth + "/" + "0" + (monthDate + 1) + "/" + yearDate);
+            } else if ((dayOfMonth < 10) && ((monthDate + 1) >= 10)) {
+                etDtNascimento.setText("0" + dayOfMonth + "/" + (monthDate + 1) + "/" + yearDate);
+            } else if ((dayOfMonth < 10) && ((monthDate + 1) < 10)) {
+                etDtNascimento.setText("0" + dayOfMonth + "/" + "0" + (monthDate + 1) + "/" + yearDate);
+            }
+        } else {
+            etDtNascimento.setError("É necessário ter no mínimo 16 anos");
         }
     }
 }

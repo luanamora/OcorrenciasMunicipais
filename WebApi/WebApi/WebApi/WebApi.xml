@@ -4,10 +4,5 @@
         <name>WebApi</name>
     </assembly>
     <members>
-        <member name="L:WebApi.Startup.XmlCommentsFilePath">
-            <summary>
-            Returns the path of XML with the comments ///
-            </summary>
-        </member>
     </members>
 </doc>
