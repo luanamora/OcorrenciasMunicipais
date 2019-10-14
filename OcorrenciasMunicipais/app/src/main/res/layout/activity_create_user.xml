@@ -39,6 +39,7 @@
             android:src="@drawable/ic_person_black_24dp" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tvlNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -69,6 +70,7 @@
             android:src="@drawable/ic_email_black_24dp" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tvlEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -138,6 +140,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tvlDtNascimento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -208,6 +211,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tvlConfirmarSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
