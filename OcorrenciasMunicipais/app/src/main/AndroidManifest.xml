@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_help"
+        android:icon="@drawable/ic_add_circle_outline_black_24dp"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_help"
+        android:roundIcon="@drawable/ic_add_circle_outline_black_24dp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
@@ -29,7 +29,7 @@
 
         <meta-data
             android:name="VERSION"
-            android:value="1" />
+            android:value="2" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
