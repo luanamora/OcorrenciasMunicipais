@@ -3,8 +3,12 @@ package projeto.fag.com.ocorrenciasmunicipais;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -41,6 +45,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     private int codigoUsuario;
     private int codigoTelefone;
     private int codigoHistoricoSenha;
+    private boolean textFieldControl = false;
     private String dsTelefone;
     private String ddd;
 
@@ -61,36 +66,9 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         loadEvents();
         datePicker();
         controlErrorTextInput();
+
     }
 
-    private void controlErrorTextInput() {
-        int nome = etNome.getText().toString().trim().length();
-        int email = etEmail.getText().toString().trim().length();
-        int telefone = etTelefone.getText().toString().trim().length();
-        int dataNascimento = etDtNascimento.getText().toString().trim().length();
-        int senha = etSenha.getText().toString().trim().length();
-        int confirmarSenha = etConfirmarSenha.getText().toString().trim().length();
-
-        if (nome <= 0)
-            tvlNome.setError("Campo vazio!");
-        else
-            tvlNome.setErrorEnabled(true);
-
-        if (email <= 0)
-            tvlEmail.setError("Campo vazio!");
-
-        if (telefone <= 0)
-            tvlTelefone.setError("Campo vazio!");
-
-        if (dataNascimento <= 0)
-            tvlDtNascimento.setError("Campo vazio!");
-
-        if (senha <= 0)
-            tvlSenha.setError("Campo vazio!");
-
-        if (confirmarSenha <= 0)
-            tvlConfirmarSenha.setError("Campo vazio!");
-    }
 
     private void datePicker() {
         year = calendar.get(Calendar.YEAR);
@@ -171,20 +149,21 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         historicoSenha.setCdHistoricoSenha(lastPasswordCode());
                         historicoSenha.setDsHistoricoSenha("Arrumar depois");
                         historicoSenha.setDtCadastro(new Date());
-                        historicoSenha.setCdUsuario(usuario.getCdUsuario());
+                        historicoSenha.setCdUsuario(1);
 
+                        passwordControl();
                         usuario.save();
                         telefone.save();
                         historicoSenha.save();
 
-                        UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
+                        /*UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
                         usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
 
                         TelefoneTaskPost telefoneTaskPost = new TelefoneTaskPost(CreateUserActivity.this);
                         telefoneTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(telefone));
 
                         HistSenhaTaskPost histSenhaTaskPost = new HistSenhaTaskPost(CreateUserActivity.this);
-                        histSenhaTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(historicoSenha));
+                        histSenhaTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(historicoSenha));*/
 
                         System.out.println("Código do usuario ---> " + usuario);
                         System.out.println("Telefone ------>" + telefone);
@@ -202,6 +181,9 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     }
 
     public boolean checkFields() {
+        textFieldControl = true;
+        boolean control = false;
+
         int nome = etNome.getText().toString().trim().length();
         int email = etEmail.getText().toString().trim().length();
         int telefone = etTelefone.getText().toString().trim().length();
@@ -217,15 +199,153 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             tvlDtNascimento.setError("Campo vazio!");
             tvlSenha.setError("Campo vazio!");
             tvlConfirmarSenha.setError("Campo vazio!");
-
+            control = true;
             return true;
+
+        }
+        if (control) {
+            if (nome <= 0)
+                tvlNome.setError("Campo vazio!");
+            if (email <= 0)
+                tvlEmail.setError("Campo vazio!");
+            if (telefone <= 0)
+                tvlTelefone.setError("Campo vazio!");
+            if (dataNascimento <= 0)
+                tvlDtNascimento.setError("Campo vazio!");
+            if (senha <= 0)
+                tvlSenha.setError("Campo vazio!");
+            if (confirmarSenha <= 0)
+                tvlConfirmarSenha.setError("Campo vazio!");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean passwordControl(){ //Rever isso aqui
+        String senha = etSenha.getText().toString();
+        String confirmarSenha = etConfirmarSenha.getText().toString();
+
+        if (etSenha.getText().toString().trim().length() < 8){
+            tvlSenha.setError("A senha deve ter no mínimo 8 Caracteres");
         }
 
 
-
-
+        if (senha.equals(confirmarSenha)){
+            tvlSenha.setBackgroundColor(Color.parseColor("green"));
+        } else {
+            tvlConfirmarSenha.setError("As senhas não coincidem");
+            etConfirmarSenha.setText("");
+        }
         return false;
     }
+
+    private void controlErrorTextInput() {
+
+        etNome.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlNome.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        etEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlEmail.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        etTelefone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlTelefone.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        etDtNascimento.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlDtNascimento.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        etSenha.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlSenha.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        etConfirmarSenha.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlConfirmarSenha.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+    }
+
 
     public int lastUserCode() {
         Usuario last = Usuario.last(Usuario.class);
@@ -275,7 +395,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                 etDtNascimento.setText("0" + dayOfMonth + "/" + "0" + (monthDate + 1) + "/" + yearDate);
             }
         } else {
-            etDtNascimento.setError("É necessário ter no mínimo 16 anos");
+            tvlDtNascimento.setError("É necessário ter no mínimo 16 anos");
         }
     }
 }
