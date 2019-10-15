@@ -33,7 +33,7 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
         this.cdHistoricoSenha = cdHistoricoSenha;
     }
 
-    public int getcdUsuario() {
+    public int getCdUsuario() {
         return cdUsuario;
     }
 
@@ -69,7 +69,7 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
     public String toString() {
         return "HistoricoSenha{" +
                 "cdHistoricoSenha=" + cdHistoricoSenha +
-                ", usuario=" + cdUsuario +
+                ", cdUsuario=" + cdUsuario +
                 ", dsHistoricoSenha='" + dsHistoricoSenha + '\'' +
                 ", dtCadastro=" + dtCadastro +
                 ", dtAtualizacao=" + dtAtualizacao +
