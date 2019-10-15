@@ -120,7 +120,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         btCriarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkFields()) {
+                if (passwordControl()) {
                     try {
                         usuario = new Usuario();
                         usuario.setCdUsuario(lastUserCode());
@@ -214,8 +214,11 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             return false;
         }
 
+        return true;
+    }
 
-        if (senha < 8) {
+    public boolean passwordControl(){
+        if (etSenha.getText().toString().trim().length() < 8) {
             System.out.println("EEEEEEEEEEEEEEEEEEEEEEEENTROU AQUIUUUUUUUUUUUUUUUU");
             tvlSenha.setError("A senha deve ter no mínimo 8 Caracteres");
             etConfirmarSenha.setText("");
@@ -228,7 +231,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             etConfirmarSenha.setText("");
             return false;
         }
-
         return true;
     }
 
