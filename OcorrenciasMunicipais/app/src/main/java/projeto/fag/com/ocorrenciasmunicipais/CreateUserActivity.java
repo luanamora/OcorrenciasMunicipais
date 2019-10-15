@@ -41,11 +41,9 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     private ImageView ivTelefone;
     private TextInputLayout tvlNome, tvlEmail, tvlTelefone, tvlDtNascimento, tvlSenha, tvlConfirmarSenha;
 
-
     private int codigoUsuario;
     private int codigoTelefone;
     private int codigoHistoricoSenha;
-    private boolean textFieldControl = false;
     private String dsTelefone;
     private String ddd;
 
@@ -61,12 +59,10 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
-
         loadComponents();
         loadEvents();
         datePicker();
         controlErrorTextInput();
-
     }
 
 
@@ -100,7 +96,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         tvlDtNascimento = findViewById(R.id.tvlDtNascimento);
         tvlSenha = findViewById(R.id.tvlSenha);
         tvlConfirmarSenha = findViewById(R.id.tvlConfirmarSenha);
-
     }
 
     private void loadEvents() {
@@ -125,7 +120,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         btCriarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!checkFields()) {
+                if (checkFields()) {
                     try {
                         usuario = new Usuario();
                         usuario.setCdUsuario(lastUserCode());
@@ -151,7 +146,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         historicoSenha.setDtCadastro(new Date());
                         historicoSenha.setCdUsuario(1);
 
-                        passwordControl();
                         usuario.save();
                         telefone.save();
                         historicoSenha.save();
@@ -181,8 +175,8 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     }
 
     public boolean checkFields() {
-        textFieldControl = true;
-        boolean control = false;
+        boolean controlFields = true;
+        boolean controlPasswordError = true;
 
         int nome = etNome.getText().toString().trim().length();
         int email = etEmail.getText().toString().trim().length();
@@ -191,19 +185,20 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         int senha = etSenha.getText().toString().trim().length();
         int confirmarSenha = etConfirmarSenha.getText().toString().trim().length();
 
+
         if ((nome <= 0) && (email <= 0) && (telefone <= 0) && (dataNascimento <= 0) &&
                 (senha <= 0) && (confirmarSenha <= 0)) {
             tvlNome.setError("Campo vazio!");
             tvlEmail.setError("Campo vazio!");
-            tvlTelefone.setError("Campo vazio");
+            tvlTelefone.setError("Campo vazio!");
             tvlDtNascimento.setError("Campo vazio!");
             tvlSenha.setError("Campo vazio!");
             tvlConfirmarSenha.setError("Campo vazio!");
-            control = true;
-            return true;
+            controlFields = false;
+            return false;
 
         }
-        if (control) {
+        if (controlFields) {
             if (nome <= 0)
                 tvlNome.setError("Campo vazio!");
             if (email <= 0)
@@ -216,27 +211,25 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                 tvlSenha.setError("Campo vazio!");
             if (confirmarSenha <= 0)
                 tvlConfirmarSenha.setError("Campo vazio!");
-            return true;
+            return false;
         }
-        return false;
-    }
 
-    private boolean passwordControl(){ //Rever isso aqui
-        String senha = etSenha.getText().toString();
-        String confirmarSenha = etConfirmarSenha.getText().toString();
 
-        if (etSenha.getText().toString().trim().length() < 8){
+        if (senha < 8) {
+            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEENTROU AQUIUUUUUUUUUUUUUUUU");
             tvlSenha.setError("A senha deve ter no mínimo 8 Caracteres");
-        }
-
-
-        if (senha.equals(confirmarSenha)){
-            tvlSenha.setBackgroundColor(Color.parseColor("green"));
-        } else {
-            tvlConfirmarSenha.setError("As senhas não coincidem");
             etConfirmarSenha.setText("");
+            return false;
         }
-        return false;
+
+        if (!etSenha.getText().toString().equals(etConfirmarSenha.getText().toString())) {
+            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEENTROU AQUIUUUUUUUUUUUUUUUU 2");
+            tvlConfirmarSenha.setError("As senhas não coincidem. Tente Novamente");
+            etConfirmarSenha.setText("");
+            return false;
+        }
+
+        return true;
     }
 
     private void controlErrorTextInput() {
