@@ -216,7 +216,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="@dimen/marginEditText"
+            android:layout_marginRight="20dp"
             app:counterEnabled="true"
             app:counterMaxLength="30"
             app:errorEnabled="true"
@@ -231,6 +231,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+
 
 
 

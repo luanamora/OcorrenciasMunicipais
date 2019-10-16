@@ -198,22 +198,33 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             tvlConfirmarSenha.setError("Campo vazio!");
             return false;
 
-        } else if (nome <= 0) {
+        }
+
+        if (nome <= 0) {
             tvlNome.setError("Campo vazio!");
             cont++;
-        } else if (email <= 0) {
+        }
+
+        if (email <= 0) {
             tvlEmail.setError("Campo vazio!");
             cont++;
-        } else if (telefone <= 0) {
+        }
+
+        if (telefone <= 0) {
             tvlTelefone.setError("Campo vazio!");
             cont++;
-        } else if (dataNascimento <= 0) {
+        }
+
+        if (dataNascimento <= 0) {
             tvlDtNascimento.setError("Campo vazio!");
             cont++;
-        } else if (senha <= 0) {
+        }
+
+        if (senha <= 0) {
             tvlSenha.setError("Campo vazio!");
             cont++;
-        } else if (confirmarSenha <= 0) {
+        }
+        if (confirmarSenha <= 0) {
             tvlConfirmarSenha.setError("Campo vazio!");
             cont++;
         }
@@ -222,7 +233,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             cont = 0;
             return false;
         }
-        
+
         System.out.println("TRUE");
         return true;
     }
@@ -237,9 +248,9 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             return false;
         }
 
-        if (etSenha.getText().toString().equals(etConfirmarSenha.getText().toString())) {
+        if (!etSenha.getText().toString().equals(etConfirmarSenha.getText().toString())) {
             System.out.println("EEEEEEEEEEEEEEEEEEEEEEEENTROU AQUIUUUUUUUUUUUUUUUU 2");
-            tvlConfirmarSenha.setError("As senhas não coincidem. Tente Novamente");
+            tvlConfirmarSenha.setError("As senhas não coincidem.");
             etConfirmarSenha.setText("");
             return false;
         }
