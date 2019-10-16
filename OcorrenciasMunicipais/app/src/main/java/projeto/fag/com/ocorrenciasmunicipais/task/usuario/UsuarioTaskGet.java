@@ -6,10 +6,15 @@ import android.os.AsyncTask;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+
+import projeto.fag.com.ocorrenciasmunicipais.CreateUserActivity;
 import projeto.fag.com.ocorrenciasmunicipais.R;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
+import projeto.fag.com.ocorrenciasmunicipais.task.Result;
+import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
+import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 
-public class UsuarioTaskGet extends AsyncTask<String, Integer, Usuario> {
+public class UsuarioTaskGet extends AsyncTask<String, Integer, Result> {
 
     private ProgressDialog progress;
     private Context context;
@@ -30,7 +35,7 @@ public class UsuarioTaskGet extends AsyncTask<String, Integer, Usuario> {
     }
 
     @Override
-    protected Usuario doInBackground(String... params) {
+    protected Result doInBackground(String... params) {
 
         if (params != null && params.length > 0) {
 
@@ -45,16 +50,16 @@ public class UsuarioTaskGet extends AsyncTask<String, Integer, Usuario> {
                 connection.setReadTimeout(30000);
                 connection.connect();
 
-                if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+
+                if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) { //Usando a classe generica Result
                     Scanner scanner = new Scanner(connection.getInputStream());
                     while (scanner.hasNext()) {
                         response.append(scanner.next());
                     }
+                    return new Result(response.toString(), false);
                 } else
-                    System.out.println("-------------------- ERRO DE CONEXÃO  --------------------");
+                    return new Result(null, true);
 
-                System.out.println("-------------------- Resultado --------------------");
-                System.out.println(response.toString());
 
             } catch (Exception ex) {
                 ex.printStackTrace();

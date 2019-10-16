@@ -45,8 +45,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/marginEditText"
-            app:errorEnabled="true"
-            >
+            app:errorEnabled="true">
 
             <EditText
                 android:id="@+id/etNome"
@@ -76,7 +75,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary"
             app:errorEnabled="true">
 
             <EditText
@@ -110,10 +108,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary"
-            app:helperText="* Clique no ícone à esquerda!"
             app:errorEnabled="true"
-            >
+            app:helperText="* Clique no ícone à esquerda!">
 
             <EditText
                 android:id="@+id/etTelefone"
@@ -231,9 +227,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-
-
-
 
     <Button
         android:id="@+id/btCriarConta"
