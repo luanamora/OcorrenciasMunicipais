@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -120,35 +121,36 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         btCriarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (passwordControl()) {
-                    try {
-                        usuario = new Usuario();
-                        usuario.setCdUsuario(lastUserCode());
-                        usuario.setNmUsuario(etNome.getText().toString());
-                        usuario.setDsEmail(etEmail.getText().toString());
-                        usuario.setDtNascimento(DateUtil.stringToDate(etDtNascimento.getText().toString()));
-                        usuario.setStStatus(true);
-                        usuario.setStAdministrador(false);
-                        usuario.setDsSenha(etSenha.getText().toString());
-                        usuario.setDtCadastro(new Date());
+                if (checkFields()) {
+                    if (passwordControl()) {
+                        try {
+                            usuario = new Usuario();
+                            usuario.setCdUsuario(lastUserCode());
+                            usuario.setNmUsuario(etNome.getText().toString());
+                            usuario.setDsEmail(etEmail.getText().toString());
+                            usuario.setDtNascimento(DateUtil.stringToDate(etDtNascimento.getText().toString()));
+                            usuario.setStStatus(true);
+                            usuario.setStAdministrador(false);
+                            usuario.setDsSenha(etSenha.getText().toString());
+                            usuario.setDtCadastro(new Date());
 
-                        telefone = new TelefoneUsuario();
-                        telefone.setCdUsuario(usuario.getCdUsuario());
-                        telefone.setCdTelefoneUsuario(lastPhoneCode());
-                        telefone.setNrTelefone(etTelefone.getText().toString());
-                        telefone.setNrDdd(ddd);
-                        telefone.setDsTelefone(dsTelefone);
-                        telefone.setDtCadastro(new Date());
+                            telefone = new TelefoneUsuario();
+                            telefone.setCdUsuario(usuario.getCdUsuario());
+                            telefone.setCdTelefoneUsuario(lastPhoneCode());
+                            telefone.setNrTelefone(etTelefone.getText().toString());
+                            telefone.setNrDdd(ddd);
+                            telefone.setDsTelefone(dsTelefone);
+                            telefone.setDtCadastro(new Date());
 
-                        historicoSenha = new HistoricoSenha();
-                        historicoSenha.setCdHistoricoSenha(lastPasswordCode());
-                        historicoSenha.setDsHistoricoSenha("Arrumar depois");
-                        historicoSenha.setDtCadastro(new Date());
-                        historicoSenha.setCdUsuario(1);
+                            historicoSenha = new HistoricoSenha();
+                            historicoSenha.setCdHistoricoSenha(lastPasswordCode());
+                            historicoSenha.setDsHistoricoSenha("Arrumar depois");
+                            historicoSenha.setDtCadastro(new Date());
+                            historicoSenha.setCdUsuario(1);
 
-                        usuario.save();
-                        telefone.save();
-                        historicoSenha.save();
+                            usuario.save();
+                            telefone.save();
+                            historicoSenha.save();
 
                         /*UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
                         usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
@@ -159,10 +161,11 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         HistSenhaTaskPost histSenhaTaskPost = new HistSenhaTaskPost(CreateUserActivity.this);
                         histSenhaTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(historicoSenha));*/
 
-                        System.out.println("Código do usuario ---> " + usuario);
-                        System.out.println("Telefone ------>" + telefone);
-                    } catch (NullPointerException npe) {
-                        Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ERRO);
+                            System.out.println("Código do usuario ---> " + usuario);
+                            System.out.println("Telefone ------>" + telefone);
+                        } catch (NullPointerException npe) {
+                            Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ERRO);
+                        }
                     }
                 }
             }
@@ -175,8 +178,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     }
 
     public boolean checkFields() {
-        boolean controlFields = true;
-        boolean controlPasswordError = true;
+        int cont = 0;
 
         int nome = etNome.getText().toString().trim().length();
         int email = etEmail.getText().toString().trim().length();
@@ -194,30 +196,40 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             tvlDtNascimento.setError("Campo vazio!");
             tvlSenha.setError("Campo vazio!");
             tvlConfirmarSenha.setError("Campo vazio!");
-            controlFields = false;
             return false;
 
-        }
-        if (controlFields) {
-            if (nome <= 0)
-                tvlNome.setError("Campo vazio!");
-            if (email <= 0)
-                tvlEmail.setError("Campo vazio!");
-            if (telefone <= 0)
-                tvlTelefone.setError("Campo vazio!");
-            if (dataNascimento <= 0)
-                tvlDtNascimento.setError("Campo vazio!");
-            if (senha <= 0)
-                tvlSenha.setError("Campo vazio!");
-            if (confirmarSenha <= 0)
-                tvlConfirmarSenha.setError("Campo vazio!");
-            return false;
+        } else if (nome <= 0) {
+            tvlNome.setError("Campo vazio!");
+            cont++;
+        } else if (email <= 0) {
+            tvlEmail.setError("Campo vazio!");
+            cont++;
+        } else if (telefone <= 0) {
+            tvlTelefone.setError("Campo vazio!");
+            cont++;
+        } else if (dataNascimento <= 0) {
+            tvlDtNascimento.setError("Campo vazio!");
+            cont++;
+        } else if (senha <= 0) {
+            tvlSenha.setError("Campo vazio!");
+            cont++;
+        } else if (confirmarSenha <= 0) {
+            tvlConfirmarSenha.setError("Campo vazio!");
+            cont++;
         }
 
+        if (cont > 0) {
+            cont = 0;
+            return false;
+        }
+        
+        System.out.println("TRUE");
         return true;
     }
 
-    public boolean passwordControl(){
+    public boolean passwordControl() {
+        System.out.println("Passou aqui");
+        System.out.println(etSenha.getText().toString().trim().length());
         if (etSenha.getText().toString().trim().length() < 8) {
             System.out.println("EEEEEEEEEEEEEEEEEEEEEEEENTROU AQUIUUUUUUUUUUUUUUUU");
             tvlSenha.setError("A senha deve ter no mínimo 8 Caracteres");
@@ -225,7 +237,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             return false;
         }
 
-        if (!etSenha.getText().toString().equals(etConfirmarSenha.getText().toString())) {
+        if (etSenha.getText().toString().equals(etConfirmarSenha.getText().toString())) {
             System.out.println("EEEEEEEEEEEEEEEEEEEEEEEENTROU AQUIUUUUUUUUUUUUUUUU 2");
             tvlConfirmarSenha.setError("As senhas não coincidem. Tente Novamente");
             etConfirmarSenha.setText("");
