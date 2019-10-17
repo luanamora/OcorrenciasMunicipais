@@ -1,6 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,11 +11,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
+
 import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
+import projeto.fag.com.ocorrenciasmunicipais.task.Result;
+import projeto.fag.com.ocorrenciasmunicipais.task.Task;
 import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
@@ -46,6 +53,19 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         loadEvents();
         datePicker();
         controlErrorTextInput();
+
+        Task task = new Task(CreateUserActivity.this);
+        Result result = null;
+        try {
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios"}).get();
+            String teste = new Gson().toJson(result);
+            Mensagem.ExibirMensagem(CreateUserActivity.this, teste, TipoMensagem.SUCESSO);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
     }
 
 
@@ -98,7 +118,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             public void onClick(View view) {
                 if (checkFields()) {
                     if (passwordControl()) {
-                        try {
                             usuario = new Usuario();
                             usuario.setCdUsuario(lastUserCode());
                             usuario.setNmUsuario(etNome.getText().toString());
@@ -130,6 +149,8 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                             System.out.println("Código do usuario ---> " + usuario);
                             System.out.println("Telefone ------>" + telefone);
 
+
+
                             /*UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
                             usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
 
@@ -140,9 +161,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                             histSenhaTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(historicoSenha));*/
 
 
-                        } catch (NullPointerException npe) {
-                            Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ERRO);
-                        }
+
                     }
                 }
             }
