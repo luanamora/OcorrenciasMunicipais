@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
+import java.net.HttpURLConnection;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +28,7 @@ import java.util.List;
 import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
+import projeto.fag.com.ocorrenciasmunicipais.task.Task;
 import projeto.fag.com.ocorrenciasmunicipais.task.historicoSenha.HistSenhaTaskPost;
 import projeto.fag.com.ocorrenciasmunicipais.task.telefone.TelefoneTaskPost;
 import projeto.fag.com.ocorrenciasmunicipais.task.usuario.UsuarioTaskPost;
@@ -102,13 +104,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     private void loadEvents() {
         saveUser();
 
-        etTelefone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // etTelefone.setError(" *Clique no ícone à esquerda!");
-            }
-        });
-
         ivTelefone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,17 +147,19 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                             telefone.save();
                             historicoSenha.save();
 
-                        /*UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
-                        usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
-
-                        TelefoneTaskPost telefoneTaskPost = new TelefoneTaskPost(CreateUserActivity.this);
-                        telefoneTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(telefone));
-
-                        HistSenhaTaskPost histSenhaTaskPost = new HistSenhaTaskPost(CreateUserActivity.this);
-                        histSenhaTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(historicoSenha));*/
-
                             System.out.println("Código do usuario ---> " + usuario);
                             System.out.println("Telefone ------>" + telefone);
+
+                            /*UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
+                            usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
+
+                            TelefoneTaskPost telefoneTaskPost = new TelefoneTaskPost(CreateUserActivity.this);
+                            telefoneTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(telefone));
+
+                            HistSenhaTaskPost histSenhaTaskPost = new HistSenhaTaskPost(CreateUserActivity.this);
+                            histSenhaTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(historicoSenha));*/
+
+
                         } catch (NullPointerException npe) {
                             Mensagem.ExibirMensagem(CreateUserActivity.this, "É necessário preencher todos os campos!", TipoMensagem.ERRO);
                         }
@@ -175,7 +172,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     public void openDialogPhone() {
         UserPhoneDialog userPhoneDialog = new UserPhoneDialog();
         userPhoneDialog.show(getSupportFragmentManager(), "Telefone");
-    }
+    } //Abre dialog do telefone (rever)
 
     public boolean checkFields() {
         int cont = 0;
@@ -239,23 +236,20 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     }
 
     public boolean passwordControl() {
-        System.out.println("Passou aqui");
         System.out.println(etSenha.getText().toString().trim().length());
         if (etSenha.getText().toString().trim().length() < 8) {
-            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEENTROU AQUIUUUUUUUUUUUUUUUU");
             tvlSenha.setError("A senha deve ter no mínimo 8 Caracteres");
             etConfirmarSenha.setText("");
             return false;
         }
 
         if (!etSenha.getText().toString().equals(etConfirmarSenha.getText().toString())) {
-            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEENTROU AQUIUUUUUUUUUUUUUUUU 2");
             tvlConfirmarSenha.setError("As senhas não coincidem.");
             etConfirmarSenha.setText("");
             return false;
         }
         return true;
-    }
+    } //Controla regra de negócio da senha
 
     private void controlErrorTextInput() {
 
@@ -360,10 +354,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
             }
         });
-
-
-    }
-
+    } //Controla os textfields para voltar ao normal (sem erro)
 
     public int lastUserCode() {
         Usuario last = Usuario.last(Usuario.class);
@@ -372,7 +363,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         else
             codigoUsuario = last.getCdUsuario() + 1;
         return codigoUsuario;
-    }
+    }//Para dar continuação a PK
 
 
     public int lastPhoneCode() {
@@ -382,7 +373,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         else
             codigoUsuario = last.getCdTelefoneUsuario() + 1;
         return codigoTelefone;
-    }
+    }//Para dar continuação a PK
 
     public int lastPasswordCode() {
         HistoricoSenha last = HistoricoSenha.last(HistoricoSenha.class);
@@ -391,10 +382,10 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         else
             codigoHistoricoSenha = last.getCdHistoricoSenha() + 1;
         return codigoHistoricoSenha;
-    }
+    }//Para dar continuação a PK
 
     @Override
-    public void applyPhone(String dddTelefone, String telefone, String descricao) {
+    public void applyPhone(String dddTelefone, String telefone, String descricao) { //Mascara do telefone (ta ruim)
         ddd = dddTelefone;
         etTelefone.setText("(" + dddTelefone + ") " + telefone);
         dsTelefone = descricao;
