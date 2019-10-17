@@ -3,6 +3,9 @@ package projeto.fag.com.ocorrenciasmunicipais.task.usuario;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
@@ -50,7 +53,6 @@ public class UsuarioTaskGet extends AsyncTask<String, Integer, Result> {
                 connection.setReadTimeout(30000);
                 connection.connect();
 
-
                 if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) { //Usando a classe generica Result
                     Scanner scanner = new Scanner(connection.getInputStream());
                     while (scanner.hasNext()) {
@@ -59,8 +61,6 @@ public class UsuarioTaskGet extends AsyncTask<String, Integer, Result> {
                     return new Result(response.toString(), false);
                 } else
                     return new Result(null, true);
-
-
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
