@@ -1,37 +1,20 @@
 package projeto.fag.com.ocorrenciasmunicipais;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
-
-import java.net.HttpURLConnection;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
 import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
-import projeto.fag.com.ocorrenciasmunicipais.task.Task;
-import projeto.fag.com.ocorrenciasmunicipais.task.historicoSenha.HistSenhaTaskPost;
-import projeto.fag.com.ocorrenciasmunicipais.task.telefone.TelefoneTaskPost;
-import projeto.fag.com.ocorrenciasmunicipais.task.usuario.UsuarioTaskPost;
 import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
@@ -43,17 +26,14 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     private Button btCriarConta;
     private ImageView ivTelefone;
     private TextInputLayout tvlNome, tvlEmail, tvlTelefone, tvlDtNascimento, tvlSenha, tvlConfirmarSenha;
-
     private int codigoUsuario;
     private int codigoTelefone;
     private int codigoHistoricoSenha;
     private String dsTelefone;
     private String ddd;
-
     private Usuario usuario;
     private TelefoneUsuario telefone;
     private HistoricoSenha historicoSenha;
-
     private int day, month, year;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;

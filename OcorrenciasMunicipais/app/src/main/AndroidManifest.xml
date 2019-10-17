@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AdministratorActivity"></activity>
+        <activity android:name=".ServiceAreaActivity"></activity>
+        <activity android:name=".AdministratorActivity" />
         <activity android:name=".FeedActivity" />
         <activity android:name=".RecoverPasswordActivity" />
         <activity android:name=".CreateUserActivity" />
