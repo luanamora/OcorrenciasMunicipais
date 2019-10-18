@@ -1,8 +1,11 @@
 package projeto.fag.com.ocorrenciasmunicipais;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -12,11 +15,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
-
 import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
@@ -54,9 +55,9 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         datePicker();
         controlErrorTextInput();
 
-        Task task = new Task(CreateUserActivity.this);
+        // Task task = new Task(CreateUserActivity.this);
         Result result = null;
-        try {
+       /* try {
             result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios"}).get();
             String teste = new Gson().toJson(result);
             Mensagem.ExibirMensagem(CreateUserActivity.this, teste, TipoMensagem.SUCESSO);
@@ -64,8 +65,9 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        System.out.println();
+        }*/
+
+
     }
 
 
@@ -118,48 +120,59 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             public void onClick(View view) {
                 if (checkFields()) {
                     if (passwordControl()) {
-                            usuario = new Usuario();
-                            usuario.setCdUsuario(lastUserCode());
-                            usuario.setNmUsuario(etNome.getText().toString());
-                            usuario.setDsEmail(etEmail.getText().toString());
-                            usuario.setDtNascimento(DateUtil.stringToDate(etDtNascimento.getText().toString()));
-                            usuario.setStStatus(true);
-                            usuario.setStAdministrador(false);
-                            usuario.setDsSenha(etSenha.getText().toString());
-                            usuario.setDtCadastro(new Date());
+                        usuario = new Usuario();
+                        usuario.setCdUsuario(lastUserCode());
+                        usuario.setNmUsuario(etNome.getText().toString());
+                        usuario.setDsEmail(etEmail.getText().toString());
+                        usuario.setDtNascimento(DateUtil.stringToDate(etDtNascimento.getText().toString()));
+                        usuario.setStStatus(true);
+                        usuario.setStAdministrador(false);
+                        usuario.setDsSenha(etSenha.getText().toString());
+                        usuario.setDtCadastro(new Date());
 
-                            telefone = new TelefoneUsuario();
-                            telefone.setCdUsuario(usuario.getCdUsuario());
-                            telefone.setCdTelefoneUsuario(lastPhoneCode());
-                            telefone.setNrTelefone(etTelefone.getText().toString());
-                            telefone.setNrDdd(ddd);
-                            telefone.setDsTelefone(dsTelefone);
-                            telefone.setDtCadastro(new Date());
+                        telefone = new TelefoneUsuario();
+                        telefone.setCdUsuario(usuario.getCdUsuario());
+                        telefone.setCdTelefoneUsuario(lastPhoneCode());
+                        telefone.setNrTelefone(etTelefone.getText().toString());
+                        telefone.setNrDdd(ddd);
+                        telefone.setDsTelefone(dsTelefone);
+                        telefone.setDtCadastro(new Date());
 
-                            historicoSenha = new HistoricoSenha();
-                            historicoSenha.setCdHistoricoSenha(lastPasswordCode());
-                            historicoSenha.setDsHistoricoSenha("Arrumar depois");
-                            historicoSenha.setDtCadastro(new Date());
-                            historicoSenha.setCdUsuario(1);
+                        historicoSenha = new HistoricoSenha();
+                        historicoSenha.setCdHistoricoSenha(lastPasswordCode());
+                        historicoSenha.setDsHistoricoSenha("Arrumar depois");
+                        historicoSenha.setDtCadastro(new Date());
+                        historicoSenha.setCdUsuario(1);
 
-                            usuario.save();
-                            telefone.save();
-                            historicoSenha.save();
+                        usuario.save();
+                        telefone.save();
+                        historicoSenha.save();
 
-                            System.out.println("Código do usuario ---> " + usuario);
-                            System.out.println("Telefone ------>" + telefone);
+                        System.out.println("Código do usuario ---> " + usuario);
+                        System.out.println("Telefone ------>" + telefone);
 
+                        Result result = null;
 
+                        Task task = new Task(CreateUserActivity.this);
+                        try {
+                            String teste = new Gson().toJson(result);
+                            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET"}).get();
+
+                            Mensagem.ExibirMensagem(CreateUserActivity.this, new Gson().toJson(result), TipoMensagem.SUCESSO);
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
 
                             /*UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
-                            usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));
+                            usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));*/
 
-                            TelefoneTaskPost telefoneTaskPost = new TelefoneTaskPost(CreateUserActivity.this);
+                            /*TelefoneTaskPost telefoneTaskPost = new TelefoneTaskPost(CreateUserActivity.this);
                             telefoneTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(telefone));
 
                             HistSenhaTaskPost histSenhaTaskPost = new HistSenhaTaskPost(CreateUserActivity.this);
                             histSenhaTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(historicoSenha));*/
-
 
 
                     }
