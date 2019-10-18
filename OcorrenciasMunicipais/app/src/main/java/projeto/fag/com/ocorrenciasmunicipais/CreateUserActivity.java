@@ -137,7 +137,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         historicoSenha.setCdUsuario(1);
 
                         Result result = null;
-
                         Task task = new Task(CreateUserActivity.this);
                         if (taskControl == 0) {
                             try {

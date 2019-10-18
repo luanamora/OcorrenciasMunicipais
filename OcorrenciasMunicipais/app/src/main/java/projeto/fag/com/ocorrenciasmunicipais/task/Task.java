@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class Task extends AsyncTask<String, Integer, Result> {
 
     private Context context;
-    public boolean returnResponse;
 
     public Task(Context context) {
         this.context = context;
@@ -36,7 +35,6 @@ public class Task extends AsyncTask<String, Integer, Result> {
 
                 if (params[1].equals("GET")) {
                     if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        returnResponse = true;
                         Scanner scanner = new Scanner(connection.getInputStream());
                         while (scanner.hasNext()) {
                             response.append(scanner.next());
