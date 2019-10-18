@@ -13,22 +13,17 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
-
 import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 import projeto.fag.com.ocorrenciasmunicipais.task.Result;
 import projeto.fag.com.ocorrenciasmunicipais.task.Task;
 import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
-import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
-import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.UserPhoneDialog;
 
 public class CreateUserActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, UserPhoneDialog.UserPhoneDialogListener {
@@ -132,7 +127,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         historicoSenha = new HistoricoSenha();
                         historicoSenha.setCdUsuario(usuario.getCdUsuario());
                         historicoSenha.setCdHistoricoSenha(lastPasswordCode());
-                        historicoSenha.setDsHistoricoSenha("Descricação teste");
+                        historicoSenha.setDsSenha("Descricação teste");
                         historicoSenha.setDtCadastro(new Date());
                         historicoSenha.setCdUsuario(1);
 
@@ -195,7 +190,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         int dataNascimento = etDtNascimento.getText().toString().trim().length();
         int senha = etSenha.getText().toString().trim().length();
         int confirmarSenha = etConfirmarSenha.getText().toString().trim().length();
-
 
         if ((nome <= 0) && (email <= 0) && (telefone <= 0) && (dataNascimento <= 0) &&
                 (senha <= 0) && (confirmarSenha <= 0)) {

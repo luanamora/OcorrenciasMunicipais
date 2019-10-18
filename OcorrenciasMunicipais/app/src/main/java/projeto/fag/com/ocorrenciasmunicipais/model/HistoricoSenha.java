@@ -45,8 +45,8 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
         return dsSenha;
     }
 
-    public void setDsHistoricoSenha(String dsHistoricoSenha) {
-        this.dsSenha = dsHistoricoSenha;
+    public void setDsSenha(String dsSenha) {
+        this.dsSenha = dsSenha;
     }
 
     public Date getDtCadastro() {
