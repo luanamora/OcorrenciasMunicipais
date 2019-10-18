@@ -13,11 +13,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
+
 import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
@@ -55,21 +58,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         datePicker();
         controlErrorTextInput();
 
-        // Task task = new Task(CreateUserActivity.this);
-        Result result = null;
-       /* try {
-            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios"}).get();
-            String teste = new Gson().toJson(result);
-            Mensagem.ExibirMensagem(CreateUserActivity.this, teste, TipoMensagem.SUCESSO);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
-
     }
-
 
     private void datePicker() {
         year = calendar.get(Calendar.YEAR);
@@ -94,7 +83,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         etConfirmarSenha = findViewById(R.id.etConfirmarSenha);
         btCriarConta = findViewById(R.id.btCriarConta);
         ivTelefone = findViewById(R.id.ivTelefone);
-
         tvlNome = findViewById(R.id.tvlNome);
         tvlEmail = findViewById(R.id.tvlEmail);
         tvlTelefone = findViewById(R.id.tvlTelefone);
@@ -115,9 +103,12 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     }
 
     public void saveUser() {
+
         btCriarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int taskControl = 0;
+
                 if (checkFields()) {
                     if (passwordControl()) {
                         usuario = new Usuario();
@@ -139,47 +130,57 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         telefone.setDtCadastro(new Date());
 
                         historicoSenha = new HistoricoSenha();
+                        historicoSenha.setCdUsuario(usuario.getCdUsuario());
                         historicoSenha.setCdHistoricoSenha(lastPasswordCode());
-                        historicoSenha.setDsHistoricoSenha("Arrumar depois");
+                        historicoSenha.setDsHistoricoSenha("Descricação teste");
                         historicoSenha.setDtCadastro(new Date());
                         historicoSenha.setCdUsuario(1);
-
-                        usuario.save();
-                        telefone.save();
-                        historicoSenha.save();
-
-                        System.out.println("Código do usuario ---> " + usuario);
-                        System.out.println("Telefone ------>" + telefone);
 
                         Result result = null;
 
                         Task task = new Task(CreateUserActivity.this);
-                        try {
-                            String teste = new Gson().toJson(result);
-                            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET"}).get();
-
-                            Mensagem.ExibirMensagem(CreateUserActivity.this, new Gson().toJson(result), TipoMensagem.SUCESSO);
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        if (taskControl == 0) {
+                            try {
+                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "POST", new Gson().toJson(usuario)}).get();
+                                usuario.save();
+                                taskControl = 1;
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
 
-                            /*UsuarioTaskPost usuarioTaskPost = new UsuarioTaskPost(CreateUserActivity.this);
-                            usuarioTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(usuario));*/
+                        task = new Task(CreateUserActivity.this);
+                        if (taskControl == 1) {
+                            try {
+                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"TelefoneUsuarios", "POST", new Gson().toJson(telefone)}).get();
+                                telefone.save();
+                                taskControl = 2;
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
 
-                            /*TelefoneTaskPost telefoneTaskPost = new TelefoneTaskPost(CreateUserActivity.this);
-                            telefoneTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(telefone));
-
-                            HistSenhaTaskPost histSenhaTaskPost = new HistSenhaTaskPost(CreateUserActivity.this);
-                            histSenhaTaskPost.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Gson().toJson(historicoSenha));*/
-
-
+                        task = new Task(CreateUserActivity.this);
+                        if (taskControl == 2) {
+                            try {
+                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoSenhas", "POST", new Gson().toJson(historicoSenha)}).get();
+                                historicoSenha.save();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }
             }
         });
     }
+
 
     public void openDialogPhone() {
         UserPhoneDialog userPhoneDialog = new UserPhoneDialog();

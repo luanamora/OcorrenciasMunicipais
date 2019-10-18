@@ -8,10 +8,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-
 public class Task extends AsyncTask<String, Integer, Result> {
 
     private Context context;
+    public boolean returnResponse;
 
     public Task(Context context) {
         this.context = context;
@@ -22,7 +22,7 @@ public class Task extends AsyncTask<String, Integer, Result> {
         if (params != null && params.length > 0) {
             try {
                 StringBuffer response = new StringBuffer();
-                URL url = new URL("http://192.168.43.154:5000/api/" + params[0]); //Ip do meu pc
+                URL url = new URL("http://192.168.1.61:5000/api/" + params[0]); //Ip do meu pc
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod(params[1]);
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -36,6 +36,7 @@ public class Task extends AsyncTask<String, Integer, Result> {
 
                 if (params[1].equals("GET")) {
                     if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        returnResponse = true;
                         Scanner scanner = new Scanner(connection.getInputStream());
                         while (scanner.hasNext()) {
                             response.append(scanner.next());
@@ -59,7 +60,6 @@ public class Task extends AsyncTask<String, Integer, Result> {
                         Scanner scanner = new Scanner(connection.getInputStream());
                         while (scanner.hasNext()) {
                             response.append(scanner.next());
-
                         }
                         System.out.println("Entrou aqui no 1");
                         return new Result(response.toString(), false);

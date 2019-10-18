@@ -10,17 +10,17 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
     @Unique
     private int cdHistoricoSenha;
     private int cdUsuario;
-    private String dsHistoricoSenha;
+    private String dsSenha;
     private Date dtCadastro;
     private Date dtAtualizacao;
 
     public HistoricoSenha() {
     }
 
-    public HistoricoSenha(int cdHistoricoSenha, int cdUsuario, String dsHistoricoSenha, Date dtCadastro, Date dtAtualizacao) {
+    public HistoricoSenha(int cdHistoricoSenha, int cdUsuario, String dsSenha, Date dtCadastro, Date dtAtualizacao) {
         this.cdHistoricoSenha = cdHistoricoSenha;
         this.cdUsuario = cdUsuario;
-        this.dsHistoricoSenha = dsHistoricoSenha;
+        this.dsSenha = dsSenha;
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
     }
@@ -41,12 +41,12 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
         this.cdUsuario = cdUsuario;
     }
 
-    public String getDsHistoricoSenha() {
-        return dsHistoricoSenha;
+    public String getDsSenha() {
+        return dsSenha;
     }
 
     public void setDsHistoricoSenha(String dsHistoricoSenha) {
-        this.dsHistoricoSenha = dsHistoricoSenha;
+        this.dsSenha = dsHistoricoSenha;
     }
 
     public Date getDtCadastro() {
@@ -70,7 +70,7 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
         return "HistoricoSenha{" +
                 "cdHistoricoSenha=" + cdHistoricoSenha +
                 ", cdUsuario=" + cdUsuario +
-                ", dsHistoricoSenha='" + dsHistoricoSenha + '\'' +
+                ", dsHistoricoSenha='" + dsSenha + '\'' +
                 ", dtCadastro=" + dtCadastro +
                 ", dtAtualizacao=" + dtAtualizacao +
                 '}';
