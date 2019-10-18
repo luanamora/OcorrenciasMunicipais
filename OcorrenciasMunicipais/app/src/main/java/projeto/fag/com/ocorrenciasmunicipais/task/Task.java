@@ -2,12 +2,8 @@ package projeto.fag.com.ocorrenciasmunicipais.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
-
-import java.io.BufferedOutputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Task extends AsyncTask<String, Integer, Result> {
