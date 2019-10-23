@@ -50,20 +50,22 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/tvlSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginEditText"
             android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
             app:errorEnabled="true"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorPrimary">
+            app:passwordToggleEnabled="true">
 
             <EditText
                 android:id="@+id/etSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/lbSenha" />
+                android:hint="@string/lbSenhaUser"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
