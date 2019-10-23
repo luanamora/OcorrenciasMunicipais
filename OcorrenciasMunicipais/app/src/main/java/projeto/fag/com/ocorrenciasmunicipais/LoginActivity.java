@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etSenha;
     private Button btEntrar, btCriarNovaConta, btEsqueceuSenha;
     private TextInputLayout tilEmail, tilSenha;
+    private Usuario usuario;
 
 
     @Override
@@ -57,19 +58,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void checkUser(){
+    private void checkUser(){ //Ver isso aqui
         String etEmailText = etEmail.getText().toString();
         String etSenhaText = etSenha.getText().toString();
-        List<Usuario> getUserList = new ArrayList<Usuario>();
+        List<String> getUserList = new ArrayList<String>();
         Result result = null;
         Task task = new Task(LoginActivity.this);
         try {
-            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET"}).get();
-           // getUserList.add((Usuario) result);
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", new Gson().toJson(usuario)}).get();
 
-            for (Usuario u : getUserList){
+            getUserList.add(result.toString());
 
-            }
+           /* for (Usuario u : {
+
+            }*/
 
         } catch (ExecutionException e) {
             e.printStackTrace();
