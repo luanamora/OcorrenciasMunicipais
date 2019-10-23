@@ -80,7 +80,6 @@
 
     </LinearLayout>
 
-
     <Button
         android:id="@+id/btCriarNovaConta"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"

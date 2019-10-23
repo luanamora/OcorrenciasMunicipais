@@ -2,26 +2,20 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.style.TabStopSpan;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
 import com.orm.SugarContext;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
-import projeto.fag.com.ocorrenciasmunicipais.task.Result;
-import projeto.fag.com.ocorrenciasmunicipais.task.Task;
+import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
+import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         SugarContext.init(this);
         loadComponents();
         loadEvents();
+        controlErrorTextInput();
     }
 
     private void loadComponents() {
@@ -58,31 +53,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void checkUser(){ //Ver isso aqui
+    private void checkAdministrator() {
         String etEmailText = etEmail.getText().toString();
-        String etSenhaText = etSenha.getText().toString();
-        List<String> getUserList = new ArrayList<String>();
-        Result result = null;
-        Task task = new Task(LoginActivity.this);
-        try {
-            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", new Gson().toJson(usuario)}).get();
-
-            getUserList.add(result.toString());
-
-           /* for (Usuario u : {
-
-            }*/
-
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void checkAdministrator(){
-        String etEmailText = etEmail.getText().toString();
-        if (etEmailText.equalsIgnoreCase("admin@admin.com")){
+        if (etEmailText.equalsIgnoreCase("admin@admin.com")) {
             Intent intent = new Intent(LoginActivity.this, RecoverPasswordActivity.class);
             startActivity(intent);
         }
@@ -109,10 +82,73 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void logon(){
+    private void logon() {
         btEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (checkUser()) {
+                    Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    private boolean checkUser() {
+        System.out.println(Usuario.listAll(Usuario.class));
+        if (etEmail.getText().toString().trim().length() != 0){
+            List<Usuario> usuarioList = Usuario.find(Usuario.class, "ds_email = '" +etEmail.getText().toString() +"'", null, null, null, "1");
+            System.out.println(usuario);
+            if (usuarioList.isEmpty()) {
+                Mensagem.ExibirMensagem(LoginActivity.this, "Usuário não encontrado", TipoMensagem.ERRO);
+                return false;
+            }
+            else if (!usuarioList.get(0).getDsSenha().equals(etSenha.getText().toString())) {
+                tilSenha.setError("Senha Inválida!");
+                return false;
+            }
+
+        } else {
+            tilEmail.setError("Campo Vazio!");
+            if (etSenha.getText().toString().trim().length() == 0){
+                tilSenha.setError("Campo Vazio!");
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private void controlErrorTextInput(){
+        etEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tilEmail.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        etSenha.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tilSenha.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });

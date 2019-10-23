@@ -21,7 +21,7 @@ public class Task extends AsyncTask<String, Integer, Result> {
         if (params != null && params.length > 0) {
             try {
                 StringBuffer response = new StringBuffer();
-                URL url = new URL("http://192.168.1.61:5000/api/" + params[0]); //Ip do meu pc
+                URL url = new URL("http://192.168.43.154:5000/api/" + params[0]); //Ip do meu pc
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod(params[1]);
                 connection.setRequestProperty("Content-Type", "application/json");
