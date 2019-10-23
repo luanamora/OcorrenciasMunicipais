@@ -1,7 +1,5 @@
 package projeto.fag.com.ocorrenciasmunicipais.task;
 
-import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
-
 public class Result{
     private String Content; //Conteudo
     private Boolean Error; //Se deu erro ou não

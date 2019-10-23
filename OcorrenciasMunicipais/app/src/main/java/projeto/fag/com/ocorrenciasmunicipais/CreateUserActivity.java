@@ -1,11 +1,9 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -52,7 +50,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         loadEvents();
         datePicker();
         controlErrorTextInput();
-
     }
 
     private void datePicker() {
