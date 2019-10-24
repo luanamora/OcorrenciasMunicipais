@@ -89,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     private boolean checkAdministrator() {
         if (etEmail.getText().toString().equals("admin") && (etSenha.getText().toString().equals("admin"))) {
             Intent intent = new Intent(LoginActivity.this, AdministratorActivity.class);

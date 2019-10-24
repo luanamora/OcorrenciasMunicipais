@@ -15,11 +15,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ServiceAreaActivity"></activity>
-        <activity android:name=".AdministratorActivity" />
-        <activity android:name=".FeedActivity" />
-        <activity android:name=".RecoverPasswordActivity" />
-        <activity android:name=".CreateUserActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,11 +22,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ServiceAreaActivity" />
+        <activity android:name=".AdministratorActivity" />
+        <activity android:name=".FeedActivity" />
+        <activity android:name=".RecoverPasswordActivity" />
+        <activity android:name=".CreateUserActivity" />
+        <activity android:name=".AdminUser"/>
         <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="VERSION"
-            android:value="4" />
+            android:value="5" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />

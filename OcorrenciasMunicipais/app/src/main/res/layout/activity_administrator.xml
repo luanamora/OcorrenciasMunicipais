@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="top"
         android:orientation="vertical">
 
         <ImageView
@@ -32,73 +32,59 @@
     </LinearLayout>
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_gravity="center">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="100dp">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_people_black_24dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvlUsuarioAdministrador"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="@dimen/marginEditText">
+            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/etAdministrador"
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_people_black_24dp" />
+            <Button
+                android:id="@+id/btUsuarioAdministrador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Usuário Administrador"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorPrimary"
+                android:text="Usuário Administrador"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_account_balance_black_24dp" />
+
+            <Button
+                android:id="@+id/btAreaAtendimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorPrimary"
+                android:text="Área de Atendimento"
+                android:textColor="@color/colorWhite"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_account_balance_black_24dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvlAreaAtendimento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="@dimen/marginEditText">
-
-            <EditText
-                android:id="@+id/etAreaAtendimento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Área de Atendimento"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-</LinearLayout>
-
-
-
-
-</LinearLayout>
