@@ -69,11 +69,17 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:foregroundTint="@color/colorPrimary"
+            android:foreground="@color/colorPrimary"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             android:id="@+id/spAreaAtuacao"/>
 
     </LinearLayout>
-
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
