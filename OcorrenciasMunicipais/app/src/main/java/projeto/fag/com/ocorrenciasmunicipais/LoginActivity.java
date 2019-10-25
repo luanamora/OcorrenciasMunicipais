@@ -33,8 +33,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         SugarContext.init(this);
-        loadComponents();
         loadEvents();
+
+    }
+
+    private void loadEvents() {
+        loadComponents();
+        createUser();
+        recoverPassword();
+        logon();
         controlErrorTextInput();
     }
 
@@ -47,13 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         tilEmail = findViewById(R.id.tilEmail);
         tilSenha = findViewById(R.id.tilSenha);
     }
-
-    private void loadEvents() {
-        createUser();
-        recoverPassword();
-        logon();
-    }
-
 
     private void createUser() {
         btCriarNovaConta.setOnClickListener(new View.OnClickListener() {

@@ -107,16 +107,6 @@ public class Usuario extends SugarRecord implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "cdUsuario=" + cdUsuario +
-                ", nmUsuario='" + nmUsuario + '\'' +
-                ", dsSenha='" + dsSenha + '\'' +
-                ", dsEmail='" + dsEmail + '\'' +
-                ", dtNascimento=" + dtNascimento +
-                ", stStatus=" + stStatus +
-                ", stAdministrador=" + stAdministrador +
-                ", dtCadastro=" + dtCadastro +
-                ", dtAtualizacao=" + dtAtualizacao +
-                '}';
+        return nmUsuario + " - " + dsEmail;
     }
 }

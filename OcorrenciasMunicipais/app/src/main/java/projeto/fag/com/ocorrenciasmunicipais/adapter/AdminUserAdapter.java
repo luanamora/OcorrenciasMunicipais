@@ -5,11 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
-
 import java.util.List;
-
 import projeto.fag.com.ocorrenciasmunicipais.R;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 
@@ -42,9 +38,8 @@ public class AdminUserAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         Usuario usuario = usuarioList.get(position);
         view = myInflater.inflate(R.layout.item_admin, null);
-        ((Spinner) view.findViewById(R.id.spAdminUser)).setTe
 
-        return null;
+        return view;
     }
 }
 
