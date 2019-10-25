@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#001D57</color>
     <color name="colorAccent">#3249D1</color>
     <color name="colorWhite">#FFFFfF</color>
-
+    <color name="colorSpinner">#8B8080</color>
 
 </resources>
