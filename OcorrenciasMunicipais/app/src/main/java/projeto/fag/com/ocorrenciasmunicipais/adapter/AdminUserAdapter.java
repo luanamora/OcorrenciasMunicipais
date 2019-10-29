@@ -39,20 +39,7 @@ public class AdminUserAdapter extends BaseAdapter {
         Usuario usuario = usuarioList.get(position);
         view = myInflater.inflate(R.layout.item_admin, null);
 
+
         return view;
     }
 }
-
-/*
-    @Override
-    public View getView(int position, View view, ViewGroup parent) {
-        Corretor corretor = corretorList.get(position);
-        view = myInflater.inflate(R.layout.item_imovel, null);
-        ((TextView) view.findViewById(R.id.etCodigo)).setText(String.valueOf(corretor.getCodigo()));
-        ((TextView) view.findViewById(R.id.etNome)).setText(String.valueOf(corretor.getNome()));
-        ((TextView) view.findViewById(R.id.etTelefone)).setText(String.valueOf(corretor.getTelefone()));
-        ((TextView) view.findViewById(R.id.etCreci)).setText(String.valueOf(corretor.getCreci()));
-
-        return view;
-    }
-*/

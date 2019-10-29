@@ -126,7 +126,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         historicoSenha.setCdHistoricoSenha(lastPasswordCode());
                         historicoSenha.setDsSenha("Descricação teste");
                         historicoSenha.setDtCadastro(new Date());
-                        historicoSenha.setCdUsuario(1);
+                        historicoSenha.setCdUsuario(usuario.getCdUsuario());
 
                         Result result = null;
                         Task task = new Task(CreateUserActivity.this);
@@ -361,6 +361,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
     public int lastUserCode() {
         Usuario last = Usuario.last(Usuario.class);
+        System.out.println("LAST TELEFONEEEEEEEEEEEEEEEEEEEEEEEEE" + last.getCdUsuario());
         if (last == null)
             codigoUsuario = 1;
         else
@@ -371,10 +372,12 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
     public int lastPhoneCode() {
         TelefoneUsuario last = TelefoneUsuario.last(TelefoneUsuario.class);
+
+        System.out.println("LAST TELEFONEEEEEEEEEEEEEEEEEEEEEEEEE" + last.getCdTelefoneUsuario());
         if (last == null)
             codigoTelefone = 1;
         else
-            codigoUsuario = last.getCdTelefoneUsuario() + 1;
+            codigoTelefone = last.getCdTelefoneUsuario() + 1;
         return codigoTelefone;
     }//Para dar continuação a PK
 
