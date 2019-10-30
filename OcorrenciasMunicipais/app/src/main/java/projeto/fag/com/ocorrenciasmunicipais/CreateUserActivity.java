@@ -132,7 +132,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         Task task = new Task(CreateUserActivity.this);
                         if (taskControl == 0) {
                             try {
-                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "POST", new Gson().toJson(usuario)}).get();
+                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "POST", new Gson().toJson(usuario), null}).get();
                                 usuario.save();
                                 taskControl = 1;
                             } catch (ExecutionException e) {
@@ -145,7 +145,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         task = new Task(CreateUserActivity.this);
                         if (taskControl == 1) {
                             try {
-                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"TelefoneUsuarios", "POST", new Gson().toJson(telefone)}).get();
+                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"TelefoneUsuarios", "POST", new Gson().toJson(telefone), null}).get();
                                 telefone.save();
                                 taskControl = 2;
                             } catch (ExecutionException e) {
@@ -158,7 +158,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         task = new Task(CreateUserActivity.this);
                         if (taskControl == 2) {
                             try {
-                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoSenhas", "POST", new Gson().toJson(historicoSenha)}).get();
+                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoSenhas", "POST", new Gson().toJson(historicoSenha), null}).get();
                                 historicoSenha.save();
                             } catch (ExecutionException e) {
                                 e.printStackTrace();
@@ -361,19 +361,16 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
     public int lastUserCode() {
         Usuario last = Usuario.last(Usuario.class);
-        System.out.println("LAST TELEFONEEEEEEEEEEEEEEEEEEEEEEEEE" + last.getCdUsuario());
         if (last == null)
             codigoUsuario = 1;
         else
             codigoUsuario = last.getCdUsuario() + 1;
         return codigoUsuario;
-    }//Para dar continuação a PK
+    }
 
 
     public int lastPhoneCode() {
         TelefoneUsuario last = TelefoneUsuario.last(TelefoneUsuario.class);
-
-        System.out.println("LAST TELEFONEEEEEEEEEEEEEEEEEEEEEEEEE" + last.getCdTelefoneUsuario());
         if (last == null)
             codigoTelefone = 1;
         else

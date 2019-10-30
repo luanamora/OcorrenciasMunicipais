@@ -78,7 +78,7 @@ namespace WebApi.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(usuario);
         }
 
         // POST: api/Usuarios
