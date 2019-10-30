@@ -2,6 +2,7 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
+
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
@@ -75,15 +78,34 @@ public class AdminUser extends AppCompatActivity {
                             try {
                                 String codigoEncontrado = String.valueOf(usuarioEncontrado.getCdUsuario());
                                 usuarioEncontrado.setStAdministrador(true);
+                                usuarioEncontrado.setDtAtualizacao(new Date());
                                 Task task = new Task(AdminUser.this);
                                 Result result = result = task.executeOnExecutor
                                         (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "PUT", new Gson().toJson(usuarioEncontrado),codigoEncontrado,}).get();
+                                if (result.getError()){
+                                    MaterialAlertDialogBuilder dialogError = new MaterialAlertDialogBuilder(AdminUser.this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+                                    dialogError.setTitle("Erro");
+                                    dialogError.setMessage("Algo deu errado. Tente Novamente!");
+                                    dialogError.setPositiveButton("continuar", null);
+                                    dialogError.show();
+                                } else {
+                                    MaterialAlertDialogBuilder dialogError = new MaterialAlertDialogBuilder(AdminUser.this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+                                    dialogError.setTitle("Sucesso");
+                                    dialogError.setMessage(usuarioEncontrado.getNmUsuario() + " agora é um administrador.");
+                                    dialogError.setPositiveButton("continuar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                             finish();
+                                        }
+                                    });
+                                    dialogError.show();
+                                }
+                                System.out.println("teste agora topsseeeeeeeera" + result.getError());
                             } catch (ExecutionException e) {
                                 e.printStackTrace();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-
                         }
                     });
                     dialog.setNegativeButton("Não", null);
