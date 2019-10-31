@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParser;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -48,8 +52,13 @@ public class AdminUser extends AppCompatActivity {
     private void loadSpinner() {
         Task task = new Task(AdminUser.this);
         try {
-            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "findByAdmin/false"}).get();
-            System.out.println("OLHAR AQUI AGORA " + result.getContent().toString());
+            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "false"}).get();
+             //gson = new GsonBuilder();
+
+            List<Usuario> usuarioList = new ArrayList<>();
+
+
+            System.out.println("TESTEEEEEEEEEEEEEEEEEEE " + result.getContent());
             //adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, result.getContent());
             spUsuarioAdmin.setAdapter(adminAdapter);
 

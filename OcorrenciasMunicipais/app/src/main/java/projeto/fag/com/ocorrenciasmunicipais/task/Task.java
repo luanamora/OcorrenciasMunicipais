@@ -7,6 +7,8 @@ import java.io.BufferedOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Task extends AsyncTask<String, Integer, Result> {
@@ -22,18 +24,18 @@ public class Task extends AsyncTask<String, Integer, Result> {
         if (params != null && params.length > 0) {
             try {
                 StringBuffer response = new StringBuffer();
-                String urlController = "";
+                StringBuilder urlControler = new StringBuilder();
                 if (params[1].equals("GET")){
-                    urlController = "http://192.168.43.154:5000/api/" + params[0];
-                    if (!params[3].isEmpty())
-                        urlController = urlController + "/"+params[3];
+                    urlControler.append("http://192.168.1.61:5000/api/" + params[0]);
+                    if (!params[2].isEmpty())
+                        urlControler = urlControler.append("/findByAdmin/"+params[2]);
                 }
                 else if (params[1].equals("POST"))
-                    urlController = "http://192.168.43.154:5000/api/" + params[0];
+                    urlControler.append("http://192.168.1.61:5000/api/" + params[0]);
                 else if (params[1].equals("PUT"))
-                    urlController = "http://192.168.43.154:5000/api/" + params[0] + "/" + params[3];
+                    urlControler.append("http://192.168.1.61:5000/api" + params[0] + "/" + params[3]);
 
-                URL url = new URL(urlController);
+                URL url = new URL(urlControler.toString());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod(params[1]);
                 connection.setRequestProperty("Content-Type", "application/json");

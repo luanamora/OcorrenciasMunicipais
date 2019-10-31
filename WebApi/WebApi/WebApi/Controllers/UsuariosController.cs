@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         // GET: api/Usuarios/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetUsuario([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -52,7 +52,7 @@ namespace WebApi.Controllers
        
 
         // PUT: api/Usuarios/5
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> PutUsuario([FromRoute] int id, [FromBody] Usuario usuario)
         {
             if (!ModelState.IsValid)
@@ -102,7 +102,7 @@ namespace WebApi.Controllers
         }
 
         // DELETE: api/Usuarios/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteUsuario([FromRoute] int id)
         {
             if (!ModelState.IsValid)
