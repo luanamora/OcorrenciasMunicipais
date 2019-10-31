@@ -46,6 +46,11 @@ namespace WebApi.Controllers
             return Ok(usuario);
         }
 
+        [HttpGet("findByAdmin/{StAdministrador:bool}")]
+        public List<Usuario> findByAdmin(bool StAdministrador) => 
+            _context.Usuario.Where(e => e.StAdministrador == StAdministrador).ToList();
+       
+
         // PUT: api/Usuarios/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario([FromRoute] int id, [FromBody] Usuario usuario)

@@ -1,5 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 import java.io.Serializable;
@@ -13,6 +15,8 @@ public class Usuario extends SugarRecord implements Serializable {
     private String dsEmail;
     private Date dtNascimento;
     private boolean stStatus;
+    @SerializedName("st_administrador")
+    @Expose
     private boolean stAdministrador;
     private Date dtCadastro;
     private Date dtAtualizacao;

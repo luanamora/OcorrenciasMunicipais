@@ -2,17 +2,14 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
-
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -49,10 +46,18 @@ public class AdminUser extends AppCompatActivity {
     }
 
     private void loadSpinner() {
-        List<Usuario> usuarioList = Usuario.listAll(Usuario.class);
-        adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, usuarioList);
-        spUsuarioAdmin.setAdapter(adminAdapter);
+        Task task = new Task(AdminUser.this);
+        try {
+            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "findByAdmin/false"}).get();
+            System.out.println("OLHAR AQUI AGORA " + result.getContent().toString());
+            //adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, result.getContent());
+            spUsuarioAdmin.setAdapter(adminAdapter);
 
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void saveAdmin() {
@@ -82,7 +87,7 @@ public class AdminUser extends AppCompatActivity {
                                 Task task = new Task(AdminUser.this);
                                 Result result = result = task.executeOnExecutor
                                         (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "PUT", new Gson().toJson(usuarioEncontrado),codigoEncontrado,}).get();
-                                if (result.getError()){
+                                if (result.getError().booleanValue()){
                                     MaterialAlertDialogBuilder dialogError = new MaterialAlertDialogBuilder(AdminUser.this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
                                     dialogError.setTitle("Erro");
                                     dialogError.setMessage("Algo deu errado. Tente Novamente!");

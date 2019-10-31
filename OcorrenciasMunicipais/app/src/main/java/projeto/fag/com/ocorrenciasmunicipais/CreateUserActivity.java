@@ -132,7 +132,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         Task task = new Task(CreateUserActivity.this);
                         if (taskControl == 0) {
                             try {
-                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "POST", new Gson().toJson(usuario), null}).get();
+                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "POST", new Gson().toJson(usuario)}).get();
                                 usuario.save();
                                 taskControl = 1;
                             } catch (ExecutionException e) {
@@ -145,7 +145,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         task = new Task(CreateUserActivity.this);
                         if (taskControl == 1) {
                             try {
-                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"TelefoneUsuarios", "POST", new Gson().toJson(telefone), null}).get();
+                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"TelefoneUsuarios", "POST", new Gson().toJson(telefone)}).get();
                                 telefone.save();
                                 taskControl = 2;
                             } catch (ExecutionException e) {
@@ -158,7 +158,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         task = new Task(CreateUserActivity.this);
                         if (taskControl == 2) {
                             try {
-                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoSenhas", "POST", new Gson().toJson(historicoSenha), null}).get();
+                                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoSenhas", "POST", new Gson().toJson(historicoSenha)}).get();
                                 historicoSenha.save();
                             } catch (ExecutionException e) {
                                 e.printStackTrace();

@@ -22,7 +22,18 @@ public class Task extends AsyncTask<String, Integer, Result> {
         if (params != null && params.length > 0) {
             try {
                 StringBuffer response = new StringBuffer();
-                URL url = new URL("http://192.168.43.154:5000/api/" + params[0] + "/"+params[3]); //Ip do meu pc
+                String urlController = "";
+                if (params[1].equals("GET")){
+                    urlController = "http://192.168.43.154:5000/api/" + params[0];
+                    if (!params[3].isEmpty())
+                        urlController = urlController + "/"+params[3];
+                }
+                else if (params[1].equals("POST"))
+                    urlController = "http://192.168.43.154:5000/api/" + params[0];
+                else if (params[1].equals("PUT"))
+                    urlController = "http://192.168.43.154:5000/api/" + params[0] + "/" + params[3];
+
+                URL url = new URL(urlController);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod(params[1]);
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -32,23 +43,18 @@ public class Task extends AsyncTask<String, Integer, Result> {
                 connection.setReadTimeout(70000);
                 connection.connect();
 
-                System.out.println("PARAMS[1]" + params[1]);
-
                 if (params[1].equals("GET")) {
                     if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         Scanner scanner = new Scanner(connection.getInputStream());
                         while (scanner.hasNext()) {
                             response.append(scanner.next());
                         }
-                        System.out.println("Entrou aqui no 1");
                         return new Result(response.toString(), false);
                     } else
-                        System.out.println("Entrou aqui no 2");
-                    return new Result(null, true);
+                        return new Result(null, true);
                 }
 
                 if (params[1].equals("POST")) {
-                    System.out.println("EEEEEEEEEEEENTROU AQUI");
                     OutputStream os = new BufferedOutputStream(connection.getOutputStream()); //Escrevo na conexão que montamos
                     os.write(params[2].getBytes()); //Escrevo na requisição do nosso Json
                     System.out.println("PARAMS[2]" + params[2]);
@@ -68,13 +74,10 @@ public class Task extends AsyncTask<String, Integer, Result> {
                 }
 
                 if (params[1].equals("PUT")) {
-                    System.out.println("PUUUUUUUUT");
                     OutputStream os = new BufferedOutputStream(connection.getOutputStream());
                     os.write(params[2].getBytes());
-                    System.out.println("PARAMS[2]" + params[2]);
                     os.flush();
                     System.out.println("Retorno da requisição" + connection.getResponseCode());
-
                     if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         Scanner scanner = new Scanner(connection.getInputStream());
                         while (scanner.hasNext()) {
