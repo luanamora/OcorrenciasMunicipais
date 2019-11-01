@@ -12,6 +12,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,13 +54,11 @@ public class AdminUser extends AppCompatActivity {
         Task task = new Task(AdminUser.this);
         try {
             Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "false"}).get();
-             //gson = new GsonBuilder();
-
-            List<Usuario> usuarioList = new ArrayList<>();
-
-
-            System.out.println("TESTEEEEEEEEEEEEEEEEEEE " + result.getContent());
-            //adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, result.getContent());
+            TypeToken tt = new TypeToken<List<Usuario>>() {};
+            Gson gson = new Gson();
+            String json = result.getContent();
+            List<Usuario> usuarioList = gson.fromJson(json, tt.getType());
+            adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, usuarioList);
             spUsuarioAdmin.setAdapter(adminAdapter);
 
         } catch (ExecutionException e) {
