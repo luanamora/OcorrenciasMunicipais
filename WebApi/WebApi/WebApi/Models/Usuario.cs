@@ -1,5 +1,4 @@
-﻿using Microsoft.OData.Edm;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -20,11 +19,11 @@ namespace WebApi.Models
         public string NmUsuario { get; set; }
         public string DsSenha { get; set; }
         public string DsEmail { get; set; }
-        public Date DtNascimento { get; set; }
+        public DateTime DtNascimento { get; set; }
         public bool StStatus { get; set; }
         public bool StAdministrador { get; set; }
-        public Date DtCadastro { get; set; }
-        public Date? DtAtualizacao { get; set; }
+        public DateFormatHandling DtCadastro { get; set; }
+        public DateTime? DtAtualizacao { get; set; }
 
 
         [JsonIgnore]

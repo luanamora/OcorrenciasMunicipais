@@ -14,6 +14,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,11 +55,11 @@ public class AdminUser extends AppCompatActivity {
     private void loadSpinner() {
         Task task = new Task(AdminUser.this);
         try {
+
             Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "false"}).get();
-            TypeToken tt = new TypeToken<List<Usuario>>() {};
-            Gson gson = new Gson();
             String json = result.getContent();
-            List<Usuario> usuarioList = gson.fromJson(json, tt.getType());
+            List<Usuario> usuarioList = new Gson().fromJson(json, new TypeToken<List<Usuario>>(){}.getType());
+            System.out.println(usuarioList.toString());
             adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, usuarioList);
             spUsuarioAdmin.setAdapter(adminAdapter);
 
@@ -65,6 +67,16 @@ public class AdminUser extends AppCompatActivity {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static String convertDate(String date) {
+        SimpleDateFormat fromFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        try {
+            Date dt = fromFormat.parse(date);
+            return new SimpleDateFormat("yyyy-MM-dd").format(dt);
+        } catch (ParseException e) {
+            return "";
         }
     }
 
