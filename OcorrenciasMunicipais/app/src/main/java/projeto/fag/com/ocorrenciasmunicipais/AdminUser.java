@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,28 +56,18 @@ public class AdminUser extends AppCompatActivity {
     private void loadSpinner() {
         Task task = new Task(AdminUser.this);
         try {
-
             Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "false"}).get();
-            String json = result.getContent();
-            List<Usuario> usuarioList = new Gson().fromJson(json, new TypeToken<List<Usuario>>(){}.getType());
-            System.out.println(usuarioList.toString());
-            adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, usuarioList);
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            ArrayList<Usuario> list = new ArrayList<Usuario>();
+            Type listType = new TypeToken<List<Usuario>>() {}.getType();
+            list = gson.fromJson(result.getContent(), listType);
+            System.out.println(list.toString());
+            adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, list);
             spUsuarioAdmin.setAdapter(adminAdapter);
-
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-    }
-
-    public static String convertDate(String date) {
-        SimpleDateFormat fromFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        try {
-            Date dt = fromFormat.parse(date);
-            return new SimpleDateFormat("yyyy-MM-dd").format(dt);
-        } catch (ParseException e) {
-            return "";
         }
     }
 

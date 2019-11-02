@@ -22,7 +22,7 @@ namespace WebApi.Models
         public DateTime DtNascimento { get; set; }
         public bool StStatus { get; set; }
         public bool StAdministrador { get; set; }
-        public DateFormatHandling DtCadastro { get; set; }
+        public DateTime DtCadastro { get; set; }
         public DateTime? DtAtualizacao { get; set; }
 
 
