@@ -70,9 +70,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:foregroundTint="@color/colorPrimary"
-            android:foreground="@color/colorPrimary"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:id="@+id/spAreaAtuacao"/>
@@ -107,7 +104,22 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+
     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btSalvarAreaAtendimento"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:text="Salvar"
+        android:textSize="@dimen/sizeButton" />
+
+
 
 
 </LinearLayout>

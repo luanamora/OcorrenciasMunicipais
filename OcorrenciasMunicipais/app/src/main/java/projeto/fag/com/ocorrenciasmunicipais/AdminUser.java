@@ -99,7 +99,6 @@ public class AdminUser extends AppCompatActivity {
                                 Task task = new Task(AdminUser.this);
                                 usuarioEncontrado.setDtAtualizacao(new Date());
                                 usuarioEncontrado.setStAdministrador(true);
-                                System.out.println("11111111111111111111111111111111111111111111111111" + new Gson().toJson(usuarioEncontrado));
                                 Result result = result = task.executeOnExecutor
                                         (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "PUT", new Gson().toJson(usuarioEncontrado), codigoEncontrado}).get();
 

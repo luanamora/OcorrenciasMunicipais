@@ -9,7 +9,7 @@ import java.util.Date;
 public class AreaAtendimento extends SugarRecord implements Serializable {
     @Unique
     private int cdAreaAtendimento;
-    private AreaAtuacao areaAtuacao;
+    private int cdAreaAtuacao;
     private String dsAreaAtendimento;
     private String dsEmail;
     private Date dtCadastro;
@@ -18,9 +18,9 @@ public class AreaAtendimento extends SugarRecord implements Serializable {
     public AreaAtendimento() {
     }
 
-    public AreaAtendimento(int cdAreaAtendimento, AreaAtuacao areaAtuacao, String dsAreaAtendimento, String dsEmail, Date dtCadastro, Date dtAtualizacao) {
+    public AreaAtendimento(int cdAreaAtendimento, int cdAreaAtuacao, String dsAreaAtendimento, String dsEmail, Date dtCadastro, Date dtAtualizacao) {
         this.cdAreaAtendimento = cdAreaAtendimento;
-        this.areaAtuacao = areaAtuacao;
+        this.cdAreaAtuacao = cdAreaAtuacao;
         this.dsAreaAtendimento = dsAreaAtendimento;
         this.dsEmail = dsEmail;
         this.dtCadastro = dtCadastro;
@@ -35,12 +35,12 @@ public class AreaAtendimento extends SugarRecord implements Serializable {
         this.cdAreaAtendimento = cdAreaAtendimento;
     }
 
-    public AreaAtuacao getAreaAtuacao() {
-        return areaAtuacao;
+    public int getCdAreaAtuacao() {
+        return cdAreaAtuacao;
     }
 
-    public void setAreaAtuacao(AreaAtuacao areaAtuacao) {
-        this.areaAtuacao = areaAtuacao;
+    public void setCdAreaAtuacao(int cdAreaAtuacao) {
+        this.cdAreaAtuacao = cdAreaAtuacao;
     }
 
     public String getDsAreaAtendimento() {
@@ -79,7 +79,7 @@ public class AreaAtendimento extends SugarRecord implements Serializable {
     public String toString() {
         return "AreaAtendimento{" +
                 "cdAreaAtendimento=" + cdAreaAtendimento +
-                ", areaAtuacao=" + areaAtuacao +
+                ", cdAreaAtuacao=" + cdAreaAtuacao +
                 ", dsAreaAtendimento='" + dsAreaAtendimento + '\'' +
                 ", dsEmail='" + dsEmail + '\'' +
                 ", dtCadastro=" + dtCadastro +
