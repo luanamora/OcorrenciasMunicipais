@@ -16,8 +16,6 @@ public class Usuario extends SugarRecord implements Serializable {
     private String dsEmail;
     private Date dtNascimento;
     private boolean stStatus;
-    @SerializedName("st_administrador")
-    @Expose
     private boolean stAdministrador;
     private Date dtCadastro;
     private Date dtAtualizacao;

@@ -97,8 +97,8 @@ public class AdminUser extends AppCompatActivity {
                             try {
                                 String codigoEncontrado = String.valueOf(usuarioEncontrado.getCdUsuario());
                                 Task task = new Task(AdminUser.this);
-                                usuarioEncontrado.setStAdministrador(true);
                                 usuarioEncontrado.setDtAtualizacao(new Date());
+                                usuarioEncontrado.setStAdministrador(true);
                                 System.out.println("11111111111111111111111111111111111111111111111111" + new Gson().toJson(usuarioEncontrado));
                                 Result result = result = task.executeOnExecutor
                                         (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "PUT", new Gson().toJson(usuarioEncontrado), codigoEncontrado}).get();
@@ -116,7 +116,7 @@ public class AdminUser extends AppCompatActivity {
                                     dialogError.setPositiveButton("continuar", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            finish();
+
                                         }
                                     });
                                     dialogError.show();
