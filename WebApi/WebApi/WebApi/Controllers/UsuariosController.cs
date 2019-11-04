@@ -52,7 +52,7 @@ namespace WebApi.Controllers
        
 
         // PUT: api/Usuarios/5
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario([FromRoute] int id, [FromBody] Usuario usuario)
         {
             if (!ModelState.IsValid)

@@ -7,8 +7,6 @@ import java.io.BufferedOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Task extends AsyncTask<String, Integer, Result> {
@@ -26,14 +24,14 @@ public class Task extends AsyncTask<String, Integer, Result> {
                 StringBuffer response = new StringBuffer();
                 StringBuilder urlControler = new StringBuilder();
                 if (params[1].equals("GET")){
-                    urlControler.append("http://192.168.43.154:5000/api/" + params[0]);
+                    urlControler.append("http://192.168.100.116:5000/api/" + params[0]);
                     if (!params[2].isEmpty())
                         urlControler = urlControler.append("/findByAdmin/"+params[2]);
                 }
                 else if (params[1].equals("POST"))
-                    urlControler.append("http://192.168.43.154:5000/api/" + params[0]);
+                    urlControler.append("http://192.168.100.116:5000/api/" + params[0]);
                 else if (params[1].equals("PUT"))
-                    urlControler.append("http://192.168.43.154:5000/api" + params[0] + "/" + params[3]);
+                    urlControler.append("http://192.168.100.116:5000/api/" + params[0] + "/" + params[3]);
 
                 URL url = new URL(urlControler.toString());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -78,8 +76,9 @@ public class Task extends AsyncTask<String, Integer, Result> {
                 if (params[1].equals("PUT")) {
                     OutputStream os = new BufferedOutputStream(connection.getOutputStream());
                     os.write(params[2].getBytes());
+                    System.out.println("3222222222222222222222222222222222222 " + params[2]);
                     os.flush();
-                    System.out.println("Retorno da requisição" + connection.getResponseCode());
+                    System.out.println("Retorno da requisição " + connection.getResponseCode());
                     if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         Scanner scanner = new Scanner(connection.getInputStream());
                         while (scanner.hasNext()) {

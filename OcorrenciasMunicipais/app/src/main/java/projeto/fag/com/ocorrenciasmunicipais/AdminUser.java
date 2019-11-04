@@ -1,6 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 import projeto.fag.com.ocorrenciasmunicipais.task.Result;
 import projeto.fag.com.ocorrenciasmunicipais.task.Task;
@@ -50,7 +53,6 @@ public class AdminUser extends AppCompatActivity {
     private void loadComponents() {
         spUsuarioAdmin = findViewById(R.id.spUsuarioAdmin);
         btSalvarAdmin = findViewById(R.id.btSalvarAdmin);
-
     }
 
     private void loadSpinner() {
@@ -59,7 +61,8 @@ public class AdminUser extends AppCompatActivity {
             Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "false"}).get();
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             ArrayList<Usuario> list = new ArrayList<Usuario>();
-            Type listType = new TypeToken<List<Usuario>>() {}.getType();
+            Type listType = new TypeToken<List<Usuario>>() {
+            }.getType();
             list = gson.fromJson(result.getContent(), listType);
             System.out.println(list.toString());
             adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, list);
@@ -93,12 +96,14 @@ public class AdminUser extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             try {
                                 String codigoEncontrado = String.valueOf(usuarioEncontrado.getCdUsuario());
+                                Task task = new Task(AdminUser.this);
                                 usuarioEncontrado.setStAdministrador(true);
                                 usuarioEncontrado.setDtAtualizacao(new Date());
-                                Task task = new Task(AdminUser.this);
+                                System.out.println("11111111111111111111111111111111111111111111111111" + new Gson().toJson(usuarioEncontrado));
                                 Result result = result = task.executeOnExecutor
-                                        (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "PUT", new Gson().toJson(usuarioEncontrado),codigoEncontrado,}).get();
-                                if (result.getError().booleanValue()){
+                                        (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "PUT", new Gson().toJson(usuarioEncontrado), codigoEncontrado}).get();
+
+                                if (result.getError().booleanValue()) {
                                     MaterialAlertDialogBuilder dialogError = new MaterialAlertDialogBuilder(AdminUser.this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
                                     dialogError.setTitle("Erro");
                                     dialogError.setMessage("Algo deu errado. Tente Novamente!");
@@ -111,7 +116,7 @@ public class AdminUser extends AppCompatActivity {
                                     dialogError.setPositiveButton("continuar", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                             finish();
+                                            finish();
                                         }
                                     });
                                     dialogError.show();

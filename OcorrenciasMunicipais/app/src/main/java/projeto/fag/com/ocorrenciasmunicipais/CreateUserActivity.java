@@ -15,6 +15,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
@@ -51,6 +53,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         datePicker();
         controlErrorTextInput();
     }
+
 
     private void datePicker() {
         year = calendar.get(Calendar.YEAR);
@@ -171,7 +174,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             }
         });
     }
-
 
     public void openDialogPhone() {
         UserPhoneDialog userPhoneDialog = new UserPhoneDialog();
@@ -361,13 +363,15 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
     public int lastUserCode() {
         Usuario last = Usuario.last(Usuario.class);
+        Iterator<Usuario> teste = Usuario.findAll(Usuario.class);
+        System.out.println("oLHAR ESSA MERDA" + teste);
+        System.out.println(Usuario.listAll(Usuario.class));
         if (last == null)
             codigoUsuario = 1;
         else
             codigoUsuario = last.getCdUsuario() + 1;
         return codigoUsuario;
     }
-
 
     public int lastPhoneCode() {
         TelefoneUsuario last = TelefoneUsuario.last(TelefoneUsuario.class);
