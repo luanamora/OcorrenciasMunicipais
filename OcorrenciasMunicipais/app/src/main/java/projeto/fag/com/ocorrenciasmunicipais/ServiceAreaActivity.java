@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtuacao;
@@ -36,13 +37,14 @@ public class ServiceAreaActivity extends AppCompatActivity {
     private Button btSalvarAreaAtendimento;
     private ArrayAdapter<AreaAtuacao> areaAtuacaoAdapter;
     private int codigoAreaAtendimento;
+    private int qtdAreaAtuacao;
+    private int codigoEncontradoAreaAtuacao;
     private AreaAtendimento areaAtendimento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_area);
-
         loadEvents();
     }
 
@@ -59,7 +61,7 @@ public class ServiceAreaActivity extends AppCompatActivity {
         btSalvarAreaAtendimento = findViewById(R.id.btSalvarAreaAtendimento);
     }
 
-    private void loadSpinner() {
+    private int loadSpinner() {
         Task task = new Task(ServiceAreaActivity.this);
         try {
             Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"AreaAtuacaos", "GET", ""}).get();
@@ -68,7 +70,6 @@ public class ServiceAreaActivity extends AppCompatActivity {
             Type listType = new TypeToken<List<AreaAtuacao>>() {
             }.getType();
             list = gson.fromJson(result.getContent(), listType);
-            System.out.println("olalalsdnfksjdnfskjdnsdifnsidfnsdifn" + list.toString());
             areaAtuacaoAdapter = new ArrayAdapter<>(ServiceAreaActivity.this, R.layout.support_simple_spinner_dropdown_item, list);
             spAreaAtuacao.setAdapter(areaAtuacaoAdapter);
         } catch (ExecutionException e) {
@@ -76,6 +77,7 @@ public class ServiceAreaActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return qtdAreaAtuacao;
     }
 
     private void saveServiceArea() {
@@ -83,15 +85,12 @@ public class ServiceAreaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 areaAtendimento = new AreaAtendimento();
                 areaAtendimento.setCdAreaAtendimento(lastServiceCode());
                 areaAtendimento.setDsAreaAtendimento(etDescricao.getText().toString());
                 areaAtendimento.setDsEmail(etEmail.getText().toString());
                 areaAtendimento.setDtCadastro(new Date());
-                areaAtendimento.setCdAreaAtuacao(1);
-
+                areaAtendimento.setCdAreaAtuacao(searchCodeSpinner());
                 Result result = null;
                 Task task = new Task(ServiceAreaActivity.this);
                 try {
@@ -105,6 +104,30 @@ public class ServiceAreaActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private int searchCodeSpinner(){
+        Task task = new Task(ServiceAreaActivity.this);
+        try {
+            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"AreaAtuacaos", "GET", ""}).get();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            ArrayList<AreaAtuacao> list = new ArrayList<AreaAtuacao>();
+            Type listType = new TypeToken<List<AreaAtuacao>>() {
+            }.getType();
+            list = gson.fromJson(result.getContent(), listType);
+            qtdAreaAtuacao = list.size();
+            String legal =  spAreaAtuacao.getSelectedItem().toString();
+            for (AreaAtuacao a : list){
+                if (a.getDsAreaAtuacao().equals(legal)){
+                    codigoEncontradoAreaAtuacao = a.getCdAreaAtuacao();
+                }
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return codigoEncontradoAreaAtuacao;
     }
 
 
