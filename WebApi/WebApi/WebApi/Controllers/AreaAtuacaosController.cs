@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         // GET: api/AreaAtuacaos/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetAreaAtuacao([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -47,7 +47,7 @@ namespace WebApi.Controllers
         }
 
         // PUT: api/AreaAtuacaos/5
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> PutAreaAtuacao([FromRoute] int id, [FromBody] AreaAtuacao areaAtuacao)
         {
             if (!ModelState.IsValid)

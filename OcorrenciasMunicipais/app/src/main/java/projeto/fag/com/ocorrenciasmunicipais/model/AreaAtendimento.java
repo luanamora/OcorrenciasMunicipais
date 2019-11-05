@@ -1,5 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 
@@ -8,11 +10,23 @@ import java.util.Date;
 
 public class AreaAtendimento extends SugarRecord implements Serializable {
     @Unique
+    @SerializedName("cd_areaatendimento")
+    @Expose
     private int cdAreaAtendimento;
+    @SerializedName("cd_areaatuacao")
+    @Expose
     private int cdAreaAtuacao;
+    @SerializedName("ds_areaatendimento")
+    @Expose
     private String dsAreaAtendimento;
+    @SerializedName("ds_email")
+    @Expose
     private String dsEmail;
+    @SerializedName("dt_cadastro")
+    @Expose
     private Date dtCadastro;
+    @SerializedName("dt_atualizacao")
+    @Expose
     private Date dtAtualizacao;
 
     public AreaAtendimento() {

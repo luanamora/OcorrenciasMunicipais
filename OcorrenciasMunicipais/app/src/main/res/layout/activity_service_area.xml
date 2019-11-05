@@ -46,7 +46,7 @@
             android:layout_marginRight="@dimen/marginEditText">
 
             <EditText
-                android:id="@+id/etDescricao"
+                android:id="@+id/etDescricaoaa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Descrição" />
@@ -104,7 +104,48 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+    </LinearLayout>
 
+
+
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_email_black_24dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tvlEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/marginEditText">
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbEmailUser"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

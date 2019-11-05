@@ -2,7 +2,6 @@ package projeto.fag.com.ocorrenciasmunicipais.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
-
 import java.io.BufferedOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -25,7 +24,7 @@ public class Task extends AsyncTask<String, Integer, Result> {
                 StringBuilder urlControler = new StringBuilder();
                 if (params[1].equals("GET")){
                     urlControler.append("http://192.168.42.94:5000/api/" + params[0]);
-                    if (!params[2].isEmpty())
+                    if (!(params[2].trim().length() == 0))
                         urlControler = urlControler.append("/findByAdmin/"+params[2]);
                 }
                 else if (params[1].equals("POST"))
