@@ -27,7 +27,7 @@ namespace WebApi.Mappings
             entity.Property(e => e.DtAtualizacao)
                 .IsRequired()
                 .HasColumnName("dt_atualizacao")
-                .HasColumnType("character varying");
+                .HasColumnType("date");
 
             entity.Property(e => e.DtCadastro)
                 .HasColumnName("dt_cadastro")

@@ -55,27 +55,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_person_black_24dp" />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:id="@+id/spAreaAtuacao"/>
-
-    </LinearLayout>
-    <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,6 +84,132 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_call_black_24dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
+            android:outlineSpotShadowColor="@color/colorPrimary">
+
+            <EditText
+                android:id="@+id/etDdd"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbDddUser"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tvlTelefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/marginEditText">
+
+            <EditText
+                android:id="@+id/etTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telefone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_call_black_24dp"        />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tvlDescricaoTelefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/marginEditText">
+
+            <EditText
+                android:id="@+id/etDescricaoTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descrição"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_person_black_24dp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/spAreaAtuacao"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_person_black_24dp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/spUserAdminAtendimento"/>
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btSalvarAreaAtendimento"

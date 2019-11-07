@@ -1,5 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 import com.orm.dsl.MultiUnique;
 
@@ -8,21 +10,23 @@ import java.util.Date;
 
 @MultiUnique("cdUsuarioAtendimento, cdAreaAtendimento")
 public class UsuarioAreaAtendimento extends SugarRecord implements Serializable {
+    @SerializedName("cd_usuarioatendimento")
+    @Expose
     private int cdUsuarioAtendimento;
+    @SerializedName("cd_areaatendimento")
+    @Expose
     private int cdAreaAtendimento;
-    private Usuario usuario;
+    @SerializedName("cd_usuario")
+    @Expose
+    private int cdUsuario;
+    @SerializedName("dt_cadastro")
+    @Expose
     private Date dtCadastro;
+    @SerializedName("dt_atualizacao")
+    @Expose
     private Date dtAtualizacao;
 
     public UsuarioAreaAtendimento() {
-    }
-
-    public UsuarioAreaAtendimento(int cdUsuarioAtendimento, int cdAreaAtendimento, Usuario usuario, Date dtCadastro, Date dtAtualizacao) {
-        this.cdUsuarioAtendimento = cdUsuarioAtendimento;
-        this.cdAreaAtendimento = cdAreaAtendimento;
-        this.usuario = usuario;
-        this.dtCadastro = dtCadastro;
-        this.dtAtualizacao = dtAtualizacao;
     }
 
     public int getCdUsuarioAtendimento() {
@@ -41,12 +45,12 @@ public class UsuarioAreaAtendimento extends SugarRecord implements Serializable 
         this.cdAreaAtendimento = cdAreaAtendimento;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getCdUsuario() {
+        return cdUsuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCdUsuario(int cdUsuario) {
+        this.cdUsuario = cdUsuario;
     }
 
     public Date getDtCadastro() {
@@ -70,7 +74,7 @@ public class UsuarioAreaAtendimento extends SugarRecord implements Serializable 
         return "UsuarioAreaAtendimento{" +
                 "cdUsuarioAtendimento=" + cdUsuarioAtendimento +
                 ", cdAreaAtendimento=" + cdAreaAtendimento +
-                ", usuario=" + usuario +
+                ", usuario=" + cdUsuario +
                 ", dtCadastro=" + dtCadastro +
                 ", dtAtualizacao=" + dtAtualizacao +
                 '}';
