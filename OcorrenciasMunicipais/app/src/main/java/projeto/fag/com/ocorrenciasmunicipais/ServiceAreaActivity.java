@@ -6,6 +6,7 @@ import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,8 @@ import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.UsuarioAreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.task.Result;
 import projeto.fag.com.ocorrenciasmunicipais.task.Task;
+import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
+import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 
 public class ServiceAreaActivity extends AppCompatActivity {
 
@@ -40,10 +43,18 @@ public class ServiceAreaActivity extends AppCompatActivity {
 
     private ArrayAdapter<AreaAtuacao> areaAtuacaoAdapter;
     private ArrayAdapter<Usuario> adminAdapter;
-    private List<AreaAtuacao> atuacaoList = new ArrayList<>();
-    private List<Usuario> usuarioList = new ArrayList<>();
 
-    private List<UsuarioAreaAtendimento> usuarioAtendimentoList = new ArrayList<>();
+
+    private List<AreaAtendimento> taskAtendimentoList = new ArrayList<>(); //Recebe get Area de Atendimento vindo da api
+    private List<AreaAtuacao> taskAtuacaoList = new ArrayList<>(); //Recebe get Area de Atuação vindo da api
+    private List<UsuarioAreaAtendimento> taskUsuarioAtList = new ArrayList<>(); //Recebe get Usuario Atendimento vindo da api
+    private List<Usuario> taskUsuarioList = new ArrayList<>(); //Recebe get Usuario vindo da api
+
+
+    private int codeAAtendimento; //PK Area de atendimento
+    private int codeAAtuacao; //PK Area de atuacao
+    private int codeUsuarioAt; //PK Usuario Atendimento
+    private int codeSpUsuario;
 
     private int codigoAreaAtendimento;
     private int codigoUsuarioAtendimento;
@@ -59,15 +70,20 @@ public class ServiceAreaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_area);
-        loadEvents();
+        loadComponents();
+        searchAll();
+        searchCodeAll();
+        saveServiceArea();
+
     }
 
-    private void loadEvents() {
+   /* private void loadEvents() {
         loadComponents();
+        searchAll();
         loadSpinnerAreaAtuacao();
         loadSpinnerUsuarioAdmin();
         saveServiceArea();
-    }
+    }*/
 
     private void loadComponents() {
         etDescricao = findViewById(R.id.etDescricaoaa);
@@ -85,17 +101,22 @@ public class ServiceAreaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 areaAtendimento = new AreaAtendimento();
-                areaAtendimento.setCdAreaAtendimento(lastServiceCode());
+                areaAtendimento.setCdAreaAtendimento(codeAAtendimento);
+                areaAtendimento.setCdAreaAtuacao(searchCodeSpAtuacao());
                 areaAtendimento.setDsAreaAtendimento(etDescricao.getText().toString());
                 areaAtendimento.setDsEmail(etEmail.getText().toString());
                 areaAtendimento.setDtCadastro(new Date());
-                areaAtendimento.setCdAreaAtuacao(searchCodeSpinnerAreaAtuacao());
+
 
                 usuarioAreaAtendimento = new UsuarioAreaAtendimento();
-                usuarioAreaAtendimento.setCdUsuarioAtendimento(lastUsuarioAreaAtendimentoCode());
+                usuarioAreaAtendimento.setCdUsuarioAtendimento(codeUsuarioAt);
                 usuarioAreaAtendimento.setCdAreaAtendimento(areaAtendimento.getCdAreaAtendimento());
-                usuarioAreaAtendimento.setCdUsuario(searchCodeSpinnerUsuarioAdmin());
+                usuarioAreaAtendimento.setCdUsuario(codeSpUsuario);
                 usuarioAreaAtendimento.setDtCadastro(new Date());
+
+                postAll();
+                /*areaAtendimento.save();
+                usuarioAreaAtendimento.save();*/
 
                 /*telefoneAreaAtendimento = new TelefoneAreaAtendimento();
                 telefoneAreaAtendimento.setCdTelefoneAreaAtendimento();
@@ -105,115 +126,162 @@ public class ServiceAreaActivity extends AppCompatActivity {
                 telefoneAreaAtendimento.setDsTelefone(etDescricaoTelefone.getText().toString());
                 telefoneAreaAtendimento.setDtCadastro(new Date());*/
 
-                Result result = null;
-                Task task = new Task(ServiceAreaActivity.this);
-                try {
-                    result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"AreaAtendimentoes", "POST", new Gson().toJson(areaAtendimento)}).get();
-                    areaAtendimento.save();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 
-                task = new Task(ServiceAreaActivity.this);
-                try {
-                    result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"UsuarioAreaatendimentoes", "POST", new Gson().toJson(usuarioAreaAtendimento)}).get();
-                    usuarioAreaAtendimento.save();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         });
     }
 
-    private void loadSpinnerAreaAtuacao() {
-        Task task = new Task(ServiceAreaActivity.this);
+
+    private void searchAll() {
+        //Area de Atuação
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        Type listType;
+        Result result = null;
+        int controlTasks = 0;
         try {
-            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"AreaAtuacaos", "GET", ""}).get();
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-            ArrayList<AreaAtuacao> list;
-            Type listType = new TypeToken<List<AreaAtuacao>>() {
-            }.getType();
-            list = gson.fromJson(result.getContent(), listType);
-            atuacaoList.addAll(list);
-            System.out.println("Atuacao listtttttttttttttttttt" + atuacaoList.toString());
-            qtdAreaAtuacao = list.size();
-            areaAtuacaoAdapter = new ArrayAdapter<>(ServiceAreaActivity.this, R.layout.support_simple_spinner_dropdown_item, list);
-            spAreaAtuacao.setAdapter(areaAtuacaoAdapter);
-        } catch (ExecutionException e) {
+            if (controlTasks == 0) {
+                //Area de atendimento
+                Task task = new Task(ServiceAreaActivity.this);
+                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"AreaAtendimentoes", "GET", ""}).get();
+                listType = new TypeToken<List<AreaAtendimento>>() {
+                }.getType();
+                ArrayList<AreaAtendimento> areaAtendimentoList;
+                areaAtendimentoList = gson.fromJson(result.getContent(), listType);
+                taskAtendimentoList.addAll(areaAtendimentoList);
+                controlTasks = 1;
+            }
+
+            if (controlTasks == 1) {
+                Task task = new Task(ServiceAreaActivity.this);
+                //Area atuacao
+                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"AreaAtuacaos", "GET", ""}).get();
+                ArrayList<AreaAtuacao> areaAtuacaoList;
+                listType = new TypeToken<List<AreaAtuacao>>() {
+                }.getType();
+                areaAtuacaoList = gson.fromJson(result.getContent(), listType);
+                taskAtuacaoList.addAll(areaAtuacaoList);
+                controlTasks = 2;
+            }
+
+            if (controlTasks == 2) {
+                Task task = new Task(ServiceAreaActivity.this);
+                //Usuario Atendimento
+                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"UsuarioAreaAtendimentoes", "GET", ""}).get();
+                ArrayList<UsuarioAreaAtendimento> usuarioAtList;
+                listType = new TypeToken<List<UsuarioAreaAtendimento>>() {
+                }.getType();
+                usuarioAtList = gson.fromJson(result.getContent(), listType);
+                taskUsuarioAtList.addAll(usuarioAtList);
+                controlTasks = 3;
+            }
+
+            if (controlTasks == 3) {
+                Task task = new Task(ServiceAreaActivity.this);
+                //Usuario
+                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "true"}).get();
+                ArrayList<Usuario> usuarioList;
+                listType = new TypeToken<List<Usuario>>() {
+                }.getType();
+                usuarioList = gson.fromJson(result.getContent(), listType);
+                taskUsuarioList.addAll(usuarioList);
+                controlTasks = 0;
+            }
+
+
+            loadSpinner();
+        } catch (
+                ExecutionException | InterruptedException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
+        }
+
+    }
+
+    private void loadSpinner() {
+        //Area de Atuação
+        areaAtuacaoAdapter = new ArrayAdapter<>(ServiceAreaActivity.this, R.layout.support_simple_spinner_dropdown_item, taskAtuacaoList);
+        spAreaAtuacao.setAdapter(areaAtuacaoAdapter);
+
+        //Usuario
+        adminAdapter = new ArrayAdapter<>(ServiceAreaActivity.this, R.layout.support_simple_spinner_dropdown_item, taskUsuarioList);
+        spUserAdminAtendimento.setAdapter(adminAdapter);
+
+    }
+
+    private void postAll() {
+        try {
+            Result result = null;
+            Task task = new Task(ServiceAreaActivity.this);
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"AreaAtendimentoes", "POST", new Gson().toJson(areaAtendimento)}).get();
+
+            task = new Task(ServiceAreaActivity.this);
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"UsuarioAreaatendimentoes", "POST", new Gson().toJson(usuarioAreaAtendimento)}).get();
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private int searchCodeSpinnerAreaAtuacao() {
-        String spAreaAtuacaoItem = spAreaAtuacao.getSelectedItem().toString();
-        for (AreaAtuacao a : atuacaoList) {
-            if (a.getDsAreaAtuacao().equals(spAreaAtuacaoItem)) {
-                codigoEncontradoAreaAtuacao = a.getCdAreaAtuacao();
+    private void searchCodeAll() {
+
+        if (!taskUsuarioAtList.isEmpty()) {
+            int control = 0;
+            for (UsuarioAreaAtendimento u : taskUsuarioAtList) {
+                if (u.getCdUsuarioAtendimento() >= control) {//codigo == 1 last == 0
+                    control = u.getCdUsuarioAtendimento() + 1;
+                    codeUsuarioAt = control;
+                }
+            }
+        } else
+            codeUsuarioAt = 1;
+
+
+        if (!taskAtuacaoList.isEmpty()) {
+            int control = 0;
+            for (AreaAtuacao a : taskAtuacaoList) {
+                if (a.getCdAreaAtuacao() >= control) {//codigo == 1 last == 0
+                    control = a.getCdAreaAtuacao() + 1;
+                    codeAAtuacao = control;
+                }
+            }
+        } else
+            codeAAtuacao = 1;
+
+
+        if (!taskAtendimentoList.isEmpty()) {
+            int control = 0;
+            for (AreaAtendimento a : taskAtendimentoList) {
+                if (a.getCdAreaAtendimento() >= control) {//codigo == 1 last == 0
+                    control = a.getCdAreaAtendimento() + 1;
+                    codeAAtendimento = control;
+                }
+            }
+        } else
+            codeAAtendimento = 1;
+
+        spUserAdminAtendimento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Encontra ID do item selecionado
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Usuario usuario = (Usuario) parent.getSelectedItem();
+                codeSpUsuario = usuario.getCdUsuario();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
+    private int searchCodeSpAtuacao() {
+        String spAreaAAtuacao = spAreaAtuacao.getSelectedItem().toString();
+        for (AreaAtuacao u : taskAtuacaoList) {
+            if (u.getDsAreaAtuacao().equals(spAreaAAtuacao)) {
+                return u.getCdAreaAtuacao();
             }
         }
-        return codigoEncontradoAreaAtuacao;
+        return 0;
     }
 
 
-    private void loadSpinnerUsuarioAdmin() {
-        Task task = new Task(ServiceAreaActivity.this);
-        try {
-            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "true"}).get();
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-            ArrayList<Usuario> list;
-            Type listType = new TypeToken<List<Usuario>>() {
-            }.getType();
-            list = gson.fromJson(result.getContent(), listType);
-            usuarioList.addAll(list);
-            //qtdAreaAtuacao = list.size();
-            adminAdapter = new ArrayAdapter<>(ServiceAreaActivity.this, R.layout.support_simple_spinner_dropdown_item, list);
-            spUserAdminAtendimento.setAdapter(adminAdapter);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private int searchCodeSpinnerUsuarioAdmin() {
-        String spUsuarioAdmin = spUserAdminAtendimento.getSelectedItem().toString();
-        for (Usuario u : usuarioList) {
-            if (u.getNmUsuario().equals(spUsuarioAdmin)) {
-                codigoEncontradoAreaAtuacao = u.getCdUsuario();
-            }
-        }
-        return codigoEncontradoAreaAtuacao;
-    }
-
-
-
-    public int lastUsuarioAreaAtendimentoCode() {
-        UsuarioAreaAtendimento last = UsuarioAreaAtendimento.last(UsuarioAreaAtendimento.class);
-        Iterator<UsuarioAreaAtendimento> iUsuarioAtendimento = UsuarioAreaAtendimento.findAll(UsuarioAreaAtendimento.class);
-        System.out.println(UsuarioAreaAtendimento.listAll(UsuarioAreaAtendimento.class));
-        if (last == null)
-            codigoUsuarioAtendimento = 1;
-        else
-            codigoUsuarioAtendimento = last.getCdUsuarioAtendimento() + 1;
-        return codigoUsuarioAtendimento;
-    }
-
-
-
-    public int lastServiceCode() {
-        AreaAtendimento last = AreaAtendimento.last(AreaAtendimento.class);
-        Iterator<AreaAtendimento> iAreaAtendimento = AreaAtendimento.findAll(AreaAtendimento.class);
-        System.out.println(AreaAtendimento.listAll(AreaAtendimento.class));
-        if (last == null)
-            codigoAreaAtendimento = 1;
-        else
-            codigoAreaAtendimento = last.getCdAreaAtendimento() + 1;
-        return codigoAreaAtendimento;
-    }
 }

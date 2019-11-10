@@ -98,16 +98,16 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     }
 
     public void saveUser() {
-
         btCriarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int taskControl = 0;
+                Result result = null;
 
                 if (checkFields()) {
                     if (passwordControl()) {
                         usuario = new Usuario();
-                        usuario.setCdUsuario(lastUserCode());
+                        usuario.setCdUsuario(5);
                         usuario.setNmUsuario(etNome.getText().toString());
                         usuario.setDsEmail(etEmail.getText().toString());
                         usuario.setDtNascimento(DateUtil.stringToDate(etDtNascimento.getText().toString()));
@@ -127,11 +127,11 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         historicoSenha = new HistoricoSenha();
                         historicoSenha.setCdUsuario(usuario.getCdUsuario());
                         historicoSenha.setCdHistoricoSenha(lastPasswordCode());
-                        historicoSenha.setDsSenha("Descricação teste");
+                        historicoSenha.setDsSenha("Tem que arrumar");
                         historicoSenha.setDtCadastro(new Date());
                         historicoSenha.setCdUsuario(usuario.getCdUsuario());
 
-                        Result result = null;
+
                         Task task = new Task(CreateUserActivity.this);
                         if (taskControl == 0) {
                             try {
@@ -178,11 +178,10 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     public void openDialogPhone() {
         UserPhoneDialog userPhoneDialog = new UserPhoneDialog();
         userPhoneDialog.show(getSupportFragmentManager(), "Telefone");
-    } //Abre dialog do telefone (rever)
+    }
 
     public boolean checkFields() {
         int cont = 0;
-
         int nome = etNome.getText().toString().trim().length();
         int email = etEmail.getText().toString().trim().length();
         int telefone = etTelefone.getText().toString().trim().length();
@@ -254,7 +253,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             return false;
         }
         return true;
-    } //Controla regra de negócio da senha
+    }
 
     private void controlErrorTextInput() {
 
@@ -359,7 +358,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
             }
         });
-    } //Controla os textfields para voltar ao normal (sem erro)
+    }
 
     public int lastUserCode() {
         Usuario last = Usuario.last(Usuario.class);

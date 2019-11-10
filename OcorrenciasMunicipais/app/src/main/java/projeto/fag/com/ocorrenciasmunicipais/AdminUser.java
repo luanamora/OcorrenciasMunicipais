@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -24,9 +25,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtuacao;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
+import projeto.fag.com.ocorrenciasmunicipais.model.UsuarioAreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.task.Result;
 import projeto.fag.com.ocorrenciasmunicipais.task.Task;
+import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
+import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 
 public class AdminUser extends AppCompatActivity {
 
@@ -34,7 +39,11 @@ public class AdminUser extends AppCompatActivity {
     private Button btSalvarAdmin;
     private Usuario usuarioEncontrado = null;
 
+    private List<Usuario> usuarioList = new ArrayList<>();
+
     private ArrayAdapter<Usuario> adminAdapter;
+    private List<Usuario> taskUsuarioList = new ArrayList<>();
+    private int codeUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,7 @@ public class AdminUser extends AppCompatActivity {
         loadComponents();
         loadSpinner();
         saveAdmin();
+        searchCode();
     }
 
     private void loadComponents() {
@@ -60,13 +70,20 @@ public class AdminUser extends AppCompatActivity {
         try {
             Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "false"}).get();
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-            ArrayList<Usuario> list = new ArrayList<Usuario>();
+            ArrayList<Usuario> list;
             Type listType = new TypeToken<List<Usuario>>() {
             }.getType();
             list = gson.fromJson(result.getContent(), listType);
-            System.out.println(list.toString());
-            adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, list);
-            spUsuarioAdmin.setAdapter(adminAdapter);
+            usuarioList.addAll(list);
+
+            if (list != null) {
+                System.out.println(list.toString());
+                adminAdapter = new ArrayAdapter<>(AdminUser.this, R.layout.support_simple_spinner_dropdown_item, list);
+                spUsuarioAdmin.setAdapter(adminAdapter);
+            } else {
+
+            }
+
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -75,18 +92,10 @@ public class AdminUser extends AppCompatActivity {
     }
 
     private void saveAdmin() {
+        searchCode();
         btSalvarAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<Usuario> findUsuario = Usuario.find(Usuario.class, "cd_usuario =" +
-                        " '" + (spUsuarioAdmin.getSelectedItemId() + 1) + "'", null, null, null, null);
-                if (!findUsuario.isEmpty()) {
-                    for (Usuario u : findUsuario) {
-                        if (findUsuario.contains(u)) {
-                            usuarioEncontrado = u;
-                        }
-                    }
-                }
                 if (usuarioEncontrado != null) {
                     MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(AdminUser.this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
                     dialog.setTitle("Atenção");
@@ -139,6 +148,44 @@ public class AdminUser extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+
+
+    private void searchCode() {
+        spUsuarioAdmin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Encontra ID do item selecionado
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Usuario usuario = (Usuario) parent.getSelectedItem();
+                usuarioEncontrado = usuario;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
+    private void searchUsuario() {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        Task task = new Task(AdminUser.this);
+        Result result = null;
+        try {
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"AreaAtuacaos", "GET", ""}).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Usuario> usuarioList;
+        Type listType = new TypeToken<List<Usuario>>() {
+        }.getType();
+        usuarioList = gson.fromJson(result.getContent(), listType);
+        taskUsuarioList.addAll(usuarioList);
     }
 }
 
