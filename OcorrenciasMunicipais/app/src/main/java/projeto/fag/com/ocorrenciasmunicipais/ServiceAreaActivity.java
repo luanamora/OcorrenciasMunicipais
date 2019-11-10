@@ -49,11 +49,13 @@ public class ServiceAreaActivity extends AppCompatActivity {
     private List<AreaAtuacao> taskAtuacaoList = new ArrayList<>(); //Recebe get Area de Atuação vindo da api
     private List<UsuarioAreaAtendimento> taskUsuarioAtList = new ArrayList<>(); //Recebe get Usuario Atendimento vindo da api
     private List<Usuario> taskUsuarioList = new ArrayList<>(); //Recebe get Usuario vindo da api
+    private List<TelefoneAreaAtendimento> taskTelefoneList = new ArrayList<>(); //Recebe get Telefone Area de atendimento vindo da api
 
 
     private int codeAAtendimento; //PK Area de atendimento
     private int codeAAtuacao; //PK Area de atuacao
     private int codeUsuarioAt; //PK Usuario Atendimento
+    private int codeTelefoneAt; //PK Telefone Atendimento
     private int codeSpUsuario;
 
     private int codigoAreaAtendimento;
@@ -107,24 +109,24 @@ public class ServiceAreaActivity extends AppCompatActivity {
                 areaAtendimento.setDsEmail(etEmail.getText().toString());
                 areaAtendimento.setDtCadastro(new Date());
 
-
                 usuarioAreaAtendimento = new UsuarioAreaAtendimento();
                 usuarioAreaAtendimento.setCdUsuarioAtendimento(codeUsuarioAt);
                 usuarioAreaAtendimento.setCdAreaAtendimento(areaAtendimento.getCdAreaAtendimento());
                 usuarioAreaAtendimento.setCdUsuario(codeSpUsuario);
                 usuarioAreaAtendimento.setDtCadastro(new Date());
 
-                postAll();
-                /*areaAtendimento.save();
-                usuarioAreaAtendimento.save();*/
-
-                /*telefoneAreaAtendimento = new TelefoneAreaAtendimento();
-                telefoneAreaAtendimento.setCdTelefoneAreaAtendimento();
+                telefoneAreaAtendimento = new TelefoneAreaAtendimento();
+                telefoneAreaAtendimento.setCdTelefoneAreaAtendimento(codeTelefoneAt);
                 telefoneAreaAtendimento.setCdAreaAtendimento(areaAtendimento.getCdAreaAtendimento());
                 telefoneAreaAtendimento.setNrDdd(etDdd.getText().toString());
                 telefoneAreaAtendimento.setNrTelefone(etTelefone.getText().toString());
                 telefoneAreaAtendimento.setDsTelefone(etDescricaoTelefone.getText().toString());
-                telefoneAreaAtendimento.setDtCadastro(new Date());*/
+                telefoneAreaAtendimento.setDtCadastro(new Date());
+
+                postAll();
+                areaAtendimento.save();
+                usuarioAreaAtendimento.save();
+                telefoneAreaAtendimento.save();
 
 
             }
@@ -184,8 +186,22 @@ public class ServiceAreaActivity extends AppCompatActivity {
                 }.getType();
                 usuarioList = gson.fromJson(result.getContent(), listType);
                 taskUsuarioList.addAll(usuarioList);
+                controlTasks = 4;
+            }
+
+            if (controlTasks == 4) {
+                Task task = new Task(ServiceAreaActivity.this);
+                //Usuario
+                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"TelefoneAreaatendimentoes", "GET", ""}).get();
+                ArrayList<TelefoneAreaAtendimento> telefoneList;
+                listType = new TypeToken<List<TelefoneAreaAtendimento>>() {
+                }.getType();
+                telefoneList = gson.fromJson(result.getContent(), listType);
+                taskTelefoneList.addAll(telefoneList);
                 controlTasks = 0;
             }
+
+
 
 
             loadSpinner();
@@ -215,6 +231,10 @@ public class ServiceAreaActivity extends AppCompatActivity {
 
             task = new Task(ServiceAreaActivity.this);
             result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"UsuarioAreaatendimentoes", "POST", new Gson().toJson(usuarioAreaAtendimento)}).get();
+
+            task = new Task(ServiceAreaActivity.this);
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"TelefoneAreaatendimentoes", "POST", new Gson().toJson(telefoneAreaAtendimento)}).get();
+
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -256,6 +276,17 @@ public class ServiceAreaActivity extends AppCompatActivity {
             }
         } else
             codeAAtendimento = 1;
+
+        if (!taskTelefoneList.isEmpty()) {
+            int control = 0;
+            for (TelefoneAreaAtendimento t : taskTelefoneList) {
+                if (t.getCdTelefoneAreaAtendimento() >= control) {//codigo == 1 last == 0
+                    control = t.getCdTelefoneAreaAtendimento() + 1;
+                    codeTelefoneAt = control;
+                }
+            }
+        } else
+            codeTelefoneAt = 1;
 
         spUserAdminAtendimento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Encontra ID do item selecionado
             @Override
