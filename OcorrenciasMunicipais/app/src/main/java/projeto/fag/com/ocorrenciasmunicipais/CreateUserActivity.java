@@ -1,6 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,19 +12,32 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtendimento;
+import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtuacao;
 import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
+import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneAreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
+import projeto.fag.com.ocorrenciasmunicipais.model.UsuarioAreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.task.Result;
 import projeto.fag.com.ocorrenciasmunicipais.task.Task;
 import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
+import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
+import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.UserPhoneDialog;
 
 public class CreateUserActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, UserPhoneDialog.UserPhoneDialogListener {
@@ -37,12 +51,24 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     private int codigoHistoricoSenha;
     private String dsTelefone;
     private String ddd;
+    private String tel;
     private Usuario usuario;
     private TelefoneUsuario telefone;
     private HistoricoSenha historicoSenha;
     private int day, month, year;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;
+
+
+    private List<Usuario> taskUsuarioList = new ArrayList<>(); //Recebe get Usuario vindo da api
+    private List<TelefoneUsuario> taskTelefone = new ArrayList<>(); //Recebe get Usuario vindo da api
+    private List<HistoricoSenha> taskHistorico = new ArrayList<>(); //Recebe get Usuario vindo da api
+
+
+    private int codeUsuario; //PK Area de atendimento
+    private int codeTelefone; //PK Area de atendimento
+    private int codeHistorico; //PK Area de atendimento
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +78,8 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         loadEvents();
         datePicker();
         controlErrorTextInput();
+        searchAll();
+        searchCodeAll();
     }
 
 
@@ -107,7 +135,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                 if (checkFields()) {
                     if (passwordControl()) {
                         usuario = new Usuario();
-                        usuario.setCdUsuario(5);
+                        usuario.setCdUsuario(codeUsuario);
                         usuario.setNmUsuario(etNome.getText().toString());
                         usuario.setDsEmail(etEmail.getText().toString());
                         usuario.setDtNascimento(DateUtil.stringToDate(etDtNascimento.getText().toString()));
@@ -118,15 +146,15 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
                         telefone = new TelefoneUsuario();
                         telefone.setCdUsuario(usuario.getCdUsuario());
-                        telefone.setCdTelefoneUsuario(lastPhoneCode());
-                        telefone.setNrTelefone(etTelefone.getText().toString());
+                        telefone.setCdTelefoneUsuario(codeTelefone);
+                        telefone.setNrTelefone(tel);
                         telefone.setNrDdd(ddd);
                         telefone.setDsTelefone(dsTelefone);
                         telefone.setDtCadastro(new Date());
 
                         historicoSenha = new HistoricoSenha();
                         historicoSenha.setCdUsuario(usuario.getCdUsuario());
-                        historicoSenha.setCdHistoricoSenha(lastPasswordCode());
+                        historicoSenha.setCdHistoricoSenha(codeHistorico);
                         historicoSenha.setDsSenha("Tem que arrumar");
                         historicoSenha.setDtCadastro(new Date());
                         historicoSenha.setCdUsuario(usuario.getCdUsuario());
@@ -360,6 +388,98 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
+
+    private void searchCodeAll() {
+
+        if (!taskUsuarioList.isEmpty()) {
+            int control = 0;
+            for (Usuario u : taskUsuarioList) {
+                if (u.getCdUsuario() >= control) {//codigo == 1 last == 0
+                    control = u.getCdUsuario() + 1;
+                    codeUsuario = control;
+                }
+            }
+        } else
+            codeUsuario = 1;
+
+
+        if (!taskTelefone.isEmpty()) {
+            int control = 0;
+            for (TelefoneUsuario t : taskTelefone) {
+                if (t.getCdTelefoneUsuario() >= control) {//codigo == 1 last == 0
+                    control = t.getCdTelefoneUsuario() + 1;
+                    codeTelefone = control;
+                }
+            }
+        } else
+            codeTelefone = 1;
+
+        if (!taskHistorico.isEmpty()) {
+            int control = 0;
+            for (HistoricoSenha h : taskHistorico) {
+                if (h.getCdHistoricoSenha() >= control) {//codigo == 1 last == 0
+                    control = h.getCdHistoricoSenha() + 1;
+                    codeHistorico = control;
+                }
+            }
+        } else
+            codeHistorico = 1;
+
+    }
+
+    private void searchAll() {
+        //Area de Atuação
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        Type listType;
+        Result result = null;
+        int controlTasks = 0;
+        try {
+            if (controlTasks == 0) {
+                //Area de atendimento
+                Task task = new Task(CreateUserActivity.this);
+                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", ""}).get();
+                listType = new TypeToken<List<Usuario>>() {
+                }.getType();
+                ArrayList<Usuario> usuarioList;
+                usuarioList = gson.fromJson(result.getContent(), listType);
+                taskUsuarioList.addAll(usuarioList);
+                controlTasks = 1;
+            }
+
+            if (controlTasks == 1) {
+                //Area de atendimento
+                Task task = new Task(CreateUserActivity.this);
+                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"TelefoneUsuarios", "GET", ""}).get();
+                listType = new TypeToken<List<TelefoneUsuario>>() {
+                }.getType();
+                ArrayList<TelefoneUsuario> telefoneList;
+                telefoneList = gson.fromJson(result.getContent(), listType);
+                taskTelefone.addAll(telefoneList);
+                controlTasks = 2;
+            }
+
+            if (controlTasks == 2) {
+                //Area de atendimento
+                Task task = new Task(CreateUserActivity.this);
+                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoSenhas", "GET", ""}).get();
+                listType = new TypeToken<List<HistoricoSenha>>() {
+                }.getType();
+                ArrayList<HistoricoSenha> historicoList;
+                historicoList = gson.fromJson(result.getContent(), listType);
+                taskHistorico.addAll(historicoList);
+                controlTasks = 0;
+            }
+
+
+        } catch (
+                ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
     public int lastUserCode() {
         Usuario last = Usuario.last(Usuario.class);
         Iterator<Usuario> teste = Usuario.findAll(Usuario.class);
@@ -393,6 +513,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     @Override
     public void applyPhone(String dddTelefone, String telefone, String descricao) { //Mascara do telefone (ta ruim)
         ddd = dddTelefone;
+        tel = telefone;
         etTelefone.setText("(" + dddTelefone + ") " + telefone);
         dsTelefone = descricao;
     }
