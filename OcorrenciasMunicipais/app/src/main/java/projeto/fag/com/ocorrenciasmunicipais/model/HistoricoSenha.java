@@ -1,5 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 
@@ -8,21 +10,28 @@ import java.util.Date;
 
 public class HistoricoSenha extends SugarRecord implements Serializable {
     @Unique
+    @SerializedName("cd_historicosenha")
+    @Expose
     private int cdHistoricoSenha;
+    @SerializedName("cd_usuario")
+    @Expose
     private int cdUsuario;
+    @SerializedName("ds_senha")
+    @Expose
     private String dsSenha;
+    @SerializedName("dt_cadastro")
+    @Expose
     private Date dtCadastro;
-    private Date dtAtualizacao;
+
 
     public HistoricoSenha() {
     }
 
-    public HistoricoSenha(int cdHistoricoSenha, int cdUsuario, String dsSenha, Date dtCadastro, Date dtAtualizacao) {
+    public HistoricoSenha(int cdHistoricoSenha, int cdUsuario, String dsSenha, Date dtCadastro) {
         this.cdHistoricoSenha = cdHistoricoSenha;
         this.cdUsuario = cdUsuario;
         this.dsSenha = dsSenha;
         this.dtCadastro = dtCadastro;
-        this.dtAtualizacao = dtAtualizacao;
     }
 
     public int getCdHistoricoSenha() {
@@ -57,13 +66,6 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
         this.dtCadastro = dtCadastro;
     }
 
-    public Date getDtAtualizacao() {
-        return dtAtualizacao;
-    }
-
-    public void setDtAtualizacao(Date dtAtualizacao) {
-        this.dtAtualizacao = dtAtualizacao;
-    }
 
     @Override
     public String toString() {
@@ -72,7 +74,7 @@ public class HistoricoSenha extends SugarRecord implements Serializable {
                 ", cdUsuario=" + cdUsuario +
                 ", dsHistoricoSenha='" + dsSenha + '\'' +
                 ", dtCadastro=" + dtCadastro +
-                ", dtAtualizacao=" + dtAtualizacao +
+
                 '}';
     }
 }

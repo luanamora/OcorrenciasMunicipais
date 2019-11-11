@@ -10,14 +10,32 @@ import java.util.Date;
 
 public class Usuario extends SugarRecord implements Serializable {
     @Unique
+    @SerializedName("cd_usuario")
+    @Expose
     private int cdUsuario;
+    @SerializedName("nm_usuario")
+    @Expose
     private String nmUsuario;
+    @SerializedName("ds_senha")
+    @Expose
     private String dsSenha;
+    @SerializedName("ds_email")
+    @Expose
     private String dsEmail;
+    @SerializedName("dt_nascimento")
+    @Expose
     private Date dtNascimento;
+    @SerializedName("st_status")
+    @Expose
     private boolean stStatus;
+    @SerializedName("st_administrador")
+    @Expose
     private boolean stAdministrador;
+    @SerializedName("dt_cadastro")
+    @Expose
     private Date dtCadastro;
+    @SerializedName("dt_atualizacao")
+    @Expose
     private Date dtAtualizacao;
 
 

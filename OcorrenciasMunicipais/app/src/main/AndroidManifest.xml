@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,12 +29,12 @@
         <activity android:name=".FeedActivity" />
         <activity android:name=".RecoverPasswordActivity" />
         <activity android:name=".CreateUserActivity" />
-        <activity android:name=".AdminUser"/>
+        <activity android:name=".AdminUser" />
         <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="VERSION"
-            android:value="8" />
+            android:value="9" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
