@@ -145,7 +145,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         usuario.setDtCadastro(new Date());
 
                         telefone = new TelefoneUsuario();
-                        telefone.setCdUsuario(usuario.getCdUsuario());
+                        telefone.setCdUsuario(codeUsuario);
                         telefone.setCdTelefoneUsuario(codeTelefone);
                         telefone.setNrTelefone(tel);
                         telefone.setNrDdd(ddd);
@@ -153,11 +153,10 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         telefone.setDtCadastro(new Date());
 
                         historicoSenha = new HistoricoSenha();
-                        historicoSenha.setCdUsuario(usuario.getCdUsuario());
+                        historicoSenha.setCdUsuario(codeUsuario);
                         historicoSenha.setCdHistoricoSenha(codeHistorico);
                         historicoSenha.setDsSenha("Tem que arrumar");
                         historicoSenha.setDtCadastro(new Date());
-                        historicoSenha.setCdUsuario(usuario.getCdUsuario());
 
 
                         Task task = new Task(CreateUserActivity.this);

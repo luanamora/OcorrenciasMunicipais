@@ -15,14 +15,24 @@ namespace WebApi.Models
             UsuarioAreaatendimento = new HashSet<UsuarioAreaatendimento>();
         }
 
+
+        [JsonProperty("cd_usuario")]
         public int CdUsuario { get; set; }
+        [JsonProperty("nm_usuario")]
         public string NmUsuario { get; set; }
+        [JsonProperty("ds_senha")]
         public string DsSenha { get; set; }
+        [JsonProperty("ds_email")]
         public string DsEmail { get; set; }
+        [JsonProperty("dt_nascimento")]
         public DateTime DtNascimento { get; set; }
+        [JsonProperty("st_status")]
         public bool StStatus { get; set; }
+        [JsonProperty("st_administrador")]
         public bool StAdministrador { get; set; }
+        [JsonProperty("dt_cadastro")]
         public DateTime DtCadastro { get; set; }
+        [JsonProperty("dt_atualizacao")]
         public DateTime? DtAtualizacao { get; set; }
 
 
