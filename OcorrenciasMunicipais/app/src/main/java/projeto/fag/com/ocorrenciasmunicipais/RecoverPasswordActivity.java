@@ -3,11 +3,8 @@ package projeto.fag.com.ocorrenciasmunicipais;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.content.Context;
-import android.content.RestrictionsManager;
-import android.content.SearchRecentSuggestionsProvider;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,19 +15,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
-
 import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
@@ -48,11 +43,9 @@ public class RecoverPasswordActivity extends AppCompatActivity {
     private String lastCodeSend;
     private Usuario usuario;
     private HistoricoSenha historicoSenha;
-
     private List<TelefoneUsuario> taskTelefoneList = new ArrayList<>();
     private List<Usuario> taskUsuarioList = new ArrayList<>();
     private List<HistoricoSenha> taskHistoricoSenhaList = new ArrayList<>();
-
     private int codeHistoricoSenha;
     private int codeUsuario;
 
@@ -91,13 +84,13 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         btSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkFieldsSave()){
-                    save();
+                if (checkFieldsSave()) {
+                    if (passwordControl()) {
+                        save();
+                    }
                 }
             }
         });
-
-
     }
 
     private void loadComponents() {
@@ -122,27 +115,25 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         String telefone = etTelefone.getText().toString();
 
 
-        if ((ddd == null || telefone == null) || telefone.trim().length() == 0) {
-            return;
-        }
-
-        if (checkPermission(Manifest.permission.SEND_SMS)) {
-            if (verificaTelefone()) {
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(telefone, null, sms, null, null);
-                Toast.makeText(this, "Mensagem enviada!", Toast.LENGTH_SHORT).show();
-                etDdd.setEnabled(false);
-                etTelefone.setEnabled(false);
-                btEnviar.setEnabled(false);
-                etCodigoRecebido.setEnabled(true);
-                etNovaSenha.setEnabled(true);
-                etConfirmarNovaSenha.setEnabled(true);
-                btSalvar.setEnabled(true);
+        if (checkFieldsSend()) {
+            if (checkPermission(Manifest.permission.SEND_SMS)) {
+                if (verificaTelefone()) {
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(telefone, null, sms, null, null);
+                    Toast.makeText(this, "Mensagem enviada!", Toast.LENGTH_SHORT).show();
+                    etDdd.setEnabled(false);
+                    etTelefone.setEnabled(false);
+                    btEnviar.setEnabled(false);
+                    etCodigoRecebido.setEnabled(true);
+                    etNovaSenha.setEnabled(true);
+                    etConfirmarNovaSenha.setEnabled(true);
+                    btSalvar.setEnabled(true);
+                } else {
+                    Mensagem.ExibirMensagem(RecoverPasswordActivity.this, "Telefone não encontrado.", TipoMensagem.ERRO);
+                }
             } else {
-                Mensagem.ExibirMensagem(RecoverPasswordActivity.this, "Telefone não encontrado.", TipoMensagem.ERRO);
+                Toast.makeText(this, "Permissão negada!", Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(this, "Permissão negada!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -264,8 +255,6 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         searchHistoricoSenha();
         searchUsuario();
 
-
-
         historicoSenha = new HistoricoSenha();
         historicoSenha.setCdHistoricoSenha(codeHistoricoSenha);
         historicoSenha.setCdUsuario(usuario.getCdUsuario());
@@ -292,6 +281,18 @@ public class RecoverPasswordActivity extends AppCompatActivity {
             result = result = task.executeOnExecutor
                     (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "PUT", new Gson().toJson(usuario), String.valueOf(usuario.getCdUsuario())}).get();
             usuario.update();
+            MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+            dialog.setTitle("Sucesso");
+            dialog.setMessage("Senha recuperada com sucesso!");
+            dialog.setPositiveButton("continuar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            dialog.show();
+
+
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -304,7 +305,6 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         int codigoRecebido = etCodigoRecebido.getText().toString().trim().length();
         int novaSenha = etNovaSenha.getText().toString().trim().length();
         int confirmarSenha = etConfirmarNovaSenha.getText().toString().trim().length();
-
 
 
         if ((codigoRecebido <= 0) && (novaSenha <= 0) && (confirmarSenha <= 0)) {
@@ -338,7 +338,7 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         System.out.println("Last codigo send" + lastCodeSend);
         System.out.println("Codigo inserido" + etCodigoRecebido.getText().toString());
         String codigo = etCodigoRecebido.getText().toString();
-        if(!lastCodeSend.equals(codigo)){
+        if (!lastCodeSend.equals(codigo)) {
             tvlCodigoRecevido.setError("Código incorreto");
             return false;
         }
@@ -349,8 +349,8 @@ public class RecoverPasswordActivity extends AppCompatActivity {
 
     public boolean checkFieldsSend() {
         int cont = 0;
-        int ddd = etCodigoRecebido.getText().toString().trim().length();
-        int telefone = etNovaSenha.getText().toString().trim().length();
+        int ddd = etDdd.getText().toString().trim().length();
+        int telefone = etTelefone.getText().toString().trim().length();
 
 
         if ((ddd <= 0) && (telefone <= 0)) {
@@ -396,7 +396,6 @@ public class RecoverPasswordActivity extends AppCompatActivity {
     }
 
 
-
     private void controlErrorTextInput() {
 
         etCodigoRecebido.addTextChangedListener(new TextWatcher() {
@@ -437,6 +436,40 @@ public class RecoverPasswordActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 tvlConfirmarNovaSenha.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        etDdd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlDdd.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        etTelefone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlTelefone.setError(null);
             }
 
             @Override
