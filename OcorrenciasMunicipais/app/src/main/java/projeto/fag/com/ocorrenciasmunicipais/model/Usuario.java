@@ -54,6 +54,7 @@ public class Usuario extends SugarRecord implements Serializable {
         this.dtAtualizacao = dtAtualizacao;
     }
 
+
     public int getCdUsuario() {
         return cdUsuario;
     }
@@ -94,7 +95,7 @@ public class Usuario extends SugarRecord implements Serializable {
         this.dtNascimento = dtNascimento;
     }
 
-    public boolean isStStatus() {
+    public boolean getStStatus() {
         return stStatus;
     }
 
@@ -102,7 +103,7 @@ public class Usuario extends SugarRecord implements Serializable {
         this.stStatus = stStatus;
     }
 
-    public boolean isStAdministrador() {
+    public boolean getStAdministrador() {
         return stAdministrador;
     }
 

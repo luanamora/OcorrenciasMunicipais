@@ -110,6 +110,7 @@ public class AdminUser extends AppCompatActivity {
                                 usuarioEncontrado.setStAdministrador(true);
                                 Result result = result = task.executeOnExecutor
                                         (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "PUT", new Gson().toJson(usuarioEncontrado), codigoEncontrado}).get();
+                                usuarioEncontrado.update();
 
                                 if (result.getError().booleanValue()) {
                                     MaterialAlertDialogBuilder dialogError = new MaterialAlertDialogBuilder(AdminUser.this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);

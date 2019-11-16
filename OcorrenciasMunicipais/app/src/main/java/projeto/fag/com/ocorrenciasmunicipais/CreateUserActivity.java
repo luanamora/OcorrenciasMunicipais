@@ -1,7 +1,6 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,12 +11,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,19 +22,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
-import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtendimento;
-import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtuacao;
 import projeto.fag.com.ocorrenciasmunicipais.model.HistoricoSenha;
-import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneAreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.model.TelefoneUsuario;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
-import projeto.fag.com.ocorrenciasmunicipais.model.UsuarioAreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.task.Result;
 import projeto.fag.com.ocorrenciasmunicipais.task.Task;
 import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
-import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
-import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.UserPhoneDialog;
 
 public class CreateUserActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, UserPhoneDialog.UserPhoneDialogListener {
@@ -58,13 +48,9 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
     private int day, month, year;
     private Calendar calendar = Calendar.getInstance();
     private DatePickerDialog datePickerDialog;
-
-
     private List<Usuario> taskUsuarioList = new ArrayList<>(); //Recebe get Usuario vindo da api
     private List<TelefoneUsuario> taskTelefone = new ArrayList<>(); //Recebe get Usuario vindo da api
     private List<HistoricoSenha> taskHistorico = new ArrayList<>(); //Recebe get Usuario vindo da api
-
-
     private int codeUsuario; //PK Area de atendimento
     private int codeTelefone; //PK Area de atendimento
     private int codeHistorico; //PK Area de atendimento
@@ -155,7 +141,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
                         historicoSenha = new HistoricoSenha();
                         historicoSenha.setCdUsuario(codeUsuario);
                         historicoSenha.setCdHistoricoSenha(codeHistorico);
-                        historicoSenha.setDsSenha("Tem que arrumar");
+                        historicoSenha.setDsSenha(etSenha.getText().toString());
                         historicoSenha.setDtCadastro(new Date());
 
 

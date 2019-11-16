@@ -12,17 +12,21 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -39,6 +43,7 @@ public class RecoverPasswordActivity extends AppCompatActivity {
 
     final int SEND_SMS_PERMISSION_REQUEST_CODE = 1;
     private EditText etDdd, etTelefone, etCodigoRecebido, etNovaSenha, etConfirmarNovaSenha;
+    private TextInputLayout tvlCodigoRecevido, tvlNovaSenha, tvlConfirmarNovaSenha, tvlDdd, tvlTelefone;
     private Button btEnviar, btSalvar;
     private String lastCodeSend;
     private Usuario usuario;
@@ -48,6 +53,9 @@ public class RecoverPasswordActivity extends AppCompatActivity {
     private List<Usuario> taskUsuarioList = new ArrayList<>();
     private List<HistoricoSenha> taskHistoricoSenhaList = new ArrayList<>();
 
+    private int codeHistoricoSenha;
+    private int codeUsuario;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +63,7 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recover_password);
         loadComponents();
         codeRandom();
+        controlErrorTextInput();
 
         btEnviar.setEnabled(false);
         if (checkPermission(Manifest.permission.SEND_SMS)) {
@@ -82,28 +91,13 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         btSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                usuario = new Usuario();
-
-
-                historicoSenha = new HistoricoSenha();
-
-
-                /*Task task = new Task(CreateUserActivity.this);
-                if (taskControl == 0) {
-                    try {
-                        result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "POST", new Gson().toJson(usuario)}).get();
-                        usuario.save();
-                        taskControl = 1;
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }*/
-
+                if (checkFieldsSave()){
+                    save();
+                }
             }
         });
+
+
     }
 
     private void loadComponents() {
@@ -114,6 +108,11 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         etNovaSenha = findViewById(R.id.etNovaSenha);
         etConfirmarNovaSenha = findViewById(R.id.etConfirmarSenhsNova);
         btSalvar = findViewById(R.id.btSalvar);
+        tvlCodigoRecevido = findViewById(R.id.tvlCodigoRecebido);
+        tvlNovaSenha = findViewById(R.id.tvlNovaSenha);
+        tvlConfirmarNovaSenha = findViewById(R.id.tvlConfirmarSenhaNova);
+        tvlDdd = findViewById(R.id.tvlDdd);
+        tvlTelefone = findViewById(R.id.tvlTelefone);
     }
 
 
@@ -181,7 +180,7 @@ public class RecoverPasswordActivity extends AppCompatActivity {
             for (TelefoneUsuario t : taskTelefoneList) {
                 if (t.getNrDdd().equals(etDdd.getText().toString())) {
                     if (t.getNrTelefone().equals(etTelefone.getText().toString())) {
-                        usuario.setCdUsuario(t.getCdUsuario());
+                        codeUsuario = t.getCdUsuario();
                         return true;
                     }
                 }
@@ -208,11 +207,18 @@ public class RecoverPasswordActivity extends AppCompatActivity {
             usuarioList = gson.fromJson(result.getContent(), listType);
             taskUsuarioList.addAll(usuarioList);
 
-            for (Usuario u : taskUsuarioList){
-                if (usuario.getCdUsuario() == u.getCdUsuario()){
+            for (Usuario u : taskUsuarioList) {
+                if (codeUsuario == u.getCdUsuario()) {
+                    usuario = new Usuario();
+                    usuario.setCdUsuario(u.getCdUsuario());
                     usuario.setNmUsuario(u.getNmUsuario());
                     usuario.setDsEmail(u.getDsEmail());
-                    usuario.setDtNascimento(u.getDtNascimento() );
+                    usuario.setStStatus(u.getStStatus());
+                    usuario.setStAdministrador(u.getStAdministrador());
+                    usuario.setDtNascimento(u.getDtNascimento());
+                    usuario.setDtCadastro(u.getDtCadastro());
+                    usuario.setDtAtualizacao(new Date());
+                    usuario.setDsSenha(u.getDsSenha());
                 }
             }
 
@@ -221,5 +227,227 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void searchHistoricoSenha() {
+        try {
+            Result result = null;
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            Task task = new Task(RecoverPasswordActivity.this);
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoSenhas", "GET", ""}).get();
+            Type listType = new TypeToken<List<HistoricoSenha>>() {
+            }.getType();
+            ArrayList<HistoricoSenha> historicoSenhaList;
+            historicoSenhaList = gson.fromJson(result.getContent(), listType);
+            taskHistoricoSenhaList.addAll(historicoSenhaList);
+
+            if (!taskHistoricoSenhaList.isEmpty()) {
+                int control = 0;
+                for (HistoricoSenha h : taskHistoricoSenhaList) {
+                    if (h.getCdHistoricoSenha() >= control) {//codigo == 1 last == 0
+                        control = h.getCdHistoricoSenha() + 1;
+                        codeHistoricoSenha = control;
+                    }
+                }
+            } else
+                codeHistoricoSenha = 1;
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void save() {
+        historicoSenha = new HistoricoSenha();
+        searchHistoricoSenha();
+        searchUsuario();
+
+
+
+        historicoSenha = new HistoricoSenha();
+        historicoSenha.setCdHistoricoSenha(codeHistoricoSenha);
+        historicoSenha.setCdUsuario(usuario.getCdUsuario());
+        historicoSenha.setDsSenha(usuario.getDsSenha());
+        historicoSenha.setDtCadastro(usuario.getDtCadastro());
+
+        Task task = new Task(RecoverPasswordActivity.this);
+        Result result = null;
+        try {
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoSenhas", "POST", new Gson().toJson(historicoSenha)}).get();
+            historicoSenha.save();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+
+        usuario.setDsSenha(etNovaSenha.getText().toString());
+
+        task = new Task(RecoverPasswordActivity.this);
+        usuario.setDsSenha(etNovaSenha.getText().toString());
+        try {
+            result = result = task.executeOnExecutor
+                    (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "PUT", new Gson().toJson(usuario), String.valueOf(usuario.getCdUsuario())}).get();
+            usuario.update();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkFieldsSave() {
+        int cont = 0;
+        int codigoRecebido = etCodigoRecebido.getText().toString().trim().length();
+        int novaSenha = etNovaSenha.getText().toString().trim().length();
+        int confirmarSenha = etConfirmarNovaSenha.getText().toString().trim().length();
+
+
+
+        if ((codigoRecebido <= 0) && (novaSenha <= 0) && (confirmarSenha <= 0)) {
+            tvlCodigoRecevido.setError("Campo vazio!");
+            tvlNovaSenha.setError("Campo vazio!");
+            tvlConfirmarNovaSenha.setError("Campo vazio!");
+            return false;
+
+        }
+
+        if (codigoRecebido <= 0) {
+            tvlCodigoRecevido.setError("Campo vazio!");
+            cont++;
+        }
+
+        if (novaSenha <= 0) {
+            tvlNovaSenha.setError("Campo vazio!");
+            cont++;
+        }
+
+        if (confirmarSenha <= 0) {
+            tvlConfirmarNovaSenha.setError("Campo vazio!");
+            cont++;
+        }
+
+        if (cont > 0) {
+            cont = 0;
+            return false;
+        }
+
+        System.out.println("Last codigo send" + lastCodeSend);
+        System.out.println("Codigo inserido" + etCodigoRecebido.getText().toString());
+        String codigo = etCodigoRecebido.getText().toString();
+        if(!lastCodeSend.equals(codigo)){
+            tvlCodigoRecevido.setError("Código incorreto");
+            return false;
+        }
+
+        System.out.println("TRUE");
+        return true;
+    }
+
+    public boolean checkFieldsSend() {
+        int cont = 0;
+        int ddd = etCodigoRecebido.getText().toString().trim().length();
+        int telefone = etNovaSenha.getText().toString().trim().length();
+
+
+        if ((ddd <= 0) && (telefone <= 0)) {
+            tvlDdd.setError("Campo vazio!");
+            tvlTelefone.setError("Campo vazio!");
+            return false;
+
+        }
+
+        if (ddd <= 0) {
+            tvlDdd.setError("Campo vazio!");
+            cont++;
+        }
+
+        if (telefone <= 0) {
+            tvlTelefone.setError("Campo vazio!");
+            cont++;
+        }
+
+        if (cont > 0) {
+            cont = 0;
+            return false;
+        }
+
+        System.out.println("TRUE");
+        return true;
+    }
+
+    public boolean passwordControl() {
+        System.out.println(etNovaSenha.getText().toString().trim().length());
+        if (etNovaSenha.getText().toString().trim().length() < 8) {
+            tvlNovaSenha.setError("A senha deve ter no mínimo 8 Caracteres");
+            etConfirmarNovaSenha.setText("");
+            return false;
+        }
+
+        if (!etNovaSenha.getText().toString().equals(etConfirmarNovaSenha.getText().toString())) {
+            tvlConfirmarNovaSenha.setError("As senhas não coincidem.");
+            etConfirmarNovaSenha.setText("");
+            return false;
+        }
+        return true;
+    }
+
+
+
+    private void controlErrorTextInput() {
+
+        etCodigoRecebido.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlCodigoRecevido.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        etNovaSenha.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlNovaSenha.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        etConfirmarNovaSenha.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                tvlConfirmarNovaSenha.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 }
