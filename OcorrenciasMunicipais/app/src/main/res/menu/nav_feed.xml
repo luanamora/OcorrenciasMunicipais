@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home"
+        android:id="@+id/itHome"
+        android:icon="@drawable/ic_home_black_24dp"/>
+
+    <item android:title="Perfil"
+        android:id="@+id/etPerfil"
+        android:icon="@drawable/ic_person_black_24dp"/>
+
+    <item android:title="Ocorrências"
+        android:id="@+id/itOcorrencias"
+        android:icon="@drawable/ic_view_list_black_24dp"/>
+
+</menu>

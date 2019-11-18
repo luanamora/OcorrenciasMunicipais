@@ -23,14 +23,14 @@ public class Task extends AsyncTask<String, Integer, Result> {
                 StringBuffer response = new StringBuffer();
                 StringBuilder urlControler = new StringBuilder();
                 if (params[1].equals("GET")){
-                    urlControler.append("http://192.168.42.30:5000/api/" + params[0]);
+                    urlControler.append("http://192.168.42.235:5000/api/" + params[0]);
                     if (!(params[2].trim().length() == 0))
                         urlControler = urlControler.append("/findByAdmin/"+params[2]);
                 }
                 else if (params[1].equals("POST"))
-                    urlControler.append("http://192.168.42.30:5000/api/" + params[0]);
+                    urlControler.append("http://192.168.42.235:5000/api/" + params[0]);
                 else if (params[1].equals("PUT"))
-                    urlControler.append("http://192.168.42.30:5000/api/" + params[0] + "/" + params[3]);
+                    urlControler.append("http://192.168.42.235:5000/api/" + params[0] + "/" + params[3]);
 
                 URL url = new URL(urlControler.toString());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
