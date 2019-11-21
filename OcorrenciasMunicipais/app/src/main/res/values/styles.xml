@@ -21,5 +21,6 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Widget.MaterialComponents." parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"/>
 
 </resources>

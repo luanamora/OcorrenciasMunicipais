@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!checkAdministrator())   if (checkUser()) {
-                    Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, FeedNavigationActivity.class);
                     startActivity(intent);
                 }
 

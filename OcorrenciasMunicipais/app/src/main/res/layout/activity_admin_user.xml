@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".CreateUserActivity">
 
 
     <ImageView
@@ -34,19 +37,14 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/ic_person_black_24dp" />
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginRight="10dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:foregroundTint="@color/colorPrimary"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:id="@+id/spUsuarioAdmin"/>
+
+            <Spinner
+                android:id="@+id/spUsuarioAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
 
     </LinearLayout>
-
-
 
     <Button
         android:id="@+id/btSalvarAdmin"

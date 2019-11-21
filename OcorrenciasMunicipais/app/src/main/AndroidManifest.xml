@@ -16,6 +16,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".FeedNavigationActivity"
+            android:label="@string/title_activity_feed_navigation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -26,7 +30,6 @@
         </activity>
         <activity android:name=".ServiceAreaActivity" />
         <activity android:name=".AdministratorActivity" />
-        <activity android:name=".FeedActivity" />
         <activity android:name=".RecoverPasswordActivity" />
         <activity android:name=".CreateUserActivity" />
         <activity android:name=".AdminUser" />
