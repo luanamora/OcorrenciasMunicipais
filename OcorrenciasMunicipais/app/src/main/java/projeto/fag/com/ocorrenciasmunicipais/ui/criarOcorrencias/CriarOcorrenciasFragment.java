@@ -9,13 +9,14 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import projeto.fag.com.ocorrenciasmunicipais.R;
 
-public class CriarOcorrenciasFragment extends Fragment {
+public class CriarOcorrenciasFragment extends AppCompatActivity {
 
     private CriarOcorrenciasViewModel criarOcorrenciasViewModel;
     private AutoCompleteTextView etTipoOcorrencia;

@@ -16,10 +16,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".OcorrenciasActivity"></activity>
+        <activity android:name=".FeedActivity" />
+        <activity android:name=".PerfilActivity" />
         <activity
             android:name=".FeedNavigationActivity"
             android:label="@string/title_activity_feed_navigation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>

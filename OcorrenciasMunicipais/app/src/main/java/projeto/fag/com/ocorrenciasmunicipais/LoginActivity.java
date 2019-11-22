@@ -34,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         SugarContext.init(this);
         loadEvents();
+        etEmail.setText("luanamora88@gmail.com");
+        etSenha.setText("teste123");
     }
 
     private void loadEvents() {
@@ -80,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!checkAdministrator())   if (checkUser()) {
-                    Intent intent = new Intent(LoginActivity.this, FeedNavigationActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, PerfilActivity.class);
                     startActivity(intent);
                 }
 
@@ -92,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         if (etEmail.getText().toString().equals("admin") && (etSenha.getText().toString().equals("admin"))) {
             Intent intent = new Intent(LoginActivity.this, AdministratorActivity.class);
             startActivity(intent);
-            return true;
+             return true;
         }
         return false;
     }
