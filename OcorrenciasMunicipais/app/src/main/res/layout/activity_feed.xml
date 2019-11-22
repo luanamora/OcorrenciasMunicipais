@@ -2,167 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".FeedActivity">
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_account_circle_black_24dp"
-        android:textAlignment="center" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Perfil "
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:hint="FEED IMPLEMENTAR CARD VIEWS"/>
 
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_person_black_24dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvlNome"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/bottomBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary">
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true">
 
-            <EditText
-                android:id="@+id/etNome"
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavView_Bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/lbNomeUser" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_email_black_24dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvlEmail"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary">
-
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/lbEmailUser"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
+                android:layout_height="match_parent"
+                app:menu="@menu/nav_feed">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/ivTelefone"
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_contact_phone_black_24dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvlTelefone"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="@dimen/marginEditText"
-            android:outlineSpotShadowColor="@color/colorPrimary">
-
-            <EditText
-                android:id="@+id/etTelefone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/lbTelefoneUser"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_date_range_black_24dp" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvlDtNascimento"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp">
-
-            <EditText
-                android:id="@+id/etDtNascimento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/lbDtNascimento"
-                android:inputType="date" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btSalvar"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="120dp"
-        android:text="Salvar"
-        android:textSize="@dimen/sizeButton" />
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
+        </RelativeLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>

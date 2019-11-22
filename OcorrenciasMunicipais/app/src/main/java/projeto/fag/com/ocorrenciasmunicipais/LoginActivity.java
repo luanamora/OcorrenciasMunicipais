@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!checkAdministrator())   if (checkUser()) {
-                    Intent intent = new Intent(LoginActivity.this, PerfilActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                     startActivity(intent);
                 }
 

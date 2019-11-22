@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".OcorrenciasActivity"></activity>
+        <activity android:name=".CriarOcorrenciasActivity"></activity>
+        <activity android:name=".OcorrenciasActivity" />
         <activity android:name=".FeedActivity" />
         <activity android:name=".PerfilActivity" />
         <activity android:name=".LoginActivity" />
