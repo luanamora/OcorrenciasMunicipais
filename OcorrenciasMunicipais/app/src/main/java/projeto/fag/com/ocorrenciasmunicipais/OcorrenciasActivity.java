@@ -17,7 +17,7 @@ public class OcorrenciasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ocorrencias);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView_Bar);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_ocorrencia);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(2);
         menuItem.setChecked(true);
@@ -42,8 +42,7 @@ public class OcorrenciasActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                 }
-                finish();
-                return true;
+                return false;
             }
         });
 

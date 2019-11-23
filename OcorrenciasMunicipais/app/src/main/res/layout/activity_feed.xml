@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_feed"
     android:orientation="vertical"
     tools:context=".FeedActivity">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="FEED IMPLEMENTAR CARD VIEWS"/>
 
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
@@ -24,10 +21,10 @@
             android:layout_alignParentBottom="true">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavView_Bar"
+                android:id="@+id/bottom_criar_ocorrencia"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:menu="@menu/nav_feed">
+                app:menu="@menu/nav_bottom">
 
 
             </com.google.android.material.bottomnavigation.BottomNavigationView>

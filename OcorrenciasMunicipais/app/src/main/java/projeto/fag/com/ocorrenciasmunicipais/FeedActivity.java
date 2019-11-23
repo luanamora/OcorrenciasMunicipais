@@ -1,55 +1,37 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.ListView;
+import java.util.ArrayList;
+import projeto.fag.com.ocorrenciasmunicipais.adapter.CustomListAdapter;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FeedActivity extends AppCompatActivity {
+
+    private ListView lvCards;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
+        setContentView(R.layout.listview_layout);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView_Bar);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(0);
-        menuItem.setChecked(true);
+        lvCards = findViewById(R.id.lvCards);
 
+        ArrayList<Card> list = new ArrayList<>();
+        list.add(new Card("drawable/ic_person_outline_black_24dp", "Logo do app"));
+        list.add(new Card("@drawable/ic_person_outline_black_24dp", "Logo do app"));
+        list.add(new Card("@drawable/ic_person_outline_black_24dp", "Logo do app"));
+        list.add(new Card("@drawable/ic_person_outline_black_24dp", "Logo do app"));
+        list.add(new Card("@drawable/ic_logo_escrita", "Logo do app"));
+        list.add(new Card("@drawable/ic_logo_escrita", "Logo do app"));
+        list.add(new Card("@drawable/ic_logo_escrita", "Logo do app"));
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_feed:
-
-                        break;
-                    case R.id.nav_criar_ocorrencias:
-                        Intent intent = new Intent(FeedActivity.this, CriarOcorrenciasActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.nav_ocorrencias:
-                        intent = new Intent(FeedActivity.this, OcorrenciasActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.nav_perfil:
-                        intent = new Intent(FeedActivity.this, PerfilActivity.class);
-                        startActivity(intent);
-                        break;
-                }
-                finish();
-                return true;
-            }
-        });
-    }
-
-    public void loadComponents() {
+        CustomListAdapter adapter = new CustomListAdapter(this, R.layout.card_layout_main, list);
+        lvCards.setAdapter(adapter);
 
     }
+
+
 }

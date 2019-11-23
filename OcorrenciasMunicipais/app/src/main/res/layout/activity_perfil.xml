@@ -178,12 +178,10 @@
             android:layout_alignParentBottom="true">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavView_Bar"
+                android:id="@+id/bottom_perfil"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:menu="@menu/nav_feed">
-
-
+                app:menu="@menu/nav_bottom">
             </com.google.android.material.bottomnavigation.BottomNavigationView>
         </RelativeLayout>
     </RelativeLayout>

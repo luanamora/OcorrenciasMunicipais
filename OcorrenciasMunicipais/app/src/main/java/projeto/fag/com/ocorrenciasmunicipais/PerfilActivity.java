@@ -24,7 +24,7 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
         loadComponents();
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView_Bar);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_perfil);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(3);
         menuItem.setChecked(true);
@@ -49,8 +49,7 @@ public class PerfilActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                 }
-                finish();
-                return true;
+                return false;
             }
         });
 

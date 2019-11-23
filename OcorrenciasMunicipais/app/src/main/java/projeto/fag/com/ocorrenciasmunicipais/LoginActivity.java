@@ -1,21 +1,16 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 
 import android.content.Intent;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.orm.SugarContext;
-
 import java.util.List;
-
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
