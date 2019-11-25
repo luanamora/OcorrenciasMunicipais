@@ -24,8 +24,13 @@ public class Task extends AsyncTask<String, Integer, Result> {
                 StringBuilder urlControler = new StringBuilder();
                 if (params[1].equals("GET")){
                     urlControler.append("http://192.168.100.116:5000/api/" + params[0]);
-                    if (!(params[2].trim().length() == 0))
-                        urlControler = urlControler.append("/findByAdmin/"+params[2]);
+                    if (!(params[2].trim().length() == 0)) {
+                        if (params[2].equals("false")){
+                            urlControler = urlControler.append("/findByAdmin/" + params[2]);
+                        } else {
+                            urlControler = urlControler.append("/findUsuarioOcorrencia/" + params[2]);
+                        }
+                    }
                 }
                 else if (params[1].equals("POST"))
                     urlControler.append("http://192.168.100.116:5000/api/" + params[0]);

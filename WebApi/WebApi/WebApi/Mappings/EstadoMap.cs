@@ -18,14 +18,6 @@ namespace WebApi.Mappings
 
             entity.Property(e => e.CdEstado).HasColumnName("cd_estado");
 
-            entity.Property(e => e.DtAtualizacao)
-                .HasColumnName("dt_atualizacao")
-                .HasColumnType("date");
-
-            entity.Property(e => e.DtCadastro)
-                .HasColumnName("dt_cadastro")
-                .HasColumnType("date");
-
             entity.Property(e => e.NmEstado)
                 .IsRequired()
                 .HasColumnName("nm_estado")

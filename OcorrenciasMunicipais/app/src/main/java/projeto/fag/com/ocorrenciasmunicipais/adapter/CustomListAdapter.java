@@ -43,9 +43,8 @@ public class CustomListAdapter  extends ArrayAdapter<Card> {
      * Holds variables in a View
      */
     private static class ViewHolder {
-        TextView title;
-        ImageView image;
-        ProgressBar dialog;
+        TextView etCardUsuario, etCardTipoOcorrencia, etAreaAtendimento, etMensagem, etObservacao;
+
     }
 
     /**
@@ -58,18 +57,18 @@ public class CustomListAdapter  extends ArrayAdapter<Card> {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
-
-        //sets up the image loader library
-        setupImageLoader();
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        //etCardUsuario, etCardTipoOcorrencia, etAreaAtendimento, etMensagem, etObservacao;
         //get the persons information
-        String title = getItem(position).getTitulo();
-        String imgUrl = getItem(position).getImaUrl();
+        String etCardUsuario = getItem(position).getEtCardUsuario();
+        String etCardTipoOcorrencia = getItem(position).getEtCardTipoOcorrencia();
+        String etAreaAtendimento = getItem(position).getEtAreaAtendimento();
+        String etMensagem = getItem(position).getEtMensagem();
+        String etObservacao = getItem(position).getEtObservacao();
 
 
         try{
@@ -85,9 +84,12 @@ public class CustomListAdapter  extends ArrayAdapter<Card> {
                 LayoutInflater inflater = LayoutInflater.from(mContext);
                 convertView = inflater.inflate(mResource, parent, false);
                 holder= new ViewHolder();
-                holder.title = (TextView) convertView.findViewById(R.id.cardTitle);
-                holder.image = (ImageView) convertView.findViewById(R.id.cardImage);
-                holder.dialog = (ProgressBar) convertView.findViewById(R.id.cardProgressDialog);
+                holder.etCardUsuario = (TextView) convertView.findViewById(R.id.etCardUsuario);
+                holder.etCardTipoOcorrencia = (TextView) convertView.findViewById(R.id.etCardTipoOcorrencia);
+                holder.etAreaAtendimento = (TextView) convertView.findViewById(R.id.etAreaAtendimento);
+                holder.etMensagem = (TextView) convertView.findViewById(R.id.etMensagem);
+                holder.etObservacao = (TextView) convertView.findViewById(R.id.etObservacao);
+
 
                 result = convertView;
 
@@ -104,40 +106,11 @@ public class CustomListAdapter  extends ArrayAdapter<Card> {
 //            result.startAnimation(animation);
             lastPosition = position;
 
-            holder.title.setText(title);
-
-            //create the imageloader object
-            ImageLoader imageLoader = ImageLoader.getInstance();
-
-            int defaultImage = mContext.getResources().getIdentifier("@drawable/image_failed",null,mContext.getPackageName());
-
-            //create display options
-            DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true)
-                    .cacheOnDisc(true).resetViewBeforeLoading(true)
-                    .showImageForEmptyUri(defaultImage)
-                    .showImageOnFail(defaultImage)
-                    .showImageOnLoading(defaultImage).build();
-
-            //download and display image from url
-            imageLoader.displayImage(imgUrl, holder.image, options,new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String imageUri, View view) {
-                    holder.dialog.setVisibility(View.VISIBLE);
-                }
-                @Override
-                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                    holder.dialog.setVisibility(View.GONE);
-                }
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    holder.dialog.setVisibility(View.GONE);
-                }
-                @Override
-                public void onLoadingCancelled(String imageUri, View view) {
-
-                }}
-
-            );
+            holder.etCardUsuario.setText(etCardUsuario);
+            holder.etCardTipoOcorrencia.setText(etCardTipoOcorrencia);
+            holder.etAreaAtendimento.setText(etAreaAtendimento);
+            holder.etMensagem.setText(etMensagem);
+            holder.etObservacao.setText(etObservacao);
 
             return convertView;
         }catch (IllegalArgumentException e){
@@ -147,23 +120,5 @@ public class CustomListAdapter  extends ArrayAdapter<Card> {
 
     }
 
-    /**
-     * Required for setting up the Universal Image loader Library
-     */
-    private void setupImageLoader(){
-        // UNIVERSAL IMAGE LOADER SETUP
-        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-                .cacheOnDisc(true).cacheInMemory(true)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .displayer(new FadeInBitmapDisplayer(300)).build();
 
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-                mContext)
-                .defaultDisplayImageOptions(defaultOptions)
-                .memoryCache(new WeakMemoryCache())
-                .discCacheSize(100 * 1024 * 1024).build();
-
-        ImageLoader.getInstance().init(config);
-        // END - UNIVERSAL IMAGE LOADER SETUP
-    }
 }

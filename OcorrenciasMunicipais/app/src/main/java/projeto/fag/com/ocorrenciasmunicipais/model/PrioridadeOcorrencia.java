@@ -1,5 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 
@@ -8,10 +10,20 @@ import java.util.Date;
 
 public class PrioridadeOcorrencia extends SugarRecord implements Serializable {
     @Unique
+    @SerializedName("cd_prioridade")
+    @Expose
     private int cdPrioridade;
+    @SerializedName("ds_prioridade")
+    @Expose
     private String dsPrioridade;
+    @SerializedName("nr_prioridade")
+    @Expose
     private int nrPrioridade;
+    @SerializedName("dt_cadastro")
+    @Expose
     private Date dtCadastro;
+    @SerializedName("dt_atualizacao")
+    @Expose
     private Date dtAtualizacao;
 
     public PrioridadeOcorrencia() {
@@ -67,12 +79,6 @@ public class PrioridadeOcorrencia extends SugarRecord implements Serializable {
 
     @Override
     public String toString() {
-        return "PrioridadeOcorrencia{" +
-                "cdPrioridade=" + cdPrioridade +
-                ", dsPrioridade='" + dsPrioridade + '\'' +
-                ", nrPrioridade=" + nrPrioridade +
-                ", dtCadastro=" + dtCadastro +
-                ", dtAtualizacao=" + dtAtualizacao +
-                '}';
+        return dsPrioridade ;
     }
 }

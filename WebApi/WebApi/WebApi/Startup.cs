@@ -41,7 +41,7 @@ namespace WebApi
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Ocorrências Municipais", Version = "v1" });
+                c.SwaggerDoc("v2", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Ocorrências Municipais", Version = "v2" });
                 c.IncludeXmlComments(XmlCommentsFilePath);
             });
         }
@@ -55,7 +55,7 @@ namespace WebApi
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyAPI V1"); });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v2/swagger.json", "MyAPI V2"); });
 
             app.UseCors(c =>
             {

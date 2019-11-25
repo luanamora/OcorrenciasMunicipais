@@ -48,6 +48,7 @@ namespace WebApi.Models
             modelBuilder.ApplyConfiguration(new AreaAtuacaoMap());
             modelBuilder.ApplyConfiguration(new CidadeMap());
             modelBuilder.ApplyConfiguration(new EnderecoMap());
+            modelBuilder.ApplyConfiguration(new EstadoMap());
             modelBuilder.ApplyConfiguration(new EstadoOcorrenciaMap());
             modelBuilder.ApplyConfiguration(new HistoricoOcorrenciaMap());
             modelBuilder.ApplyConfiguration(new HistoricoSenhaMap());

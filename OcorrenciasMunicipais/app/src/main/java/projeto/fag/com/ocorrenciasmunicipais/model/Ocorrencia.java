@@ -1,5 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 
@@ -8,35 +10,64 @@ import java.util.Date;
 
 public class Ocorrencia extends SugarRecord implements Serializable {
     @Unique
+    @SerializedName("cd_ocorrencia")
+    @Expose
     private int cdOcorrencia;
-    private Usuario usuario;
-    private PrioridadeOcorrencia prioridade;
-    private TipoOcorrencia tipoOcorrencia;
-    private EstadoOcorrencia estadoOcorrencia;
-    private AreaAtendimento areaAtendimento;
-    private Endereco endereco;
+    @SerializedName("cd_usuario")
+    @Expose
+    private int cdUsuario;
+    @SerializedName("cd_prioridade")
+    @Expose
+    private int cdPrioridade;
+    @SerializedName("cd_tipoocorrencia")
+    @Expose
+    private int cdTipoOcorrencia;
+    @SerializedName("cd_estadoocorrencia")
+    @Expose
+    private int cdEstadoOcorrencia;
+    @SerializedName("cd_areaatendimento")
+    @Expose
+    private int cdAreaAtendimento;
+    @SerializedName("cd_endereco")
+    @Expose
+    private int cd_endereco;
+    @SerializedName("nr_ocorrencia")
+    @Expose
     private int nrOcorrencia;
+    @SerializedName("ds_mensagem")
+    @Expose
     private String dsMensagem;
+    @SerializedName("ds_observacao")
+    @Expose
     private String dsObservacao;
+    @SerializedName("nr_status")
+    @Expose
     private int nrStatus;
+    @SerializedName("ds_finalizado")
+    @Expose
     private boolean dsFinalizado;
+    @SerializedName("nr_curtir")
+    @Expose
     private int nrCurtir;
+    @SerializedName("dt_cadastro")
+    @Expose
     private Date dtCadastro;
+    @SerializedName("dt_atualizacao")
+    @Expose
     private Date dtAtualizacao;
 
     public Ocorrencia() {
     }
 
-    public Ocorrencia(int cdOcorrencia, Usuario usuario, PrioridadeOcorrencia prioridade, TipoOcorrencia tipoOcorrencia, EstadoOcorrencia estadoOcorrencia,
-                      AreaAtendimento areaAtendimento, Endereco endereco, int nrOcorrencia, String dsMensagem, String dsObservacao, int nrStatus, boolean dsFinalizado, int nrCurtir,
-                      Date dtCadastro, Date dtAtualizacao) {
+
+    public Ocorrencia(int cdOcorrencia, int cdUsuario, int cdPrioridade, int cdTipoOcorrencia, int cdEstadoOcorrencia, int cdAreaAtendimento, int cd_endereco, int nrOcorrencia, String dsMensagem, String dsObservacao, int nrStatus, boolean dsFinalizado, int nrCurtir, Date dtCadastro, Date dtAtualizacao) {
         this.cdOcorrencia = cdOcorrencia;
-        this.usuario = usuario;
-        this.prioridade = prioridade;
-        this.tipoOcorrencia = tipoOcorrencia;
-        this.estadoOcorrencia = estadoOcorrencia;
-        this.areaAtendimento = areaAtendimento;
-        this.endereco = endereco;
+        this.cdUsuario = cdUsuario;
+        this.cdPrioridade = cdPrioridade;
+        this.cdTipoOcorrencia = cdTipoOcorrencia;
+        this.cdEstadoOcorrencia = cdEstadoOcorrencia;
+        this.cdAreaAtendimento = cdAreaAtendimento;
+        this.cd_endereco = cd_endereco;
         this.nrOcorrencia = nrOcorrencia;
         this.dsMensagem = dsMensagem;
         this.dsObservacao = dsObservacao;
@@ -55,52 +86,52 @@ public class Ocorrencia extends SugarRecord implements Serializable {
         this.cdOcorrencia = cdOcorrencia;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getCdUsuario() {
+        return cdUsuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCdUsuario(int cdUsuario) {
+        this.cdUsuario = cdUsuario;
     }
 
-    public PrioridadeOcorrencia getPrioridade() {
-        return prioridade;
+    public int getCdPrioridade() {
+        return cdPrioridade;
     }
 
-    public void setPrioridade(PrioridadeOcorrencia prioridade) {
-        this.prioridade = prioridade;
+    public void setCdPrioridade(int cdPrioridade) {
+        this.cdPrioridade = cdPrioridade;
     }
 
-    public TipoOcorrencia getTipoOcorrencia() {
-        return tipoOcorrencia;
+    public int getCdTipoOcorrencia() {
+        return cdTipoOcorrencia;
     }
 
-    public void setTipoOcorrencia(TipoOcorrencia tipoOcorrencia) {
-        this.tipoOcorrencia = tipoOcorrencia;
+    public void setCdTipoOcorrencia(int cdTipoOcorrencia) {
+        this.cdTipoOcorrencia = cdTipoOcorrencia;
     }
 
-    public EstadoOcorrencia getEstadoOcorrencia() {
-        return estadoOcorrencia;
+    public int getCdEstadoOcorrencia() {
+        return cdEstadoOcorrencia;
     }
 
-    public void setEstadoOcorrencia(EstadoOcorrencia estadoOcorrencia) {
-        this.estadoOcorrencia = estadoOcorrencia;
+    public void setCdEstadoOcorrencia(int cdEstadoOcorrencia) {
+        this.cdEstadoOcorrencia = cdEstadoOcorrencia;
     }
 
-    public AreaAtendimento getAreaAtendimento() {
-        return areaAtendimento;
+    public int getCdAreaAtendimento() {
+        return cdAreaAtendimento;
     }
 
-    public void setAreaAtendimento(AreaAtendimento areaAtendimento) {
-        this.areaAtendimento = areaAtendimento;
+    public void setCdAreaAtendimento(int cdAreaAtendimento) {
+        this.cdAreaAtendimento = cdAreaAtendimento;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public int getCdEndereco() {
+        return cd_endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setEndereco(int cd_endereco) {
+        this.cd_endereco = cd_endereco;
     }
 
     public int getNrOcorrencia() {
@@ -171,12 +202,12 @@ public class Ocorrencia extends SugarRecord implements Serializable {
     public String toString() {
         return "Ocorrencia{" +
                 "cdOcorrencia=" + cdOcorrencia +
-                ", usuario=" + usuario +
-                ", prioridade=" + prioridade +
-                ", tipoOcorrencia=" + tipoOcorrencia +
-                ", estadoOcorrencia=" + estadoOcorrencia +
-                ", areaAtendimento=" + areaAtendimento +
-                ", endereco=" + endereco +
+                ", cdUsuario=" + cdUsuario +
+                ", cdPrioridade=" + cdPrioridade +
+                ", cdTipoOcorrencia=" + cdTipoOcorrencia +
+                ", cdEstadoOcorrencia=" + cdEstadoOcorrencia +
+                ", cdAreaAtendimento=" + cdAreaAtendimento +
+                ", endereco=" + cd_endereco +
                 ", nrOcorrencia=" + nrOcorrencia +
                 ", dsMensagem='" + dsMensagem + '\'' +
                 ", dsObservacao='" + dsObservacao + '\'' +

@@ -1,5 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 
@@ -8,9 +10,17 @@ import java.util.Date;
 
 public class TipoOcorrencia extends SugarRecord implements Serializable {
     @Unique
+    @SerializedName("cd_tipoocorrencia")
+    @Expose
     private int cdTipoOcorrencia;
+    @SerializedName("ds_tipoocorrencia")
+    @Expose
     private String dsTipoOcorrencia;
+    @SerializedName("dt_cadastro")
+    @Expose
     private Date dtCadastro;
+    @SerializedName("dt_atualizacao")
+    @Expose
     private Date dtAtualizacao;
 
     public TipoOcorrencia() {
@@ -57,11 +67,6 @@ public class TipoOcorrencia extends SugarRecord implements Serializable {
 
     @Override
     public String toString() {
-        return "TipoOcorrencia{" +
-                "cdTipoOcorrencia=" + cdTipoOcorrencia +
-                ", dsTipoOcorrencia='" + dsTipoOcorrencia + '\'' +
-                ", dtCadastro=" + dtCadastro +
-                ", dtAtualizacao=" + dtAtualizacao +
-                '}';
+        return dsTipoOcorrencia;
     }
 }

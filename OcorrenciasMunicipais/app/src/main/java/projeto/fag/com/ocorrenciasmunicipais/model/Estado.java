@@ -1,5 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 
@@ -13,20 +15,11 @@ public class Estado extends SugarRecord implements Serializable {
     private int cdEstado;
     private String nmEstado;
     private String sgEstado;
-    private List<Cidade> cidadeList = new ArrayList<Cidade>();
-    private Date dtCadastro;
-    private Date dtAtualizacao;
 
-    public Estado() {
-    }
-
-    public Estado(int cdEstado, String nmEstado, String sgEstado, List<Cidade> cidadeList, Date dtCadastro, Date dtAtualizacao) {
+    public Estado(int cdEstado, String nmEstado, String sgEstado) {
         this.cdEstado = cdEstado;
         this.nmEstado = nmEstado;
         this.sgEstado = sgEstado;
-        this.cidadeList = cidadeList;
-        this.dtCadastro = dtCadastro;
-        this.dtAtualizacao = dtAtualizacao;
     }
 
     public int getCdEstado() {
@@ -53,39 +46,12 @@ public class Estado extends SugarRecord implements Serializable {
         this.sgEstado = sgEstado;
     }
 
-    public List<Cidade> getCidadeList() {
-        return cidadeList;
-    }
-
-    public void setCidadeList(List<Cidade> cidadeList) {
-        this.cidadeList = cidadeList;
-    }
-
-    public Date getDtCadastro() {
-        return dtCadastro;
-    }
-
-    public void setDtCadastro(Date dtCadastro) {
-        this.dtCadastro = dtCadastro;
-    }
-
-    public Date getDtAtualizacao() {
-        return dtAtualizacao;
-    }
-
-    public void setDtAtualizacao(Date dtAtualizacao) {
-        this.dtAtualizacao = dtAtualizacao;
-    }
-
     @Override
     public String toString() {
         return "Estado{" +
                 "cdEstado=" + cdEstado +
                 ", nmEstado='" + nmEstado + '\'' +
                 ", sgEstado='" + sgEstado + '\'' +
-                ", cidadeList=" + cidadeList +
-                ", dtCadastro=" + dtCadastro +
-                ", dtAtualizacao=" + dtAtualizacao +
                 '}';
     }
 }

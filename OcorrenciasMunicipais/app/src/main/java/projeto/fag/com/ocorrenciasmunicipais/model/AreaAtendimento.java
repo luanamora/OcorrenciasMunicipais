@@ -91,13 +91,6 @@ public class AreaAtendimento extends SugarRecord implements Serializable {
 
     @Override
     public String toString() {
-        return "AreaAtendimento{" +
-                "cdAreaAtendimento=" + cdAreaAtendimento +
-                ", cdAreaAtuacao=" + cdAreaAtuacao +
-                ", dsAreaAtendimento='" + dsAreaAtendimento + '\'' +
-                ", dsEmail='" + dsEmail + '\'' +
-                ", dtCadastro=" + dtCadastro +
-                ", dtAtualizacao=" + dtAtualizacao +
-                '}';
+        return dsAreaAtendimento + " - " + dsEmail;
     }
 }

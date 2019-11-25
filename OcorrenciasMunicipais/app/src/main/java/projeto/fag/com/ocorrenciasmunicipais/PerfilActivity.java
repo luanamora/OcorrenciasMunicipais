@@ -23,6 +23,7 @@ public class PerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
         loadComponents();
+        populaCampos();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_perfil);
         Menu menu = bottomNavigationView.getMenu();
@@ -61,6 +62,15 @@ public class PerfilActivity extends AppCompatActivity {
         etTelefone = findViewById(R.id.etTelefone);
         etDtNascimento = findViewById(R.id.etDtNascimento);
         btSalvar = findViewById(R.id.btSalvar);
+    }
+
+    public void populaCampos(){
+        etNome.setText(LoginActivity.usuarioLogado.getNmUsuario());
+        etEmail.setText(LoginActivity.usuarioLogado.getDsEmail());
+        //etTelefone.setText(LoginActivity.usuarioLogado());
+        etDtNascimento.setText(String.valueOf(LoginActivity.usuarioLogado.getDtNascimento()));
+       // etNome.setText(LoginActivity.usuarioLogado.getNmUsuario());
+
     }
 
 

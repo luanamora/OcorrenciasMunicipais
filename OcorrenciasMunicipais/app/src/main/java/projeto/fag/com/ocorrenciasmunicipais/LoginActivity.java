@@ -1,16 +1,23 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 
 import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.security.keystore.UserPresenceUnavailableException;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.google.android.material.textfield.TextInputLayout;
 import com.orm.SugarContext;
+
+import java.util.ArrayList;
 import java.util.List;
+
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
@@ -20,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etSenha;
     private Button btEntrar, btCriarNovaConta, btEsqueceuSenha;
     private TextInputLayout tilEmail, tilSenha;
-    private Usuario usuario;
+    public static Usuario usuarioLogado;
 
 
     @Override
@@ -29,8 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         SugarContext.init(this);
         loadEvents();
-        etEmail.setText("luanamora88@gmail.com");
-        etSenha.setText("teste123");
+       /* etEmail.setText("luanamora88@gmail.com");
+        etSenha.setText("teste123");*/
     }
 
     private void loadEvents() {
@@ -76,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         btEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!checkAdministrator())   if (checkUser()) {
+                if (!checkAdministrator()) if (checkUser()) {
                     Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                     startActivity(intent);
                 }
@@ -89,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         if (etEmail.getText().toString().equals("admin") && (etSenha.getText().toString().equals("admin"))) {
             Intent intent = new Intent(LoginActivity.this, AdministratorActivity.class);
             startActivity(intent);
-             return true;
+            return true;
         }
         return false;
     }
@@ -99,7 +106,8 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println(Usuario.listAll(Usuario.class));
         if (etEmail.getText().toString().trim().length() != 0) {
             List<Usuario> usuarioList = Usuario.find(Usuario.class, "ds_email = '" + etEmail.getText().toString() + "'", null, null, null, "1");
-            System.out.println(usuario);
+            usuarioLogado = usuarioList.get(0);
+            System.out.println(usuarioList.toString());
             if (usuarioList.isEmpty()) {
                 Mensagem.ExibirMensagem(LoginActivity.this, "Usuário não encontrado", TipoMensagem.ERRO);
                 return false;
@@ -116,6 +124,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
 
     private void controlErrorTextInput() {
         etEmail.addTextChangedListener(new TextWatcher() {

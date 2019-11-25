@@ -10,11 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ListView
+            android:id="@+id/lvCards"
+            android:layout_marginTop="56dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <RelativeLayout
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="false">
+            android:layout_alignParentBottom="true">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_ocorrencia"
@@ -23,11 +29,6 @@
                 app:menu="@menu/nav_bottom"></com.google.android.material.bottomnavigation.BottomNavigationView>
         </RelativeLayout>
 
-        <ListView
-            android:id="@+id/lvCards"
-            android:layout_marginTop="56dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 

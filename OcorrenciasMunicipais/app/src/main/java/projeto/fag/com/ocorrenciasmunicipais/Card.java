@@ -1,27 +1,58 @@
 package projeto.fag.com.ocorrenciasmunicipais;
 
 public class Card {
-    private String imaUrl;
-    private String titulo;
+    private String etCardUsuario;
+    private String etCardTipoOcorrencia;
+    private String etAreaAtendimento;
+    private String etMensagem;
+    private String etObservacao;
 
-    public Card(String imaUrl, String titulo) {
-        this.imaUrl = imaUrl;
-        this.titulo = titulo;
+
+    public Card(String etCardUsuario, String etCardTipoOcorrencia, String etAreaAtendimento, String etMensagem, String etObservacao) {
+        this.etCardUsuario = etCardUsuario;
+        this.etCardTipoOcorrencia = etCardTipoOcorrencia;
+        this.etAreaAtendimento = etAreaAtendimento;
+        this.etMensagem = etMensagem;
+        this.etObservacao = etObservacao;
     }
 
-    public String getImaUrl() {
-        return imaUrl;
+    public String getEtCardUsuario() {
+        return etCardUsuario;
     }
 
-    public void setImaUrl(String imaUrl) {
-        this.imaUrl = imaUrl;
+    public void setEtCardUsuario(String etCardUsuario) {
+        this.etCardUsuario = etCardUsuario;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getEtCardTipoOcorrencia() {
+        return etCardTipoOcorrencia;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setEtCardTipoOcorrencia(String etCardTipoOcorrencia) {
+        this.etCardTipoOcorrencia = etCardTipoOcorrencia;
+    }
+
+    public String getEtAreaAtendimento() {
+        return etAreaAtendimento;
+    }
+
+    public void setEtAreaAtendimento(String etAreaAtendimento) {
+        this.etAreaAtendimento = etAreaAtendimento;
+    }
+
+    public String getEtMensagem() {
+        return etMensagem;
+    }
+
+    public void setEtMensagem(String etMensagem) {
+        this.etMensagem = etMensagem;
+    }
+
+    public String getEtObservacao() {
+        return etObservacao;
+    }
+
+    public void setEtObservacao(String etObservacao) {
+        this.etObservacao = etObservacao;
     }
 }

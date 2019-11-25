@@ -20,6 +20,7 @@ namespace WebApi.Models
         [JsonProperty("dt_atualizacao")]
         public DateTime? DtAtualizacao { get; set; }
 
+        [JsonIgnore]
         public ICollection<Ocorrencia> Ocorrencia { get; set; }
     }
 }

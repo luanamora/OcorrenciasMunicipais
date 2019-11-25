@@ -10,31 +10,17 @@ import java.util.Date;
 
 public class Cidade extends SugarRecord implements Serializable {
     @Unique
-    @SerializedName("cd_cidade")
-    @Expose
     private int cdCidade;
-    @SerializedName("nm_cidade")
-    @Expose
     private String nmCidade;
-    @SerializedName("ds_estado")
-    @Expose
-    private Estado estado;
-    @SerializedName("dt_cadastro")
-    @Expose
-    private Date dtCadastro;
-    @SerializedName("dt_atualizacao")
-    @Expose
-    private Date dtAtualizacao;
+    private int cdEstado;
 
     public Cidade() {
     }
 
-    public Cidade(int cdCidade, String nmCidade, Estado estado, Date dtCadastro, Date dtAtualizacao) {
+    public Cidade(int cdCidade, String nmCidade, int cdEstado) {
         this.cdCidade = cdCidade;
         this.nmCidade = nmCidade;
-        this.estado = estado;
-        this.dtCadastro = dtCadastro;
-        this.dtAtualizacao = dtAtualizacao;
+        this.cdEstado = cdEstado;
     }
 
     public int getCdCidade() {
@@ -53,28 +39,12 @@ public class Cidade extends SugarRecord implements Serializable {
         this.nmCidade = nmCidade;
     }
 
-    public Estado getEstado() {
-        return estado;
+    public int getCdEstado() {
+        return cdEstado;
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public Date getDtCadastro() {
-        return dtCadastro;
-    }
-
-    public void setDtCadastro(Date dtCadastro) {
-        this.dtCadastro = dtCadastro;
-    }
-
-    public Date getDtAtualizacao() {
-        return dtAtualizacao;
-    }
-
-    public void setDtAtualizacao(Date dtAtualizacao) {
-        this.dtAtualizacao = dtAtualizacao;
+    public void setCdEstado(int cdEstado) {
+        this.cdEstado = cdEstado;
     }
 
     @Override
@@ -82,9 +52,7 @@ public class Cidade extends SugarRecord implements Serializable {
         return "Cidade{" +
                 "cdCidade=" + cdCidade +
                 ", nmCidade='" + nmCidade + '\'' +
-                ", estado=" + estado +
-                ", dtCadastro=" + dtCadastro +
-                ", dtAtualizacao=" + dtAtualizacao +
+                ", cdEstado=" + cdEstado +
                 '}';
     }
 }
