@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,14 +34,18 @@ import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 public class OcorrenciasActivity extends AppCompatActivity {
 
     private List<Ocorrencia> taskOcorrenciaUsuario = new ArrayList<>();
+    private List<Ocorrencia> taskOcorrencia = new ArrayList<>();
     private ListView lvCards;
+    private PullRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listview_layout);
         lvCards = findViewById(R.id.lvCards);
+        refreshLayout = findViewById(R.id.refreshLayout);
         searchCode();
+        refreshOcorrencias();
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_ocorrencia);
         Menu menu = bottomNavigationView.getMenu();
@@ -73,8 +78,36 @@ public class OcorrenciasActivity extends AppCompatActivity {
 
     }
 
-    private void searchCode() {
+    private void refreshOcorrencias() {
+        refreshLayout.setRefreshStyle(PullRefreshLayout.AUTOFILL_TYPE_LIST);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                Type listType;
+                Result result = null;
+                Task task = new Task(OcorrenciasActivity.this);
+                result = null;
+                try {
+                    result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", ""}).get();
+                    listType = new TypeToken<List<Ocorrencia>>() {
+                    }.getType();
+                    ArrayList<Ocorrencia> ocorrenciaList;
+                    ocorrenciaList = gson.fromJson(result.getContent(), listType);
+                    taskOcorrenciaUsuario.addAll(ocorrenciaList);
+                    refreshLayout.setRefreshing(false);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
+            }
+        });
+        refreshLayout.setRefreshing(false);
+    }
+
+    private void searchCode() {
         ArrayList<Card> list = new ArrayList<>();
         Ocorrencia ocorrencia = new Ocorrencia();
         String usuario = "";
@@ -84,19 +117,20 @@ public class OcorrenciasActivity extends AppCompatActivity {
         Task task = new Task(OcorrenciasActivity.this);
         Result result = null;
         try {
-            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", String.valueOf(LoginActivity.usuarioLogado.getCdUsuario())}).get();
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", String.valueOf(LoginActivity.usuarioLogado.getCdUsuario()), "findUsuarioOcorrencia"}).get();
             Type listType = new TypeToken<List<Ocorrencia>>() {
             }.getType();
             ArrayList<Ocorrencia> ocorrenciaList;
             ocorrenciaList = gson.fromJson(result.getContent(), listType);
             taskOcorrenciaUsuario.addAll(ocorrenciaList);
+            refreshLayout.setRefreshing(false);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        if (!taskOcorrenciaUsuario.isEmpty()){
+        if (!taskOcorrenciaUsuario.isEmpty()) {
             for (Ocorrencia u : taskOcorrenciaUsuario) {
 
                 //Area Atendimento
@@ -121,8 +155,6 @@ public class OcorrenciasActivity extends AppCompatActivity {
         } else {
             Mensagem.ExibirMensagem(OcorrenciasActivity.this, "Você ainda não cadastrou nenhuma Ocorrência", TipoMensagem.ALERTA);
         }
-
-
 
 
     }

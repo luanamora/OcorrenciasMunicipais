@@ -69,7 +69,7 @@ public class AdminUser extends AppCompatActivity {
     private void loadSpinner() {
         Task task = new Task(AdminUser.this);
         try {
-            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "false"}).get();
+            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "false", "findByAdmin"}).get();
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             ArrayList<Usuario> list;
             Type listType = new TypeToken<List<Usuario>>() {

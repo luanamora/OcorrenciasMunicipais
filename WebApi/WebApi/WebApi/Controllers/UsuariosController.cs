@@ -49,7 +49,13 @@ namespace WebApi.Controllers
         [HttpGet("findByAdmin/{StAdministrador:bool}")]
         public List<Usuario> findByAdmin(bool StAdministrador) => 
             _context.Usuario.Where(e => e.StAdministrador == StAdministrador).ToList();
-       
+
+
+        [HttpGet("findByUsuario/{DsEmail}")]
+        public List<Usuario> findByUsuario(string DsEmail) =>
+            _context.Usuario.Where(e => e.DsEmail.Equals(DsEmail)).ToList();
+
+
 
         // PUT: api/Usuarios/5
         [HttpPut("{id}")]

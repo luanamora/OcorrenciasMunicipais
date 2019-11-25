@@ -4,21 +4,32 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.security.keystore.UserPresenceUnavailableException;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.orm.SugarContext;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtendimento;
+import projeto.fag.com.ocorrenciasmunicipais.model.Ocorrencia;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
+import projeto.fag.com.ocorrenciasmunicipais.task.Result;
+import projeto.fag.com.ocorrenciasmunicipais.task.Task;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 
@@ -28,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button btEntrar, btCriarNovaConta, btEsqueceuSenha;
     private TextInputLayout tilEmail, tilSenha;
     public static Usuario usuarioLogado;
+    public static List<Usuario> taskUsuarioList = new ArrayList<>();
+    public static List<Ocorrencia> taskOcorrenciaUsuario = new ArrayList<>();
+    public static List<Ocorrencia> taskOcorrencia = new ArrayList<>();
 
 
     @Override
@@ -66,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void recoverPassword() {
@@ -105,27 +118,47 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checkUser() {
         System.out.println(Usuario.listAll(Usuario.class));
         if (etEmail.getText().toString().trim().length() != 0) {
-            List<Usuario> usuarioList = Usuario.find(Usuario.class, "ds_email = '" + etEmail.getText().toString() + "'", null, null, null, "1");
-            usuarioLogado = usuarioList.get(0);
-            System.out.println(usuarioList.toString());
-            if (usuarioList.isEmpty()) {
-                Mensagem.ExibirMensagem(LoginActivity.this, "Usuário não encontrado", TipoMensagem.ERRO);
-                return false;
-            } else if (!usuarioList.get(0).getDsSenha().equals(etSenha.getText().toString())) {
-                tilSenha.setError("Senha Inválida!");
-                return false;
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            Type listType;
+            Result result = null;
+            int controlTasks = 0;
+            try {
+                if (controlTasks == 0) {
+                    //Area de atendimento
+                    taskUsuarioList.clear();
+                    Task task = new Task(LoginActivity.this);
+                    result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", etEmail.getText().toString(), "findByUsuario"}).get();
+                    listType = new TypeToken<List<Usuario>>() {
+                    }.getType();
+                    ArrayList<Usuario> usuarioList;
+                    usuarioList = gson.fromJson(result.getContent(), listType);
+                    taskUsuarioList.addAll(usuarioList);
+                    usuarioLogado = taskUsuarioList.get(0);
+                    controlTasks = 1;
+
+                    // List<Usuario> usuarioList = Usuario.find(Usuario.class, "ds_email = '" + etEmail.getText().toString() + "'", null, null, null, "1");
+                    if (usuarioList.isEmpty()) {
+                        Mensagem.ExibirMensagem(LoginActivity.this, "Usuário não encontrado", TipoMensagem.ERRO);
+                        return false;
+                    } else if (!usuarioList.get(0).getDsSenha().equals(etSenha.getText().toString())) {
+                        tilSenha.setError("Senha Inválida!");
+                        return false;
+                    }
+                } else {
+                    tilEmail.setError("Campo Vazio!");
+                    if (etSenha.getText().toString().trim().length() == 0) {
+                        tilSenha.setError("Campo Vazio!");
+                    }
+                    return false;
+                }
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        } else {
-            tilEmail.setError("Campo Vazio!");
-            if (etSenha.getText().toString().trim().length() == 0) {
-                tilSenha.setError("Campo Vazio!");
-            }
-            return false;
         }
         return true;
     }
-
-
 
     private void controlErrorTextInput() {
         etEmail.addTextChangedListener(new TextWatcher() {
@@ -163,3 +196,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 }
+

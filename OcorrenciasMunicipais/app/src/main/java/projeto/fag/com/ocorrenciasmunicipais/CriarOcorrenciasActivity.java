@@ -2,8 +2,6 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,34 +12,26 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
 import projeto.fag.com.ocorrenciasmunicipais.adapter.CidadeAdapter;
-import projeto.fag.com.ocorrenciasmunicipais.adapter.EstadoAdapter;
-import projeto.fag.com.ocorrenciasmunicipais.adapter.TipoOcorrenciaAdapter;
 import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtendimento;
-import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtuacao;
 import projeto.fag.com.ocorrenciasmunicipais.model.Cidade;
 import projeto.fag.com.ocorrenciasmunicipais.model.Endereco;
 import projeto.fag.com.ocorrenciasmunicipais.model.Estado;
 import projeto.fag.com.ocorrenciasmunicipais.model.Ocorrencia;
 import projeto.fag.com.ocorrenciasmunicipais.model.PrioridadeOcorrencia;
 import projeto.fag.com.ocorrenciasmunicipais.model.TipoOcorrencia;
-import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 import projeto.fag.com.ocorrenciasmunicipais.task.Result;
 import projeto.fag.com.ocorrenciasmunicipais.task.Task;
 import projeto.fag.com.ocorrenciasmunicipais.util.EnderecoOcorrenciaDialog;
-import projeto.fag.com.ocorrenciasmunicipais.util.UserPhoneDialog;
 
 public class CriarOcorrenciasActivity extends AppCompatActivity implements EnderecoOcorrenciaDialog.EnderecoOcorrenciaDialogListener {
 
@@ -140,7 +130,7 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
     private void save() {
 
         ocorrencia = new Ocorrencia();
-        ocorrencia.setCdOcorrencia(2);
+        ocorrencia.setCdOcorrencia(5);
         ocorrencia.setCdUsuario(LoginActivity.usuarioLogado.getCdUsuario());
         ocorrencia.setCdPrioridade(searchCodePrioridade());
         ocorrencia.setCdTipoOcorrencia(searchCodeTipoOcorrencia());

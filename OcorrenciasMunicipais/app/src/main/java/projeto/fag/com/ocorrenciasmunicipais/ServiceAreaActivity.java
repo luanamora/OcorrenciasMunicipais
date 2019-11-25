@@ -180,7 +180,7 @@ public class ServiceAreaActivity extends AppCompatActivity {
             if (controlTasks == 3) {
                 Task task = new Task(ServiceAreaActivity.this);
                 //Usuario
-                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "true"}).get();
+                result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "true", "findByAdmin"}).get();
                 ArrayList<Usuario> usuarioList;
                 listType = new TypeToken<List<Usuario>>() {
                 }.getType();

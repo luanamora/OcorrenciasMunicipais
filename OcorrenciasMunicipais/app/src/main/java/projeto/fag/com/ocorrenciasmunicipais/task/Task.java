@@ -2,6 +2,7 @@ package projeto.fag.com.ocorrenciasmunicipais.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
+
 import java.io.BufferedOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -22,17 +23,12 @@ public class Task extends AsyncTask<String, Integer, Result> {
             try {
                 StringBuffer response = new StringBuffer();
                 StringBuilder urlControler = new StringBuilder();
-                if (params[1].equals("GET")){
+                if (params[1].equals("GET")) {
                     urlControler.append("http://192.168.100.116:5000/api/" + params[0]);
                     if (!(params[2].trim().length() == 0)) {
-                        if (params[2].equals("false")){
-                            urlControler = urlControler.append("/findByAdmin/" + params[2]);
-                        } else {
-                            urlControler = urlControler.append("/findUsuarioOcorrencia/" + params[2]);
-                        }
+                        urlControler = urlControler.append("/"+params[3]+"/" + params[2]);
                     }
-                }
-                else if (params[1].equals("POST"))
+                } else if (params[1].equals("POST"))
                     urlControler.append("http://192.168.100.116:5000/api/" + params[0]);
                 else if (params[1].equals("PUT"))
                     urlControler.append("http://192.168.100.116:5000/api/" + params[0] + "/" + params[3]);

@@ -2,26 +2,32 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import projeto.fag.com.ocorrenciasmunicipais.adapter.CustomListAdapter;
 import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.model.Ocorrencia;
 import projeto.fag.com.ocorrenciasmunicipais.model.TipoOcorrencia;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
+import projeto.fag.com.ocorrenciasmunicipais.task.Result;
+import projeto.fag.com.ocorrenciasmunicipais.task.Task;
 
 public class FeedActivity extends AppCompatActivity {
 
     private ListView lvCards;
+    private List<Ocorrencia> taskOcorrencia = new ArrayList<>();
 
 
     @Override
@@ -51,6 +57,21 @@ public class FeedActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_ocorrencias:
                         intent = new Intent(FeedActivity.this, OcorrenciasActivity.class);
+                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                        Task task = new Task(FeedActivity.this);
+                        Result result = null;
+                        try {
+                            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", String.valueOf(LoginActivity.usuarioLogado.getCdUsuario()), "findUsuarioOcorrencia"}).get();
+                            Type listType = new TypeToken<List<Ocorrencia>>() {
+                            }.getType();
+                            ArrayList<Ocorrencia> ocorrenciaList;
+                            ocorrenciaList = gson.fromJson(result.getContent(), listType);
+                            taskOcorrencia.addAll(ocorrenciaList);
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         startActivity(intent);
                         break;
 

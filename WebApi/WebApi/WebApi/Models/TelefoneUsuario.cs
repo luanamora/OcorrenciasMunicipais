@@ -20,7 +20,7 @@ namespace WebApi.Models
         public string DsTelefone { get; set; }
         [JsonProperty("dt_cadastro")]
         public DateTime DtCadastro { get; set; }
-        [JsonProperty("dt_atualizacao)")]
+        [JsonProperty("dt_atualizacao")]
         public DateTime? DtAtualizacao { get; set; }
 
         [JsonIgnore]

@@ -46,6 +46,11 @@ namespace WebApi.Controllers
             return Ok(telefoneUsuario);
         }
 
+        [HttpGet("findByUsuarioTelefone/{CdUsuario:int}")]
+        public List<TelefoneUsuario> findByUsuarioTelefone(int CdUsuario) =>
+            _context.TelefoneUsuario.Where(e => e.CdUsuario == CdUsuario).ToList();
+
+
         // PUT: api/TelefoneUsuarios/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTelefoneUsuario([FromRoute] int id, [FromBody] TelefoneUsuario telefoneUsuario)
