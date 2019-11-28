@@ -32,6 +32,16 @@ namespace WebApi.Controllers
         public List<Ocorrencia> findUsuarioOcorrencia(int cdUsuario) =>
             _context.Ocorrencia.Where(e => e.CdUsuario == cdUsuario).ToList();
 
+
+        [HttpGet("findLast")]
+        public Ocorrencia findLast() =>
+             _context.Ocorrencia.LastOrDefault();
+
+
+        [HttpGet("findEstadoOcorrencia/{CdEstadoocorrencia:int}")]
+        public List<Ocorrencia> findEstadoOcorrencia(int CdEstadoocorrencia) =>
+             _context.Ocorrencia.Where(e => e.CdEstadoocorrencia == CdEstadoocorrencia).ToList();
+
         // GET: api/Ocorrencias/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOcorrencia([FromRoute] int id)

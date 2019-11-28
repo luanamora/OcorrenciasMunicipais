@@ -16,6 +16,10 @@ public class Estado extends SugarRecord implements Serializable {
     private String nmEstado;
     private String sgEstado;
 
+    public Estado(){
+
+    }
+
     public Estado(int cdEstado, String nmEstado, String sgEstado) {
         this.cdEstado = cdEstado;
         this.nmEstado = nmEstado;
@@ -48,10 +52,6 @@ public class Estado extends SugarRecord implements Serializable {
 
     @Override
     public String toString() {
-        return "Estado{" +
-                "cdEstado=" + cdEstado +
-                ", nmEstado='" + nmEstado + '\'' +
-                ", sgEstado='" + sgEstado + '\'' +
-                '}';
+        return nmEstado + " - "  +sgEstado;
     }
 }

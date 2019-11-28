@@ -156,6 +156,17 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btExcluirConta"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="80dp"
+        android:text="Excluir Conta"
+        android:textSize="@dimen/sizeButton" />
+
+    <Button
         android:id="@+id/btSalvar"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"

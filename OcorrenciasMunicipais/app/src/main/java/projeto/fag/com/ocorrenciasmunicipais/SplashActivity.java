@@ -36,7 +36,6 @@ public class SplashActivity extends AppCompatActivity {
     public static List<Usuario> taskUsuario = new ArrayList<>();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +76,6 @@ public class SplashActivity extends AppCompatActivity {
             ArrayList<TipoOcorrencia> tipoOcorrenciaList;
             tipoOcorrenciaList = gson.fromJson(result.getContent(), listType);
             taskTipoOcorrencia.addAll(tipoOcorrenciaList);
-            TipoOcorrencia tipoOcorrencia = new TipoOcorrencia();
 
 
             task = new Task(SplashActivity.this);

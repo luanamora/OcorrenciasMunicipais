@@ -2,20 +2,24 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
 import projeto.fag.com.ocorrenciasmunicipais.adapter.CustomListAdapter;
 import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.model.Ocorrencia;
@@ -28,7 +32,6 @@ public class FeedActivity extends AppCompatActivity {
 
     private ListView lvCards;
     private List<Ocorrencia> taskOcorrencia = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,10 @@ public class FeedActivity extends AppCompatActivity {
 
                     case R.id.nav_perfil:
                         intent = new Intent(FeedActivity.this, PerfilActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.nav_back:
+                        intent = new Intent(FeedActivity.this, LoginActivity.class);
                         startActivity(intent);
                         break;
                 }

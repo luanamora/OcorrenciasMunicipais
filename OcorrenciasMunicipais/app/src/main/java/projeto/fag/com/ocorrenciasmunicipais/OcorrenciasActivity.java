@@ -38,6 +38,7 @@ public class OcorrenciasActivity extends AppCompatActivity {
     private ListView lvCards;
     private PullRefreshLayout refreshLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +70,10 @@ public class OcorrenciasActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_perfil:
                         intent = new Intent(OcorrenciasActivity.this, PerfilActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.nav_back:
+                        intent = new Intent(OcorrenciasActivity.this, LoginActivity.class);
                         startActivity(intent);
                         break;
                 }

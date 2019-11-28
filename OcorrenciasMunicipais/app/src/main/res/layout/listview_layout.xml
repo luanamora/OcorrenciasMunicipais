@@ -34,9 +34,5 @@
                 android:layout_height="match_parent"
                 app:menu="@menu/nav_bottom"></com.google.android.material.bottomnavigation.BottomNavigationView>
         </RelativeLayout>
-
-
     </RelativeLayout>
-
-
 </LinearLayout>

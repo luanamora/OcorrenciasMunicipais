@@ -132,7 +132,7 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
 
                         telefone = new TelefoneUsuario();
                         telefone.setCdUsuario(codeUsuario);
-                        telefone.setCdTelefoneUsuario(codeTelefone);
+                        telefone.setCdTelefone(codeTelefone);
                         telefone.setNrTelefone(tel);
                         telefone.setNrDdd(ddd);
                         telefone.setDsTelefone(dsTelefone);
@@ -391,8 +391,8 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         if (!taskTelefone.isEmpty()) {
             int control = 0;
             for (TelefoneUsuario t : taskTelefone) {
-                if (t.getCdTelefoneUsuario() >= control) {//codigo == 1 last == 0
-                    control = t.getCdTelefoneUsuario() + 1;
+                if (t.getCdTelefone() >= control) {//codigo == 1 last == 0
+                    control = t.getCdTelefone() + 1;
                     codeTelefone = control;
                 }
             }
@@ -409,7 +409,6 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
             }
         } else
             codeHistorico = 1;
-
     }
 
     private void searchAll() {
@@ -477,14 +476,14 @@ public class CreateUserActivity extends AppCompatActivity implements DatePickerD
         return codigoUsuario;
     }
 
-    public int lastPhoneCode() {
+   /* public int lastPhoneCode() {
         TelefoneUsuario last = TelefoneUsuario.last(TelefoneUsuario.class);
         if (last == null)
             codigoTelefone = 1;
         else
             codigoTelefone = last.getCdTelefoneUsuario() + 1;
         return codigoTelefone;
-    }//Para dar continuação a PK
+    }//Para dar continuação a PK*/
 
     public int lastPasswordCode() {
         HistoricoSenha last = HistoricoSenha.last(HistoricoSenha.class);

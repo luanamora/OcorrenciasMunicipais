@@ -2,6 +2,7 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,15 +13,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
 import projeto.fag.com.ocorrenciasmunicipais.adapter.CidadeAdapter;
 import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.model.Cidade;
@@ -36,7 +40,7 @@ import projeto.fag.com.ocorrenciasmunicipais.util.EnderecoOcorrenciaDialog;
 public class CriarOcorrenciasActivity extends AppCompatActivity implements EnderecoOcorrenciaDialog.EnderecoOcorrenciaDialogListener {
 
     private Spinner spTipoOcorrencia, spAreaAtendimento, spPrioridade;
-    private Button  btSalvar, btFoto;
+    private Button btSalvar, btFoto;
     private EditText etMensagem, etObservacao, etEndereco;
     private Ocorrencia ocorrencia;
     private ArrayAdapter<TipoOcorrencia> tipoOcorrenciaAdapter;
@@ -47,14 +51,13 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
     private CidadeAdapter cidadeAdapter;
     //private EstadoAdapter estadoAdapter;
 
-    public static List<Estado> taskEstado = new ArrayList<>();
-    public static List<Cidade> taskCidade = new ArrayList<>();
+
+    public int codigoOcorrencia = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_criar_ocorrencias);
-
         loadComponents();
         loadSpinner();
         eventos();
@@ -65,12 +68,10 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
             }
         });
 
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_criar_ocorrencia);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -91,6 +92,10 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
                         intent = new Intent(CriarOcorrenciasActivity.this, PerfilActivity.class);
                         startActivity(intent);
                         break;
+                    case R.id.nav_back:
+                        intent = new Intent(CriarOcorrenciasActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        break;
                 }
                 return false;
             }
@@ -103,7 +108,6 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
         etEndereco = findViewById(R.id.etEndereco);
         spPrioridade = findViewById(R.id.spPrioridade);
         btSalvar = findViewById(R.id.btSalvar);
-        btFoto = findViewById(R.id.btFoto);
         etMensagem = findViewById(R.id.etMensagem);
         etObservacao = findViewById(R.id.etObservacao);
     }
@@ -123,14 +127,13 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
             areaAtendimentoAdapter = new ArrayAdapter<>(CriarOcorrenciasActivity.this, R.layout.support_simple_spinner_dropdown_item, SplashActivity.taskAreaAtendimento);
             spAreaAtendimento.setAdapter(areaAtendimentoAdapter);
         }
-
     }
 
 
     private void save() {
-
+        searchCodeOcorrencia();
         ocorrencia = new Ocorrencia();
-        ocorrencia.setCdOcorrencia(5);
+        ocorrencia.setCdOcorrencia(codigoOcorrencia);
         ocorrencia.setCdUsuario(LoginActivity.usuarioLogado.getCdUsuario());
         ocorrencia.setCdPrioridade(searchCodePrioridade());
         ocorrencia.setCdTipoOcorrencia(searchCodeTipoOcorrencia());
@@ -160,7 +163,6 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
         }
     }
 
-
     private int searchCodeTipoOcorrencia() {
         //String spTipoOcorrencia = spTipoOcorrencia.getSelectedItem().toString();
         for (TipoOcorrencia t : SplashActivity.taskTipoOcorrencia) {
@@ -169,6 +171,33 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
             }
         }
         return 0;
+    }
+
+
+    private void searchCodeOcorrencia() {
+        try {
+            Ocorrencia ocorrencia = new Ocorrencia();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            Type listType;
+
+            Task task = new Task(CriarOcorrenciasActivity.this);
+            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", "findLast", ""}).get();
+            listType = new TypeToken<List<Ocorrencia>>() {
+            }.getType();
+            ArrayList<Ocorrencia> ocorrenciaList;
+            ocorrenciaList = gson.fromJson(result.getContent(), listType);
+            int control = 0;
+            for (Ocorrencia o : ocorrenciaList) {
+                if (o.getCdOcorrencia() >= control) {//codigo == 1 last == 0
+                    control = o.getCdOcorrencia() + 1;
+                    codigoOcorrencia = control;
+                }
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private int searchCodePrioridade() {
@@ -194,43 +223,11 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
         etEndereco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recebeDadosCidadeEstado();
-
+                //recebeDadosCidadeEstado();
                 openDialogEndereco();
-
-
             }
         });
     }
-
-    private void recebeDadosCidadeEstado() {
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        Type listType;
-
-        try {
-            Task task = new Task(CriarOcorrenciasActivity.this);
-            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Estadoes", "GET", ""}).get();
-            listType = new TypeToken<List<Estado>>() {
-            }.getType();
-            ArrayList<Estado> estadoList;
-            estadoList = gson.fromJson(result.getContent(), listType);
-            taskEstado.addAll(estadoList);
-
-            task = new Task(CriarOcorrenciasActivity.this);
-            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Cidades", "GET", ""}).get();
-            listType = new TypeToken<List<Cidade>>() {
-            }.getType();
-            ArrayList<Cidade> cidadeList;
-            cidadeList = gson.fromJson(result.getContent(), listType);
-            taskCidade.addAll(cidadeList);
-
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     public void openDialogEndereco() {
         EnderecoOcorrenciaDialog dialog = new EnderecoOcorrenciaDialog();
@@ -241,13 +238,18 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
     @Override
     public void applyEndereco(String cep, String logradouro, String numero, String bairro, String complemento, String estado, String cidade) {
         Endereco endereco = new Endereco();
+        //recebeDadosCidadeEstado();
         endereco.setNrCep(cep);
         endereco.setDsLogradouro(logradouro);
         endereco.setDsNumero(numero);
         endereco.setDsBairro(bairro);
         endereco.setDsComplemento(complemento);
-        recebeDadosCidadeEstado();
 
+        /*for (Cidade c : taskCidade) {
+            if (c.getNmCidade().equals(cidade)) {
+                endereco.setCd_cidade(c.getCdCidade());
+            }
+        }*/
     }
 
    /* private void loadSpinnerEndereco() {
@@ -255,7 +257,6 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
             estadoAdapter = new ArrayAdapter<>(CriarOcorrenciasActivity.this, R.layout.support_simple_spinner_dropdown_item, CriarOcorrenciasActivity.taskEstado);
             EnderecoOcorrenciaDialog.spEstado.setAdapter(estadoAdapter);
         }
-
     }*/
 
     private int searchCodeEstado() {
@@ -276,6 +277,4 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
         }
         return 0;
     }
-
-
 }

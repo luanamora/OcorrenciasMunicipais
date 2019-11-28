@@ -7,11 +7,11 @@ import com.orm.dsl.MultiUnique;
 import java.io.Serializable;
 import java.util.Date;
 
-@MultiUnique("cdTelefoneUsuario, cdUsuario")
+@MultiUnique("cdTelefone, cdUsuario")
 public class TelefoneUsuario extends SugarRecord implements Serializable {
-    @SerializedName("cd_telefoneusuario")
+    @SerializedName("cd_telefone")
     @Expose
-    private int cdTelefoneUsuario;
+    private int cdTelefone;
     @SerializedName("cd_usuario")
     @Expose
     private int cdUsuario;
@@ -34,8 +34,8 @@ public class TelefoneUsuario extends SugarRecord implements Serializable {
     public TelefoneUsuario() {
     }
 
-    public TelefoneUsuario(int cdTelefoneUsuario, int cdUsuario, String nrTelefone, String nrDdd, String dsTelefone, Date dtCadastro, Date dtAtualizacao) {
-        this.cdTelefoneUsuario = cdTelefoneUsuario;
+    public TelefoneUsuario(int cdTelefone, int cdUsuario, String nrTelefone, String nrDdd, String dsTelefone, Date dtCadastro, Date dtAtualizacao) {
+        this.cdTelefone = cdTelefone;
         this.cdUsuario = cdUsuario;
         this.nrTelefone = nrTelefone;
         this.nrDdd = nrDdd;
@@ -44,12 +44,12 @@ public class TelefoneUsuario extends SugarRecord implements Serializable {
         this.dtAtualizacao = dtAtualizacao;
     }
 
-    public int getCdTelefoneUsuario() {
-        return cdTelefoneUsuario;
+    public int getCdTelefone() {
+        return cdTelefone;
     }
 
-    public void setCdTelefoneUsuario(int cdTelefoneUsuario) {
-        this.cdTelefoneUsuario = cdTelefoneUsuario;
+    public void setCdTelefone(int cdTelefone) {
+        this.cdTelefone = cdTelefone;
     }
 
     public int getCdUsuario() {
@@ -103,7 +103,7 @@ public class TelefoneUsuario extends SugarRecord implements Serializable {
     @Override
     public String toString() {
         return "TelefoneUsuario{" +
-                "cdTelefoneUsuario=" + cdTelefoneUsuario +
+                "cdTelefone=" + cdTelefone +
                 ", cdUsuario=" + cdUsuario +
                 ", nrTelefone='" + nrTelefone + '\'' +
                 ", nrDdd='" + nrDdd + '\'' +

@@ -26,19 +26,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#000"
-            android:textSize="14dp"
             android:hint="Tipo de Ocorrência"
-            />
+            android:textColorHint="#000"
+            android:textSize="14dp" />
     </LinearLayout>
 
     <Spinner
         android:id="@+id/spTipoReclamacao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
-        />
-
+        android:layout_marginLeft="28dp" />
 
 
     <LinearLayout
@@ -57,18 +54,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#000"
-            android:textSize="14dp"
             android:hint="Área de Atendimento"
-            />
+            android:textColorHint="#000"
+            android:textSize="14dp" />
     </LinearLayout>
 
     <Spinner
         android:id="@+id/spAreaAtendimento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
-        />
+        android:layout_marginLeft="28dp" />
 
 
     <LinearLayout
@@ -87,18 +82,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#000"
-            android:textSize="14dp"
             android:hint="Prioridade"
-            />
+            android:textColorHint="#000"
+            android:textSize="14dp" />
     </LinearLayout>
 
     <Spinner
         android:id="@+id/spPrioridade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
-        />
+        android:layout_marginLeft="28dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -132,8 +125,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-
-
 
 
     <LinearLayout
@@ -202,20 +193,6 @@
 
     </LinearLayout>
 
-
-    <Button
-        android:id="@+id/btFoto"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="120dp"
-        android:text="Foto"
-        android:textSize="@dimen/sizeButton" />
-
-
-
     <Button
         android:id="@+id/btSalvar"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -226,10 +203,6 @@
         android:layout_marginRight="120dp"
         android:text="Salvar"
         android:textSize="@dimen/sizeButton" />
-
-
-
-
 
     <RelativeLayout
         android:id="@+id/relativeLayout"

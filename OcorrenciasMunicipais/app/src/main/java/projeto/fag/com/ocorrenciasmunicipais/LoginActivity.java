@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -19,13 +20,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.orm.SugarContext;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
-import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.model.Ocorrencia;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 import projeto.fag.com.ocorrenciasmunicipais.task.Result;
@@ -39,7 +37,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button btEntrar, btCriarNovaConta, btEsqueceuSenha;
     private TextInputLayout tilEmail, tilSenha;
     public static Usuario usuarioLogado;
+    public static Usuario usuarioAdminLogado;
     public static List<Usuario> taskUsuarioList = new ArrayList<>();
+    public static List<Usuario> taskUsuarioAdminList = new ArrayList<>();
     public static List<Ocorrencia> taskOcorrenciaUsuario = new ArrayList<>();
     public static List<Ocorrencia> taskOcorrencia = new ArrayList<>();
 
@@ -50,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         SugarContext.init(this);
         loadEvents();
-       /* etEmail.setText("luanamora88@gmail.com");
-        etSenha.setText("teste123");*/
+        etEmail.setText("luanamora88@gmail.com");
+        etSenha.setText("teste123");
     }
 
     private void loadEvents() {
@@ -96,11 +96,12 @@ public class LoginActivity extends AppCompatActivity {
         btEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!checkAdministrator()) if (checkUser()) {
-                    Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
-                    startActivity(intent);
+                if (checkUsuarioAdministrador() == false) {
+                    if (!checkAdministrator()) if (checkUser()) {
+                        Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
+                        startActivity(intent);
+                    }
                 }
-
             }
         });
     }
@@ -111,6 +112,35 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        return false;
+    }
+
+    private boolean checkUsuarioAdministrador() {
+        Task task = new Task(LoginActivity.this);
+        try {
+            Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "GET", "true", "findByAdmin"}).get();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            ArrayList<Usuario> list;
+            Type listType = new TypeToken<List<Usuario>>() {
+            }.getType();
+            list = gson.fromJson(result.getContent(), listType);
+            taskUsuarioAdminList.addAll(list);
+            for (Usuario u : taskUsuarioAdminList){
+                if (etEmail.getText().toString().equals(u.getDsEmail())){
+                    usuarioAdminLogado = u;
+                    Intent intent = new Intent(LoginActivity.this, UsuarioGestorActivity.class);
+                    startActivity(intent);
+                    Mensagem.ExibirMensagem(LoginActivity.this, "Seja Bem-Vindo Administrador", TipoMensagem.SUCESSO);
+                    return true;
+                }
+            }
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 

@@ -49,10 +49,6 @@ public class Cidade extends SugarRecord implements Serializable {
 
     @Override
     public String toString() {
-        return "Cidade{" +
-                "cdCidade=" + cdCidade +
-                ", nmCidade='" + nmCidade + '\'' +
-                ", cdEstado=" + cdEstado +
-                '}';
+        return nmCidade;
     }
 }

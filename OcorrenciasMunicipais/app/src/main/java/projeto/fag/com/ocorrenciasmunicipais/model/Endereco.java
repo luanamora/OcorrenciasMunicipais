@@ -12,21 +12,21 @@ public class Endereco {
     private String dsLogradouro;
     private String dsNumero;
     private String dsComplemento;
-    private Cidade cidade;
+    private int cd_cidade;
     private Date dtCadastro;
     private Date dtAtualizacao;
 
     public Endereco() {
     }
 
-    public Endereco(int cdEndereco, String nrCep, String dsBairro, String dsLogradouro, String dsNumero, String dsComplemento, Cidade cidade, Date dtCadastro, Date dtAtualizacao) {
+    public Endereco(int cdEndereco, String nrCep, String dsBairro, String dsLogradouro, String dsNumero, String dsComplemento, int cd_cidade, Date dtCadastro, Date dtAtualizacao) {
         this.cdEndereco = cdEndereco;
         this.nrCep = nrCep;
         this.dsBairro = dsBairro;
         this.dsLogradouro = dsLogradouro;
         this.dsNumero = dsNumero;
         this.dsComplemento = dsComplemento;
-        this.cidade = cidade;
+        this.cd_cidade = cd_cidade;
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
     }
@@ -79,12 +79,12 @@ public class Endereco {
         this.dsComplemento = dsComplemento;
     }
 
-    public Cidade getCidade() {
-        return cidade;
+    public int getCd_cidade() {
+        return cd_cidade;
     }
 
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
+    public void setCd_cidade(int cd_cidade) {
+        this.cd_cidade = cd_cidade;
     }
 
     public Date getDtCadastro() {
@@ -112,7 +112,7 @@ public class Endereco {
                 ", dsLogradouro='" + dsLogradouro + '\'' +
                 ", dsNumero='" + dsNumero + '\'' +
                 ", dsComplemento='" + dsComplemento + '\'' +
-                ", cidade=" + cidade +
+                ", cidade=" + cd_cidade +
                 ", dtCadastro=" + dtCadastro +
                 ", dtAtualizacao=" + dtAtualizacao +
                 '}';
