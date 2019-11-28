@@ -40,7 +40,7 @@ import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 public class OcorrenciasGestorActivity extends AppCompatActivity {
 
     private ListView lvCardsOcorrenciasAdmin;
-    private Button btEmAberto, btEmAndamento, btFinalizadas, btResponder;
+    private Button btEmAberto, btEmAndamento, btFinalizadas;
     private List<Ocorrencia> taskEmAberto = new ArrayList<Ocorrencia>();
     private List<Ocorrencia> taskEmAndamento = new ArrayList<Ocorrencia>();
     private List<Ocorrencia> taskFinalizada = new ArrayList<Ocorrencia>();
@@ -51,17 +51,7 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ocorrencias_gestor);
         lvCardsOcorrenciasAdmin = findViewById(R.id.lvCardsOcorrenciasAdmin);
-        btEmAberto = findViewById(R.id.btEmAberto);
-        btEmAndamento = findViewById(R.id.btEmAndamento);
-        btFinalizadas = findViewById(R.id.btFinalizado);
-        btResponder = findViewById(R.id.btResponder);
-
-        //searchCode();
         ocorrenciasEmAberto();
-        ocorrenciasEmAndamento();
-        ocorrenciasFinalizadas();
-        //responderOcorrencia();
-
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_ocorrencia_admin);
         Menu menu = bottomNavigationView.getMenu();
@@ -89,244 +79,61 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
 
     }
 
-    private void responderOcorrencia(){
-        btResponder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }
-
-
     private void ocorrenciasEmAberto() {
-        btEmAberto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                taskEmAberto.clear();
-                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                Type listType;
-                Result result = null;
-                Ocorrencia ocorrencia = new Ocorrencia();
-                ArrayList<Card> list = new ArrayList<>();
-
-                try {
-                    Task task = new Task(OcorrenciasGestorActivity.this);
-                    result = null;
-                    result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", "1", "findEstadoOcorrencia"}).get();
-                    listType = new TypeToken<List<Ocorrencia>>() {
-                    }.getType();
-                    ArrayList<Ocorrencia> emAbertoList;
-                    emAbertoList = gson.fromJson(result.getContent(), listType);
-                    taskEmAberto.addAll(emAbertoList);
-                    String usuario = "";
-                    String tipoOcorrencia = "";
-                    String areaAtendimento = "";
-                    if (!taskEmAberto.isEmpty()) {
-                        for (Ocorrencia u : taskEmAberto) {
-                            //Usuario
-                            for (Usuario t : SplashActivity.taskUsuario) {
-                                if (u.getCdUsuario() == t.getCdUsuario())
-                                    usuario = t.getNmUsuario();
-                            }
-
-                            //Area Atendimento
-                            for (TipoOcorrencia o : SplashActivity.taskTipoOcorrencia) {
-                                if (u.getCdTipoOcorrencia() == o.getCdTipoOcorrencia())
-                                    tipoOcorrencia = o.getDsTipoOcorrencia();
-                            }
-
-                            //Area Atendimento
-                            for (AreaAtendimento a : SplashActivity.taskAreaAtendimento) {
-                                if (u.getCdAreaAtendimento() == a.getCdAreaAtendimento())
-                                    areaAtendimento = a.getDsAreaAtendimento();
-                            }
-
-                            ocorrencia.setDsMensagem(u.getDsMensagem());
-                            ocorrencia.setDsObservacao(u.getDsObservacao());
-                            list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao()));
-
-                            CustomListAdapter adapter = new CustomListAdapter(OcorrenciasGestorActivity.this, R.layout.card_layout_admin, list);
-                            lvCardsOcorrenciasAdmin.setAdapter(adapter);
-                        }
-                    }
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    private void ocorrenciasEmAndamento() {
-        btEmAndamento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                taskEmAndamento.clear();
-                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                Type listType;
-                Result result = null;
-                Ocorrencia ocorrencia = new Ocorrencia();
-                ArrayList<Card> list = new ArrayList<>();
-                try {
-                    Task task = new Task(OcorrenciasGestorActivity.this);
-                    result = null;
-                    result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", "2", "findEstadoOcorrencia"}).get();
-                    listType = new TypeToken<List<Ocorrencia>>() {
-                    }.getType();
-                    ArrayList<Ocorrencia> emAndamentoList;
-                    emAndamentoList = gson.fromJson(result.getContent(), listType);
-                    taskEmAndamento.addAll(emAndamentoList);
-
-                    String usuario = "";
-                    String tipoOcorrencia = "";
-                    String areaAtendimento = "";
-                    if (!taskEmAndamento.isEmpty()) {
-                        for (Ocorrencia u : taskEmAndamento) {
-                            //Usuario
-                            for (Usuario t : SplashActivity.taskUsuario) {
-                                if (u.getCdUsuario() == t.getCdUsuario())
-                                    usuario = t.getNmUsuario();
-                            }
-
-                            //Area Atendimento
-                            for (TipoOcorrencia o : SplashActivity.taskTipoOcorrencia) {
-                                if (u.getCdTipoOcorrencia() == o.getCdTipoOcorrencia())
-                                    tipoOcorrencia = o.getDsTipoOcorrencia();
-                            }
-
-                            //Area Atendimento
-                            for (AreaAtendimento a : SplashActivity.taskAreaAtendimento) {
-                                if (u.getCdAreaAtendimento() == a.getCdAreaAtendimento())
-                                    areaAtendimento = a.getDsAreaAtendimento();
-                            }
-
-                            ocorrencia.setDsMensagem(u.getDsMensagem());
-                            ocorrencia.setDsObservacao(u.getDsObservacao());
-                            list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao()));
-
-                            CustomListAdapter adapter = new CustomListAdapter(OcorrenciasGestorActivity.this, R.layout.card_layout_admin, list);
-                            lvCardsOcorrenciasAdmin.setAdapter(adapter);
-                        }
-                    } else {
-                        Mensagem.ExibirMensagem(OcorrenciasGestorActivity.this,"Não tem ocorrência em adamento", TipoMensagem.ALERTA);
-                        CustomListAdapter adapter = new CustomListAdapter(OcorrenciasGestorActivity.this, R.layout.card_layout_admin, list);
-                        lvCardsOcorrenciasAdmin.setAdapter(adapter);
-                    }
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-
-    private void ocorrenciasFinalizadas() {
-        btFinalizadas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                taskFinalizada.clear();
-                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                Type listType;
-                Result result = null;
-                Ocorrencia ocorrencia = new Ocorrencia();
-                ArrayList<Card> list = new ArrayList<>();
-                String usuario = "";
-                String tipoOcorrencia = "";
-                String areaAtendimento = "";
-                try {
-                    Task task = new Task(OcorrenciasGestorActivity.this);
-                    result = null;
-                    result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", "3", "findEstadoOcorrencia"}).get();
-                    listType = new TypeToken<List<Ocorrencia>>() {
-                    }.getType();
-                    ArrayList<Ocorrencia> finalizadaList;
-                    finalizadaList = gson.fromJson(result.getContent(), listType);
-                    taskFinalizada.addAll(finalizadaList);
-
-                    if (!taskFinalizada.isEmpty()) {
-                        for (Ocorrencia u : taskFinalizada) {
-                            //Usuario
-                            for (Usuario t : SplashActivity.taskUsuario) {
-                                if (u.getCdUsuario() == t.getCdUsuario())
-                                    usuario = t.getNmUsuario();
-                            }
-
-                            //Area Atendimento
-                            for (TipoOcorrencia o : SplashActivity.taskTipoOcorrencia) {
-                                if (u.getCdTipoOcorrencia() == o.getCdTipoOcorrencia())
-                                    tipoOcorrencia = o.getDsTipoOcorrencia();
-                            }
-
-                            //Area Atendimento
-                            for (AreaAtendimento a : SplashActivity.taskAreaAtendimento) {
-                                if (u.getCdAreaAtendimento() == a.getCdAreaAtendimento())
-                                    areaAtendimento = a.getDsAreaAtendimento();
-                            }
-
-                            ocorrencia.setDsMensagem(u.getDsMensagem());
-                            ocorrencia.setDsObservacao(u.getDsObservacao());
-                            list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao()));
-
-                            CustomListAdapter adapter = new CustomListAdapter(OcorrenciasGestorActivity.this, R.layout.card_layout_admin, list);
-                            lvCardsOcorrenciasAdmin.setAdapter(adapter);
-                        }
-                    } else {
-                        Mensagem.ExibirMensagem(OcorrenciasGestorActivity.this,"Não tem ocorrências finalizadas!", TipoMensagem.ALERTA);
-                        CustomListAdapter adapter = new CustomListAdapter(OcorrenciasGestorActivity.this, R.layout.card_layout_admin, list);
-                        lvCardsOcorrenciasAdmin.setAdapter(adapter);
-                    }
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    private void searchCode() {
-
-        ArrayList<Card> list = new ArrayList<>();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        Type listType;
+        Result result = null;
         Ocorrencia ocorrencia = new Ocorrencia();
-        String usuario = "";
-        String tipoOcorrencia = "";
-        String areaAtendimento = "";
-        if (!SplashActivity.taskOcorrencia.isEmpty()) {
-            for (Ocorrencia u : SplashActivity.taskOcorrencia) {
+        ArrayList<Card> list = new ArrayList<>();
 
-                //Usuario
-                for (Usuario t : SplashActivity.taskUsuario) {
-                    if (u.getCdUsuario() == t.getCdUsuario())
-                        usuario = t.getNmUsuario();
+        try {
+            Task task = new Task(OcorrenciasGestorActivity.this);
+            result = null;
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", "1", "findEstadoOcorrencia"}).get();
+            listType = new TypeToken<List<Ocorrencia>>() {
+            }.getType();
+            ArrayList<Ocorrencia> emAbertoList;
+            emAbertoList = gson.fromJson(result.getContent(), listType);
+            taskEmAberto.addAll(emAbertoList);
+            String usuario = "";
+            String tipoOcorrencia = "";
+            String areaAtendimento = "";
+            if (!taskEmAberto.isEmpty()) {
+                for (Ocorrencia u : taskEmAberto) {
+                    //Usuario
+                    for (Usuario t : SplashActivity.taskUsuario) {
+                        if (u.getCdUsuario() == t.getCdUsuario())
+                            usuario = t.getNmUsuario();
+                    }
+
+                    //Area Atendimento
+                    for (TipoOcorrencia o : SplashActivity.taskTipoOcorrencia) {
+                        if (u.getCdTipoOcorrencia() == o.getCdTipoOcorrencia())
+                            tipoOcorrencia = o.getDsTipoOcorrencia();
+                    }
+
+                    //Area Atendimento
+                    for (AreaAtendimento a : SplashActivity.taskAreaAtendimento) {
+                        if (u.getCdAreaAtendimento() == a.getCdAreaAtendimento())
+                            areaAtendimento = a.getDsAreaAtendimento();
+                    }
+
+                    ocorrencia.setDsMensagem(u.getDsMensagem());
+                    ocorrencia.setDsObservacao(u.getDsObservacao());
+                    list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao()));
+
+                    CustomListAdapter adapter = new CustomListAdapter(OcorrenciasGestorActivity.this, R.layout.card_layout_admin, list);
+                    lvCardsOcorrenciasAdmin.setAdapter(adapter);
                 }
-
-                //Area Atendimento
-                for (TipoOcorrencia o : SplashActivity.taskTipoOcorrencia) {
-                    if (u.getCdTipoOcorrencia() == o.getCdTipoOcorrencia())
-                        tipoOcorrencia = o.getDsTipoOcorrencia();
-                }
-
-                //Area Atendimento
-                for (AreaAtendimento a : SplashActivity.taskAreaAtendimento) {
-                    if (u.getCdAreaAtendimento() == a.getCdAreaAtendimento())
-                        areaAtendimento = a.getDsAreaAtendimento();
-                }
-
-                ocorrencia.setDsMensagem(u.getDsMensagem());
-                ocorrencia.setDsObservacao(u.getDsObservacao());
-                list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao()));
-
-                  /* CustomListAdapter adapter = new CustomListAdapter(this, R.layout.card_layout_main, list);
-                    lvCardsOcorrenciasAdmin.setAdapter(adapter);*/
             }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
     }
-
 }
+
+
+

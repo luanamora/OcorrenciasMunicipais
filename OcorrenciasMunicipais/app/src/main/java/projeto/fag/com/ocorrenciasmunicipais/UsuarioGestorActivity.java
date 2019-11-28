@@ -85,7 +85,6 @@ public class UsuarioGestorActivity extends AppCompatActivity {
     }
 
     private void searchCode() {
-
         ArrayList<Card> list = new ArrayList<>();
         Ocorrencia ocorrencia = new Ocorrencia();
         String usuario = "";
