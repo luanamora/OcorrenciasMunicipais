@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,6 +40,7 @@ public class UsuarioGestorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_usuario_gestor);
 
         lvCardAdmin = findViewById(R.id.lvCardsAdmin);
+
         searchCode();
 
 
@@ -113,7 +115,7 @@ public class UsuarioGestorActivity extends AppCompatActivity {
 
                 ocorrencia.setDsMensagem(u.getDsMensagem());
                 ocorrencia.setDsObservacao(u.getDsObservacao());
-                list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao()));
+                list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao(), String.valueOf(u.getNrOcorrencia())));
 
                 CustomListAdapter adapter = new CustomListAdapter(this, R.layout.card_layout_main, list);
                 lvCardAdmin.setAdapter(adapter);

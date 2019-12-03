@@ -152,7 +152,7 @@ public class OcorrenciasActivity extends AppCompatActivity {
 
                 ocorrencia.setDsMensagem(u.getDsMensagem());
                 ocorrencia.setDsObservacao(u.getDsObservacao());
-                list.add(new Card(LoginActivity.usuarioLogado.getNmUsuario(), tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao()));
+                list.add(new Card(LoginActivity.usuarioLogado.getNmUsuario(), tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao(), String.valueOf(u.getNrOcorrencia())));
 
                 CustomListAdapter adapter = new CustomListAdapter(this, R.layout.card_layout_main, list);
                 lvCards.setAdapter(adapter);

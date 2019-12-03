@@ -6,14 +6,17 @@ public class Card {
     private String etAreaAtendimento;
     private String etMensagem;
     private String etObservacao;
+    private String etNumeroOcorrencia;
 
 
-    public Card(String etCardUsuario, String etCardTipoOcorrencia, String etAreaAtendimento, String etMensagem, String etObservacao) {
+    public Card(String etCardUsuario, String etCardTipoOcorrencia, String etAreaAtendimento, String etMensagem, String etObservacao, String etNumeroOcorrencia) {
         this.etCardUsuario = etCardUsuario;
         this.etCardTipoOcorrencia = etCardTipoOcorrencia;
         this.etAreaAtendimento = etAreaAtendimento;
         this.etMensagem = etMensagem;
         this.etObservacao = etObservacao;
+        this.etNumeroOcorrencia = etNumeroOcorrencia;
+
     }
 
     public String getEtCardUsuario() {
@@ -38,6 +41,14 @@ public class Card {
 
     public void setEtAreaAtendimento(String etAreaAtendimento) {
         this.etAreaAtendimento = etAreaAtendimento;
+    }
+
+    public String getEtNumeroOcorrencia() {
+        return etNumeroOcorrencia;
+    }
+
+    public void setEtNumeroOcorrencia(String etNumeroOcorrencia) {
+        this.etNumeroOcorrencia = etNumeroOcorrencia;
     }
 
     public String getEtMensagem() {

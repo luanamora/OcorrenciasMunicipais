@@ -40,7 +40,7 @@ import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 public class OcorrenciasGestorActivity extends AppCompatActivity {
 
     private ListView lvCardsOcorrenciasAdmin;
-    private Button btEmAberto, btEmAndamento, btFinalizadas;
+    private Button btEmAberto, btEmAndamento, btFinalizadas, btResponder;
     private List<Ocorrencia> taskEmAberto = new ArrayList<Ocorrencia>();
     private List<Ocorrencia> taskEmAndamento = new ArrayList<Ocorrencia>();
     private List<Ocorrencia> taskFinalizada = new ArrayList<Ocorrencia>();
@@ -51,7 +51,11 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ocorrencias_gestor);
         lvCardsOcorrenciasAdmin = findViewById(R.id.lvCardsOcorrenciasAdmin);
-        ocorrenciasEmAberto();
+        btEmAberto = findViewById(R.id.btEmAberto);
+        btEmAndamento = findViewById(R.id.btEmAndamento);
+        btFinalizadas = findViewById(R.id.btFinalizadas);
+        btResponder = findViewById(R.id.btResponder);
+        emAberto();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_ocorrencia_admin);
         Menu menu = bottomNavigationView.getMenu();
@@ -79,12 +83,15 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
 
     }
 
-    private void ocorrenciasEmAberto() {
+
+    private void emAberto() {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         Type listType;
         Result result = null;
         Ocorrencia ocorrencia = new Ocorrencia();
         ArrayList<Card> list = new ArrayList<>();
+
+        Usuario usuarioCard = new Usuario();
 
         try {
             Task task = new Task(OcorrenciasGestorActivity.this);
@@ -102,8 +109,10 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
                 for (Ocorrencia u : taskEmAberto) {
                     //Usuario
                     for (Usuario t : SplashActivity.taskUsuario) {
-                        if (u.getCdUsuario() == t.getCdUsuario())
+                        if (u.getCdUsuario() == t.getCdUsuario()) {
                             usuario = t.getNmUsuario();
+                            usuarioCard = t;
+                        }
                     }
 
                     //Area Atendimento
@@ -120,10 +129,12 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
 
                     ocorrencia.setDsMensagem(u.getDsMensagem());
                     ocorrencia.setDsObservacao(u.getDsObservacao());
-                    list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao()));
+                    list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao(), String.valueOf(u.getNrOcorrencia())));
 
-                    CustomListAdapter adapter = new CustomListAdapter(OcorrenciasGestorActivity.this, R.layout.card_layout_admin, list);
+                    CustomListAdapter adapter = new CustomListAdapter(OcorrenciasGestorActivity.this, R.layout.card_layout_emaberto, list);
                     lvCardsOcorrenciasAdmin.setAdapter(adapter);
+
+
                 }
             }
 
@@ -135,5 +146,6 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
     }
 }
 
+//http://192.168.42.188:5000/api/EstadoOcorrencias/1
 
 

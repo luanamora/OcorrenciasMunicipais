@@ -4,18 +4,16 @@
     <item
         android:id="@+id/nav_feed_admin"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="Feed"
-        />
+        android:title="Feed" />
     <item
         android:id="@+id/nav_ocorrencias_admin"
         android:icon="@drawable/ic_person_black_24dp"
-        android:title="Ocorrencias"
-        />
+        android:title="Ocorrencias" />
 
     <item
         android:id="@+id/nav_back_admin"
         android:icon="@drawable/ic_arrow_back_black_24dp"
-        android:title="Sair"
-        />
+        android:title="Sair" />
+
 
 </menu>

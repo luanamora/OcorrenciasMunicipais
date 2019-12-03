@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -32,6 +33,7 @@ public class FeedActivity extends AppCompatActivity {
 
     private ListView lvCards;
     private List<Ocorrencia> taskOcorrencia = new ArrayList<>();
+    private PullRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,10 @@ public class FeedActivity extends AppCompatActivity {
         setContentView(R.layout.listview_layout);
 
         lvCards = findViewById(R.id.lvCards);
+        refreshLayout = findViewById(R.id.refreshLayout);
 
         searchCode();
+        refreshOcorrencias();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_ocorrencia);
         Menu menu = bottomNavigationView.getMenu();
@@ -93,6 +97,35 @@ public class FeedActivity extends AppCompatActivity {
 
     }
 
+    private void refreshOcorrencias() {
+        refreshLayout.setRefreshStyle(PullRefreshLayout.AUTOFILL_TYPE_LIST);
+        refreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                Type listType;
+                Result result = null;
+                Task task = new Task(FeedActivity.this);
+                result = null;
+                try {
+                    result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", ""}).get();
+                    listType = new TypeToken<List<Ocorrencia>>() {
+                    }.getType();
+                    ArrayList<Ocorrencia> ocorrenciaList;
+                    ocorrenciaList = gson.fromJson(result.getContent(), listType);
+                    taskOcorrencia.addAll(ocorrenciaList);
+                    refreshLayout.setRefreshing(false);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        refreshLayout.setRefreshing(false);
+    }
+
     private void searchCode() {
 
         ArrayList<Card> list = new ArrayList<>();
@@ -123,7 +156,7 @@ public class FeedActivity extends AppCompatActivity {
 
                 ocorrencia.setDsMensagem(u.getDsMensagem());
                 ocorrencia.setDsObservacao(u.getDsObservacao());
-                list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao()));
+                list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao(), String.valueOf(u.getNrOcorrencia())));
 
                 CustomListAdapter adapter = new CustomListAdapter(this, R.layout.card_layout_main, list);
                 lvCards.setAdapter(adapter);

@@ -49,6 +49,7 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
     private ArrayAdapter<AreaAtendimento> areaAtendimentoAdapter;
     private ArrayAdapter<Estado> estadoAdapter;
     private CidadeAdapter cidadeAdapter;
+    private int numeroOcorrencia;
     //private EstadoAdapter estadoAdapter;
 
 
@@ -141,7 +142,7 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
         ocorrencia.setCdEstadoOcorrencia(1);
         ocorrencia.setEndereco(1);
         ocorrencia.setCdEstadoOcorrencia(1);
-        ocorrencia.setNrOcorrencia(1);
+        ocorrencia.setNrOcorrencia(ocorrencia.getCdOcorrencia() + 1);
         ocorrencia.setDsMensagem(etMensagem.getText().toString());
         ocorrencia.setDsObservacao(etObservacao.getText().toString());
         ocorrencia.setNrStatus(1);
@@ -162,6 +163,7 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
             }
         }
     }
+
 
     private int searchCodeTipoOcorrencia() {
         //String spTipoOcorrencia = spTipoOcorrencia.getSelectedItem().toString();

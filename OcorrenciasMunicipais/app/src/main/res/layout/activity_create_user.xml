@@ -227,15 +227,4 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btCriarConta"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="120dp"
-        android:text="@string/btCriarConta"
-        android:textSize="@dimen/sizeButton" />
 </LinearLayout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -51,6 +50,15 @@
 
                 <TextView
                     android:id="@+id/etCardTipoOcorrencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:layout_below="@+id/etCardTipoOcorrencia"
+                    android:scaleType="centerCrop"
+                    android:textAlignment="textStart"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/etCardNumeroOcorrencia"
                     android:layout_width="match_parent"
                     android:layout_height="37dp"
                     android:layout_below="@+id/etCardTipoOcorrencia"
