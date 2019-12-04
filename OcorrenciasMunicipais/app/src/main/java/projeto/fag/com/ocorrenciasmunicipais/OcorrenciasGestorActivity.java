@@ -134,7 +134,7 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
                     CustomListAdapter adapter = new CustomListAdapter(OcorrenciasGestorActivity.this, R.layout.card_layout_emaberto, list);
                     lvCardsOcorrenciasAdmin.setAdapter(adapter);
 
-
+                    u.setDsMsgadmin("Teste");
                 }
             }
 

@@ -43,7 +43,8 @@ namespace WebApi.Models
         public DateTime DtCadastro { get; set; }
         [JsonProperty("dt_atualizacao")]
         public DateTime? DtAtualizacao { get; set; }
-
+        [JsonProperty("ds_msgadmin")]
+        public DateTime? DsMsgadmin { get; set; }
 
         [JsonIgnore]
         public AreaAtendimento CdAreaatendimentoNavigation { get; set; }

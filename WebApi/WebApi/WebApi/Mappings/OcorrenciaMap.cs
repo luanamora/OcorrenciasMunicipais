@@ -57,6 +57,7 @@ namespace WebApi.Mappings
                 .ValueGeneratedOnAdd();
 
             entity.Property(e => e.NrStatus).HasColumnName("nr_status");
+            entity.Property(e => e.DsMsgadmin).HasColumnName("ds_msgadmin");
 
             entity.HasOne(d => d.CdAreaatendimentoNavigation)
                 .WithMany(p => p.Ocorrencia)

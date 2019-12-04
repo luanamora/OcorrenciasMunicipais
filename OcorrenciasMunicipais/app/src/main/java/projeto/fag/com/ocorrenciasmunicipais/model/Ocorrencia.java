@@ -55,12 +55,15 @@ public class Ocorrencia extends SugarRecord implements Serializable {
     @SerializedName("dt_atualizacao")
     @Expose
     private Date dtAtualizacao;
+    @SerializedName("ds_msgadmin")
+    @Expose
+    private String dsMsgadmin;
 
     public Ocorrencia() {
     }
 
 
-    public Ocorrencia(int cdOcorrencia, int cdUsuario, int cdPrioridade, int cdTipoOcorrencia, int cdEstadoOcorrencia, int cdAreaAtendimento, int cd_endereco, int nrOcorrencia, String dsMensagem, String dsObservacao, int nrStatus, boolean dsFinalizado, int nrCurtir, Date dtCadastro, Date dtAtualizacao) {
+    public Ocorrencia(int cdOcorrencia, int cdUsuario, int cdPrioridade, int cdTipoOcorrencia, int cdEstadoOcorrencia, int cdAreaAtendimento, int cd_endereco, int nrOcorrencia, String dsMensagem, String dsObservacao, int nrStatus, boolean dsFinalizado, int nrCurtir, Date dtCadastro, Date dtAtualizacao, String dsMsgadmin) {
         this.cdOcorrencia = cdOcorrencia;
         this.cdUsuario = cdUsuario;
         this.cdPrioridade = cdPrioridade;
@@ -76,6 +79,7 @@ public class Ocorrencia extends SugarRecord implements Serializable {
         this.nrCurtir = nrCurtir;
         this.dtCadastro = dtCadastro;
         this.dtAtualizacao = dtAtualizacao;
+        this.dsMsgadmin = dsMsgadmin;
     }
 
     public int getCdOcorrencia() {
@@ -196,6 +200,22 @@ public class Ocorrencia extends SugarRecord implements Serializable {
 
     public void setDtAtualizacao(Date dtAtualizacao) {
         this.dtAtualizacao = dtAtualizacao;
+    }
+
+    public int getCd_endereco() {
+        return cd_endereco;
+    }
+
+    public void setCd_endereco(int cd_endereco) {
+        this.cd_endereco = cd_endereco;
+    }
+
+    public String getDsMsgadmin() {
+        return dsMsgadmin;
+    }
+
+    public void setDsMsgadmin(String dsMsgadmin) {
+        this.dsMsgadmin = dsMsgadmin;
     }
 
     @Override

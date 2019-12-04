@@ -50,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         SugarContext.init(this);
         loadEvents();
-        etEmail.setText("");
-        etSenha.setText("");
+        etEmail.setText("luanamora88@gmail.com");
+        etSenha.setText("teste123");
     }
 
     private void loadEvents() {
