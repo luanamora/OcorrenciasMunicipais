@@ -46,8 +46,7 @@ public class ResponderActivity extends AppCompatActivity {
         id = getIntent().getIntExtra("key", 0);
 
         salvarResposta();
-        findById();
-       // atualizaOcorrencia();
+        // atualizaOcorrencia();
 
     }
 
@@ -63,7 +62,8 @@ public class ResponderActivity extends AppCompatActivity {
                 Task task = new Task(ResponderActivity.this);
                 try {
                     result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoOcorrencias", "POST", new Gson().toJson(historicoOcorrencia)}).get();
-                    Mensagem.ExibirMensagem(ResponderActivity.this, "Ocorrência respondida com sucesso!", TipoMensagem.SUCESSO);
+                    //Mensagem.ExibirMensagem(ResponderActivity.this, "Ocorrência respondida com sucesso!", TipoMensagem.SUCESSO);
+                    findById();
                     finish();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
@@ -78,68 +78,53 @@ public class ResponderActivity extends AppCompatActivity {
 
     private void findById() {
         try {
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-            Type listType;
-            Result result = null;
             Task task = new Task(ResponderActivity.this);
-            result = null;
-            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", String.valueOf(id)}).get();
-            listType = new TypeToken<List<Ocorrencia>>() {
+            Result result = null;
+            result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "GET", ""}).get();
+            Type listType = new TypeToken<List<Ocorrencia>>() {
             }.getType();
-            ArrayList<Ocorrencia> list;
-            list = gson.fromJson(result.getContent(), listType);
-            taskOcorrencia.addAll(list);
+            ArrayList<Ocorrencia> ocorrenciaList;
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            ocorrenciaList = gson.fromJson(result.getContent(), listType);
+            taskOcorrencia.addAll(ocorrenciaList);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
         ocorrencia = new Ocorrencia();
-        for (Ocorrencia o : taskOcorrencia){
-            ocorrencia.setCdOcorrencia(o.getCdOcorrencia());
-            ocorrencia.setDsObservacao(o.getDsObservacao());
-
+        for (Ocorrencia o : taskOcorrencia) {
+            if (o.getCdOcorrencia() == id) {
+                ocorrencia.setCdOcorrencia(o.getCdOcorrencia());
+                ocorrencia.setCdUsuario(o.getCdUsuario());
+                ocorrencia.setCdTipoOcorrencia(o.getCdTipoOcorrencia());
+                ocorrencia.setCdAreaAtendimento(o.getCdAreaAtendimento());
+                ocorrencia.setCdPrioridade(o.getCdPrioridade());
+                ocorrencia.setCd_endereco(o.getCd_endereco());
+                ocorrencia.setCdEstadoOcorrencia(2);
+                ocorrencia.setNrOcorrencia(o.getNrOcorrencia());
+                ocorrencia.setDsMensagem(o.getDsMensagem());
+                ocorrencia.setDsObservacao(o.getDsObservacao());
+                ocorrencia.setDsFinalizado(o.isDsFinalizado());
+                ocorrencia.setDtCadastro(o.getDtCadastro());
+                ocorrencia.setDtAtualizacao(new Date());
+                atualizaOcorrencia();
+            }
         }
-
-/*
-        public int CdOcorrencia { get; set; }
-        [JsonProperty("cd_usuario")]
-        public int CdUsuario { get; set; }
-        [JsonProperty("cd_prioridade")]
-        public int CdPrioridade { get; set; }
-        [JsonProperty("cd_tipoocorrencia")]
-        public int CdTipoocorrencia { get; set; }
-        [JsonProperty("cd_areaatendimento")]
-        public int CdAreaatendimento { get; set; }
-        [JsonProperty("cd_endereco")]
-        public int CdEndereco { get; set; }
-        [JsonProperty("cd_estadoocorrencia")]
-        public int CdEstadoocorrencia { get; set; }
-        [JsonProperty("nr_ocorrencia")]
-        public int NrOcorrencia { get; set; }
-        [JsonProperty("ds_mensagem")]
-        public string DsMensagem { get; set; }
-        [JsonProperty("ds_observacao")]
-        public string DsObservacao { get; set; }
-        [JsonProperty("nr_status")]
-        public int NrStatus { get; set; }
-        [JsonProperty("ds_finalizado")]
-        public bool DsFinalizado { get; set; }
-        [JsonProperty("nr_curtir")]
-        public int? NrCurtir { get; set; }
-        [JsonProperty("dt_cadastro")]
-        public DateTime DtCadastro { get; set; }
-        [JsonProperty("dt_atualizacao")]
-        public DateTime? DtAtualizacao { get; set; }
-        [JsonProperty("ds_msgadmin")]
-        public DateTime? DsMsgadmin { get; set; }*/
     }
 
-   /* private void atualizaOcorrencia() {
-        Task task = new Task(ResponderActivity.this);
 
-        Result result = result = task.executeOnExecutor
-                (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Usuarios", "PUT", new Gson().toJson(usuarioEncontrado), codigoEncontrado}).get();
-        usuarioEncontrado.update();
-    }*/
+    private void atualizaOcorrencia() {
+        Task task = new Task(ResponderActivity.this);
+        try {
+
+            Result result = result = task.executeOnExecutor
+                    (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "PUT", new Gson().toJson(ocorrencia), String.valueOf(ocorrencia.getCdOcorrencia())}).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
 }

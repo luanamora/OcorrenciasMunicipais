@@ -85,7 +85,7 @@ public class CustomListAdapter  extends ArrayAdapter<Card> {
             if(convertView == null){
                 LayoutInflater inflater = LayoutInflater.from(mContext);
                 convertView = inflater.inflate(mResource, parent, false);
-                holder= new ViewHolder();
+                holder = new ViewHolder();
                 holder.etCardUsuario = (TextView) convertView.findViewById(R.id.etCardUsuario);
                 holder.etCardTipoOcorrencia = (TextView) convertView.findViewById(R.id.etCardTipoOcorrencia);
                 holder.etAreaAtendimento = (TextView) convertView.findViewById(R.id.etAreaAtendimento);

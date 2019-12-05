@@ -44,6 +44,7 @@ public class DetalhesActivity extends AppCompatActivity {
 
     private void detalhesOcorrencias() {
         try {
+            listDetalhes.clear();
             Task task = new Task(DetalhesActivity.this);
             Result result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoOcorrencias", "GET", String.valueOf(id), "findOcorrencia"}).get();
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();

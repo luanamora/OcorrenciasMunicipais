@@ -30,7 +30,7 @@ public class CustomAdapterResponder extends ArrayAdapter<CardResponder> {
 
     private static class ViewHolder {
         TextView etCardUsuario, etCardTipoOcorrencia, etAreaAtendimento, etMensagem, etObservacao;
-        Button btResponder, btDetalhes;
+        Button btResponder, btDetalhes, btFinalizadas, btCardFinalizar;
     }
 
     public CustomAdapterResponder(Context context, int resource, ArrayList<CardResponder> objects) {
@@ -52,7 +52,7 @@ public class CustomAdapterResponder extends ArrayAdapter<CardResponder> {
         String etObservacao = getItem(position).getEtObservacao();
 
 
-        try{
+        try {
 
 
             //create the view result for showing the animation
@@ -61,10 +61,10 @@ public class CustomAdapterResponder extends ArrayAdapter<CardResponder> {
             //ViewHolder object
             final ViewHolder holder;
 
-            if(convertView == null){
+            if (convertView == null) {
                 LayoutInflater inflater = LayoutInflater.from(mContext);
                 convertView = inflater.inflate(mResource, parent, false);
-                holder= new ViewHolder();
+                holder = new ViewHolder();
                 holder.etCardUsuario = (TextView) convertView.findViewById(R.id.etCardUsuario);
                 holder.etCardTipoOcorrencia = (TextView) convertView.findViewById(R.id.etCardTipoOcorrencia);
                 holder.etAreaAtendimento = (TextView) convertView.findViewById(R.id.etAreaAtendimento);
@@ -72,21 +72,18 @@ public class CustomAdapterResponder extends ArrayAdapter<CardResponder> {
                 holder.etObservacao = (TextView) convertView.findViewById(R.id.etObservacao);
                 holder.btResponder = (Button) convertView.findViewById(R.id.btResponder);
                 holder.btDetalhes = (Button) convertView.findViewById(R.id.btDetalhes);
+                holder.btFinalizadas = (Button) convertView.findViewById(R.id.btFinalizadas);
+                holder.btCardFinalizar = (Button) convertView.findViewById(R.id.btCardFinalizar);
 
 
                 result = convertView;
 
                 convertView.setTag(holder);
-            }
-            else{
+            } else {
                 holder = (ViewHolder) convertView.getTag();
                 result = convertView;
             }
 
-
-//            Animation animation = AnimationUtils.loadAnimation(mContext,
-//                    (position > lastPosition) ? R.anim.load_down_anim : R.anim.load_up_anim);
-//            result.startAnimation(animation);
             lastPosition = position;
 
             holder.etCardUsuario.setText(etCardUsuario);
@@ -94,6 +91,14 @@ public class CustomAdapterResponder extends ArrayAdapter<CardResponder> {
             holder.etAreaAtendimento.setText(etAreaAtendimento);
             holder.etMensagem.setText(etMensagem);
             holder.etObservacao.setText(etObservacao);
+
+            holder.btCardFinalizar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "Teste", Toast.LENGTH_LONG).show();
+                }
+            });
+
 
             holder.btResponder.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,12 +122,11 @@ public class CustomAdapterResponder extends ArrayAdapter<CardResponder> {
             });
 
 
+
             return convertView;
-        }catch (IllegalArgumentException e){
-            Log.e(TAG, "getView: IllegalArgumentException: " + e.getMessage() );
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "getView: IllegalArgumentException: " + e.getMessage());
             return convertView;
         }
-
     }
-
 }

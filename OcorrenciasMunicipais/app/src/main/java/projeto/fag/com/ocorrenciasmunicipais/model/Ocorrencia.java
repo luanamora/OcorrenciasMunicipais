@@ -202,6 +202,8 @@ public class Ocorrencia extends SugarRecord implements Serializable {
         this.dtAtualizacao = dtAtualizacao;
     }
 
+
+
     public int getCd_endereco() {
         return cd_endereco;
     }
