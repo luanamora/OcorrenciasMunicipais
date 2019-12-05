@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
@@ -26,6 +27,7 @@ import java.util.concurrent.ExecutionException;
 
 import javax.xml.validation.TypeInfoProvider;
 
+import projeto.fag.com.ocorrenciasmunicipais.adapter.CustomAdapterResponder;
 import projeto.fag.com.ocorrenciasmunicipais.adapter.CustomListAdapter;
 import projeto.fag.com.ocorrenciasmunicipais.model.AreaAtendimento;
 import projeto.fag.com.ocorrenciasmunicipais.model.Ocorrencia;
@@ -34,17 +36,20 @@ import projeto.fag.com.ocorrenciasmunicipais.model.TipoOcorrencia;
 import projeto.fag.com.ocorrenciasmunicipais.model.Usuario;
 import projeto.fag.com.ocorrenciasmunicipais.task.Result;
 import projeto.fag.com.ocorrenciasmunicipais.task.Task;
+import projeto.fag.com.ocorrenciasmunicipais.util.CardResponder;
 import projeto.fag.com.ocorrenciasmunicipais.util.Mensagem;
+import projeto.fag.com.ocorrenciasmunicipais.util.ResponderDialog;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
+import projeto.fag.com.ocorrenciasmunicipais.util.UserPhoneDialog;
 
-public class OcorrenciasGestorActivity extends AppCompatActivity {
+public class OcorrenciasGestorActivity extends AppCompatActivity  {
 
     private ListView lvCardsOcorrenciasAdmin;
-    private Button btEmAberto, btEmAndamento, btFinalizadas, btResponder;
+    private Button btEmAberto, btEmAndamento, btFinalizadas;
     private List<Ocorrencia> taskEmAberto = new ArrayList<Ocorrencia>();
     private List<Ocorrencia> taskEmAndamento = new ArrayList<Ocorrencia>();
     private List<Ocorrencia> taskFinalizada = new ArrayList<Ocorrencia>();
-
+    private String respostaOcorrencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +59,11 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
         btEmAberto = findViewById(R.id.btEmAberto);
         btEmAndamento = findViewById(R.id.btEmAndamento);
         btFinalizadas = findViewById(R.id.btFinalizadas);
-        btResponder = findViewById(R.id.btResponder);
-        emAberto();
 
+
+        emAberto();
+        //responderOcorrencia();
+        emAndamento();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_ocorrencia_admin);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
@@ -80,7 +87,6 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
 
@@ -89,7 +95,7 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
         Type listType;
         Result result = null;
         Ocorrencia ocorrencia = new Ocorrencia();
-        ArrayList<Card> list = new ArrayList<>();
+        ArrayList<CardResponder> list = new ArrayList<>();
 
         Usuario usuarioCard = new Usuario();
 
@@ -129,12 +135,12 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
 
                     ocorrencia.setDsMensagem(u.getDsMensagem());
                     ocorrencia.setDsObservacao(u.getDsObservacao());
-                    list.add(new Card(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao(), String.valueOf(u.getNrOcorrencia())));
+                    list.add(new CardResponder(usuario, tipoOcorrencia, areaAtendimento, u.getDsMensagem(), u.getDsObservacao(), String.valueOf(u.getNrOcorrencia()), u.getCdOcorrencia()));
 
-                    CustomListAdapter adapter = new CustomListAdapter(OcorrenciasGestorActivity.this, R.layout.card_layout_emaberto, list);
+                    CustomAdapterResponder adapter = new CustomAdapterResponder(OcorrenciasGestorActivity.this, R.layout.card_layout_emaberto, list);
                     lvCardsOcorrenciasAdmin.setAdapter(adapter);
 
-                    u.setDsMsgadmin("Teste");
+
                 }
             }
 
@@ -144,8 +150,18 @@ public class OcorrenciasGestorActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    private void emAndamento(){
+        btEmAndamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(OcorrenciasGestorActivity.this, "Clicou em andamento", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(OcorrenciasGestorActivity.this, EmAndamentoActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }
 
-//http://192.168.42.188:5000/api/EstadoOcorrencias/1
 
 

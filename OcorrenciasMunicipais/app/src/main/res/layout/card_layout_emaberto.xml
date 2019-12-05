@@ -89,16 +89,28 @@
                     android:textColor="#555" />
             </LinearLayout>
 
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:id="@+id/btResponder"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
-                android:hint="Responder"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_marginLeft="50dp"/>
-        </LinearLayout>
+                android:orientation="horizontal">
 
+                <Button
+                    android:id="@+id/btResponder"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:hint="Responder" />
+
+                <Button
+                    android:id="@+id/btDetalhes"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:hint="Detalhes" />
+            </LinearLayout>
+        </LinearLayout>
 
 
     </com.google.android.material.card.MaterialCardView>

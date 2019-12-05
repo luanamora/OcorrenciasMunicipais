@@ -32,8 +32,6 @@ public class Task extends AsyncTask<String, Integer, Result> {
                     if ((params[2].equals("findCodigoMax"))&& (params[3].trim().length() == 0)){
                         urlControler = urlControler.append("/" + params[2]);
                     }
-
-
                 } else if (params[1].equals("POST"))
                     urlControler.append("http://192.168.42.233:5000/api/" + params[0]);
                 else if (params[1].equals("PUT"))

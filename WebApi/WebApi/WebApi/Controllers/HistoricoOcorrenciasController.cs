@@ -46,6 +46,10 @@ namespace WebApi.Controllers
             return Ok(historicoOcorrencia);
         }
 
+        [HttpGet("findOcorrencia/{CdOcorrencia:int}")]
+        public List<HistoricoOcorrencia> findOcorrencia(int CdOcorrencia) =>
+             _context.HistoricoOcorrencia.Where(e => e.CdOcorrencia == CdOcorrencia).ToList();
+
         // PUT: api/HistoricoOcorrencias/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHistoricoOcorrencia([FromRoute] int id, [FromBody] HistoricoOcorrencia historicoOcorrencia)

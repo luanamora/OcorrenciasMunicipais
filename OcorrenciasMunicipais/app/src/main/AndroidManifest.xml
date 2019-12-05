@@ -16,7 +16,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".InativarUsuarioActivity"></activity>
+        <activity android:name=".EmAndamentoActivity"></activity>
+        <activity android:name=".DetalhesActivity" />
+        <activity android:name=".ResponderActivity" />
+        <activity android:name=".InativarUsuarioActivity" />
         <activity android:name=".OcorrenciasGestorActivity" />
         <activity android:name=".UsuarioGestorActivity" />
         <activity android:name=".CriarOcorrenciasActivity" />

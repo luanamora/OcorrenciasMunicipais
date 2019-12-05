@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -111,6 +113,8 @@ public class CustomListAdapter  extends ArrayAdapter<Card> {
             holder.etAreaAtendimento.setText(etAreaAtendimento);
             holder.etMensagem.setText(etMensagem);
             holder.etObservacao.setText(etObservacao);
+            
+
 
             return convertView;
         }catch (IllegalArgumentException e){

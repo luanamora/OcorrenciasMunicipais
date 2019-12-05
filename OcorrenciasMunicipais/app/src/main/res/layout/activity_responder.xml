@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ResponderActivity">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginEditText"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="@dimen/marginEditText">
+
+        <EditText
+            android:id="@+id/etResposta"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:hint="Responda..." />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Salvar"
+        android:layout_marginTop="20dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:id="@+id/btSalvar"/>
+
+</LinearLayout>
