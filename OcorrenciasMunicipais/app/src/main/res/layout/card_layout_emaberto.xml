@@ -97,7 +97,8 @@
                 <Button
                     android:id="@+id/btResponder"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="100dp"
+                    android:layout_width="105dp"
+                    android:layout_marginRight="5dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:hint="Responder" />
@@ -105,9 +106,10 @@
                 <Button
                     android:id="@+id/btDetalhes"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="100dp"
+                    android:layout_width="105dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="50dp"
                     android:hint="Detalhes" />
             </LinearLayout>
         </LinearLayout>

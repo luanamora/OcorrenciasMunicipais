@@ -1,6 +1,7 @@
 package projeto.fag.com.ocorrenciasmunicipais.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +14,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.ArrayList;
 
+import projeto.fag.com.ocorrenciasmunicipais.CriarOcorrenciasActivity;
 import projeto.fag.com.ocorrenciasmunicipais.DetalhesActivity;
 import projeto.fag.com.ocorrenciasmunicipais.R;
 import projeto.fag.com.ocorrenciasmunicipais.ResponderActivity;
@@ -92,18 +96,10 @@ public class CustomAdapterResponder extends ArrayAdapter<CardResponder> {
             holder.etMensagem.setText(etMensagem);
             holder.etObservacao.setText(etObservacao);
 
-            holder.btCardFinalizar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(mContext, "Teste", Toast.LENGTH_LONG).show();
-                }
-            });
-
 
             holder.btResponder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "Teste", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(mContext.getApplicationContext(), ResponderActivity.class);
                     intent.putExtra("key", codigo);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

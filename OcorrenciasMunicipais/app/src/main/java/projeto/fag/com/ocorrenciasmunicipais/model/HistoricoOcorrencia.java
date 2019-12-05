@@ -7,7 +7,10 @@ import com.orm.dsl.Ignore;
 import com.orm.dsl.Unique;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.Date;
+
+import projeto.fag.com.ocorrenciasmunicipais.util.DateUtil;
 
 public class HistoricoOcorrencia extends SugarRecord implements Serializable {
     @Unique
@@ -68,11 +71,7 @@ public class HistoricoOcorrencia extends SugarRecord implements Serializable {
 
     @Override
     public String toString() {
-        return "HistoricoOcorrencia{" +
-                "cdHistoricoOcorrencia=" + cdHistoricoOcorrencia +
-                ", cdOcorrencia=" + cdOcorrencia +
-                ", dsHistoricoOcorrencia='" + dsHistoricoOcorrencia + '\'' +
-                ", dtCadastro=" + dtCadastro +
-                '}';
+        return DateUtil.dateToString(dtCadastro) + " - " + dsHistoricoOcorrencia;
+
     }
 }

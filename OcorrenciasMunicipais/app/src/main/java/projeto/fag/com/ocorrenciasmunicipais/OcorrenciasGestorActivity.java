@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -42,6 +45,11 @@ import projeto.fag.com.ocorrenciasmunicipais.util.ResponderDialog;
 import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 import projeto.fag.com.ocorrenciasmunicipais.util.UserPhoneDialog;
 
+import static projeto.fag.com.ocorrenciasmunicipais.R.color.colorAccent;
+import static projeto.fag.com.ocorrenciasmunicipais.R.color.colorPrimary;
+import static projeto.fag.com.ocorrenciasmunicipais.R.color.colorPrimaryDark;
+import static projeto.fag.com.ocorrenciasmunicipais.R.color.colorSpinner;
+
 public class OcorrenciasGestorActivity extends AppCompatActivity  {
 
     private ListView lvCardsOcorrenciasAdmin;
@@ -60,10 +68,15 @@ public class OcorrenciasGestorActivity extends AppCompatActivity  {
         btEmAndamento = findViewById(R.id.btEmAndamento);
         btFinalizadas = findViewById(R.id.btFinalizadas);
 
+        btEmAberto.setBackgroundColor(getResources().getColor(colorPrimaryDark));
+        btEmAberto.setHintTextColor(getResources().getColor(R.color.colorWhite));
+        btEmAndamento.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+        btFinalizadas.setBackgroundColor(getResources().getColor(R.color.colorWhite));
 
         emAberto();
-        //responderOcorrencia();
         emAndamento();
+        finalizadas();
+        verificaVazio();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_ocorrencia_admin);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
@@ -87,6 +100,12 @@ public class OcorrenciasGestorActivity extends AppCompatActivity  {
                 return false;
             }
         });
+    }
+
+    private void verificaVazio(){
+        if (taskEmAberto.isEmpty()){
+            Toast.makeText(OcorrenciasGestorActivity.this, "Não existe nenhuma ocorrência em aberto", Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -153,11 +172,29 @@ public class OcorrenciasGestorActivity extends AppCompatActivity  {
 
     private void emAndamento(){
         btEmAndamento.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                Toast.makeText(OcorrenciasGestorActivity.this, "Clicou em andamento", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(OcorrenciasGestorActivity.this, EmAndamentoActivity.class);
                 startActivity(intent);
+                btEmAndamento.setBackgroundColor(getResources().getColor(colorPrimaryDark));
+                btEmAndamento.setHintTextColor(getResources().getColor(R.color.colorWhite));
+                btEmAberto.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                btFinalizadas.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            }
+        });
+    }
+
+    private void finalizadas(){
+        btFinalizadas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OcorrenciasGestorActivity.this, FinalizadasActivity.class);
+                startActivity(intent);
+                btFinalizadas.setBackgroundColor(getResources().getColor(colorPrimaryDark));
+                btFinalizadas.setHintTextColor(getResources().getColor(R.color.colorWhite));
+                btEmAberto.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                btEmAndamento.setBackgroundColor(getResources().getColor(R.color.colorWhite));
             }
         });
     }

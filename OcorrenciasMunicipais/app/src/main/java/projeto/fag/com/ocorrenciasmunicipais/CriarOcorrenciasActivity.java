@@ -3,6 +3,7 @@ package projeto.fag.com.ocorrenciasmunicipais;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -155,7 +157,16 @@ public class CriarOcorrenciasActivity extends AppCompatActivity implements Ender
         if (taskControl == 0) {
             try {
                 result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "POST", new Gson().toJson(ocorrencia)}).get();
-                ocorrencia.save();
+                MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(CriarOcorrenciasActivity.this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+                dialog.setTitle("SUCESSO");
+                dialog.setMessage("Ocorrência criada com sucesso!");
+                dialog.setPositiveButton("continuar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                dialog.show();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {

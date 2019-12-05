@@ -2,13 +2,18 @@ package projeto.fag.com.ocorrenciasmunicipais;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -30,9 +35,10 @@ import projeto.fag.com.ocorrenciasmunicipais.util.TipoMensagem;
 public class ResponderActivity extends AppCompatActivity {
 
     private EditText etResposta;
+    private TextInputLayout tvlResposta;
     private Button btSalvar;
     private HistoricoOcorrencia historicoOcorrencia;
-    private List<Ocorrencia> taskOcorrencia = new ArrayList<>();
+    public static List<Ocorrencia> taskOcorrencia = new ArrayList<>();
     private int id;
     private Ocorrencia ocorrencia;
 
@@ -42,38 +48,54 @@ public class ResponderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_responder);
 
         etResposta = findViewById(R.id.etResposta);
+        tvlResposta = findViewById(R.id.tvlResposta);
         btSalvar = findViewById(R.id.btSalvar);
         id = getIntent().getIntExtra("key", 0);
 
         salvarResposta();
-        // atualizaOcorrencia();
-
     }
 
     private void salvarResposta() {
         btSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                historicoOcorrencia = new HistoricoOcorrencia();
-                historicoOcorrencia.setCdOcorrencia(id);
-                historicoOcorrencia.setDsHistoricoOcorrencia(etResposta.getText().toString());
-                historicoOcorrencia.setDtCadastro(new Date());
-                Result result = null;
-                Task task = new Task(ResponderActivity.this);
-                try {
-                    result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoOcorrencias", "POST", new Gson().toJson(historicoOcorrencia)}).get();
-                    //Mensagem.ExibirMensagem(ResponderActivity.this, "Ocorrência respondida com sucesso!", TipoMensagem.SUCESSO);
-                    findById();
-                    finish();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (verificaCampo()) {
+                    historicoOcorrencia = new HistoricoOcorrencia();
+                    historicoOcorrencia.setCdOcorrencia(id);
+                    historicoOcorrencia.setDsHistoricoOcorrencia(etResposta.getText().toString());
+                    historicoOcorrencia.setDtCadastro(new Date());
+                    Result result = null;
+                    Task task = new Task(ResponderActivity.this);
+                    try {
+                        result = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"HistoricoOcorrencias", "POST", new Gson().toJson(historicoOcorrencia)}).get();
+                        //Mensagem.ExibirMensagem(ResponderActivity.this, "Ocorrência respondida com sucesso!", TipoMensagem.SUCESSO);
+                        findById();
+                        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(ResponderActivity.this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog);
+                        dialog.setTitle("Atenção");
+                        dialog.setMessage("Ocorrência respondida com sucesso!");
+                        dialog.setPositiveButton("continuar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                        dialog.show();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                Toast.makeText(ResponderActivity.this, "Teste", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private boolean verificaCampo() {
+        if (etResposta.getText().toString().trim().length() == 0) {
+            tvlResposta.setError("Campo vazio!");
+            return false;
+        }
+        return true;
     }
 
     private void findById() {
@@ -121,9 +143,7 @@ public class ResponderActivity extends AppCompatActivity {
 
             Result result = result = task.executeOnExecutor
                     (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "PUT", new Gson().toJson(ocorrencia), String.valueOf(ocorrencia.getCdOcorrencia())}).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
     }

@@ -1,25 +1,37 @@
 package projeto.fag.com.ocorrenciasmunicipais.adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.content.Context;
+        import android.content.DialogInterface;
+        import android.content.Intent;
+        import android.os.AsyncTask;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ArrayAdapter;
+        import android.widget.Button;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+        import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
+        import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+        import com.google.gson.Gson;
 
-import projeto.fag.com.ocorrenciasmunicipais.DetalhesActivity;
-import projeto.fag.com.ocorrenciasmunicipais.EmAndamentoActivity;
-import projeto.fag.com.ocorrenciasmunicipais.R;
-import projeto.fag.com.ocorrenciasmunicipais.ResponderActivity;
-import projeto.fag.com.ocorrenciasmunicipais.util.CardResponder;
+        import java.util.ArrayList;
+        import java.util.Date;
+        import java.util.concurrent.ExecutionException;
+
+        import projeto.fag.com.ocorrenciasmunicipais.AdminUser;
+        import projeto.fag.com.ocorrenciasmunicipais.DetalhesActivity;
+        import projeto.fag.com.ocorrenciasmunicipais.EmAndamentoActivity;
+        import projeto.fag.com.ocorrenciasmunicipais.R;
+        import projeto.fag.com.ocorrenciasmunicipais.ResponderActivity;
+        import projeto.fag.com.ocorrenciasmunicipais.SplashActivity;
+        import projeto.fag.com.ocorrenciasmunicipais.model.Ocorrencia;
+        import projeto.fag.com.ocorrenciasmunicipais.task.Result;
+        import projeto.fag.com.ocorrenciasmunicipais.task.Task;
+        import projeto.fag.com.ocorrenciasmunicipais.util.CardResponder;
 
 public class CustomAdapterFinalizadas extends ArrayAdapter<CardResponder> {
 
@@ -29,6 +41,8 @@ public class CustomAdapterFinalizadas extends ArrayAdapter<CardResponder> {
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;
+    private Ocorrencia ocorrencia;
+    private int codigoOcorrecia;
 
     private static class ViewHolder {
         TextView etCardUsuario, etCardTipoOcorrencia, etAreaAtendimento, etMensagem, etObservacao;
@@ -52,7 +66,7 @@ public class CustomAdapterFinalizadas extends ArrayAdapter<CardResponder> {
         String etMensagem = getItem(position).getEtMensagem();
         String etObservacao = getItem(position).getEtObservacao();
 
-
+        codigoOcorrecia = codigo;
         try {
 
 
@@ -95,7 +109,6 @@ public class CustomAdapterFinalizadas extends ArrayAdapter<CardResponder> {
             holder.btResponder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "Teste", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(mContext.getApplicationContext(), ResponderActivity.class);
                     intent.putExtra("key", codigo);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -113,16 +126,47 @@ public class CustomAdapterFinalizadas extends ArrayAdapter<CardResponder> {
                 }
             });
 
-
-
-
-
+            holder.btCardFinalizadas.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ocorrencia = new Ocorrencia();
+                    for (Ocorrencia o : SplashActivity.taskOcorrencia) {
+                        if (o.getCdOcorrencia() == codigo) {
+                            ocorrencia.setCdOcorrencia(o.getCdOcorrencia());
+                            ocorrencia.setCdUsuario(o.getCdUsuario());
+                            ocorrencia.setCdTipoOcorrencia(o.getCdTipoOcorrencia());
+                            ocorrencia.setCdAreaAtendimento(o.getCdAreaAtendimento());
+                            ocorrencia.setCdPrioridade(o.getCdPrioridade());
+                            ocorrencia.setCd_endereco(o.getCd_endereco());
+                            ocorrencia.setCdEstadoOcorrencia(3);
+                            ocorrencia.setNrOcorrencia(o.getNrOcorrencia());
+                            ocorrencia.setDsMensagem(o.getDsMensagem());
+                            ocorrencia.setDsObservacao(o.getDsObservacao());
+                            ocorrencia.setDsFinalizado(true);
+                            ocorrencia.setDtCadastro(o.getDtCadastro());
+                            ocorrencia.setDtAtualizacao(new Date());
+                            atualizaOcorrencia();
+                        }
+                    }
+                }
+            });
 
 
             return convertView;
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "getView: IllegalArgumentException: " + e.getMessage());
             return convertView;
+        }
+    }
+
+    private void atualizaOcorrencia() {
+        try {
+            Task task = new Task(mContext.getApplicationContext());
+            Result result = result = task.executeOnExecutor
+                    (AsyncTask.THREAD_POOL_EXECUTOR, new String[]{"Ocorrencias", "PUT", new Gson().toJson(ocorrencia), String.valueOf(ocorrencia.getCdOcorrencia())}).get();
+            Toast.makeText(mContext.getApplicationContext(), "Ocorrência finalizada", Toast.LENGTH_LONG).show();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
         }
     }
 }
